@@ -309,7 +309,7 @@
                                         <label class="col-form-label">Company</label>
                                         <select class="select" id="company" name="company">
                                             <option value="">-- Select --</option>
-                                            <option value="Soeng Souy">Soeng Souy</option>
+                                            <option value="Signature">Signature</option>
                                             <option value="StarGame Kh">StarGame Kh</option>
                                         </select>
                                     </div>

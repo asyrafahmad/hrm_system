@@ -189,7 +189,7 @@
                                 <div class="col-sm-6 m-b-20">
                                     <img src="{{ URL::to('assets/img/logo2.png') }}" class="inv-logo" alt="">
                                      <ul class="list-unstyled">
-                                        <li>Soeng Souy</li>
+                                        <li>User</li>
                                         <li>3864 Quiet Valley Lane,</li>
                                         <li>Sherman Oaks, CA, 91403</li>
                                         <li>GST No:</li>

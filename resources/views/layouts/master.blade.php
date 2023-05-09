@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-	<meta name="description" content="SoengSouy Admin Template">
+	<meta name="description" content="Human Resource Management System Admin Template">
 	<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-	<meta name="author" content="SoengSouy Admin Template">
+	<meta name="author" content="Human Resource Management System Admin Template">
 	<meta name="robots" content="noindex, nofollow">
 	<title>Dashboard - HRMS</title>
 	<!-- Favicon -->
@@ -24,7 +24,7 @@
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap-datetimepicker.min.css') }}">
 	<!-- Chart CSS -->
-	<link rel="stylesheet" href="{{ URL::to('ssets/plugins/morris/morris.css') }}">
+	<link rel="stylesheet" href="{{ URL::to('assets/plugins/morris/morris.css') }}">
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
 
@@ -48,7 +48,7 @@
 		<div class="header">
 			<!-- Logo -->
 			<div class="header-left">
-				<a href="{{ route('home') }}" class="logo"> <img src="{{ URL::to('assets/img/logo.png') }}" width="40" height="40" alt=""> </a>
+				<a href="{{ route('home') }}" class="logo"> <img src="{{ URL::to('assets/img/signature-logo.png') }}" width="140" height="40" alt=""> </a>
 			</div>
 			<!-- /Logo -->
 			<a id="toggle_btn" href="javascript:void(0);">
@@ -77,8 +77,8 @@
 				<li class="nav-item dropdown has-arrow flag-nav">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"> <img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="20"> <span>English</span> </a>
 					<div class="dropdown-menu dropdown-menu-right">
+						<a href="javascript:void(0);" class="dropdown-item"> <img src="{{ URL::to('assets/img/flags/my.png') }}" alt="" height="16"> Malaysia </a>
 						<a href="javascript:void(0);" class="dropdown-item"> <img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="16"> English </a>
-						<a href="javascript:void(0);" class="dropdown-item"> <img src="{{ URL::to('assets/img/flags/kh.png') }}" alt="" height="16"> Khmer </a>
 					</div>
 				</li>
 				<!-- /Flag -->

@@ -6,7 +6,7 @@
             <div class="container">
                 <!-- Account Logo -->
                 <div class="account-logo">
-                    <a href="index.html"><img src="{{ URL::to('assets/img/logo2.png') }}" alt="SoengSouy"></a>
+                    <a href="index.html"><img src="{{ URL::to('assets/img/signature-logo.png') }}" alt="Company Picture"></a>
                 </div>
                 {{-- message --}}
                 {!! Toastr::message() !!}

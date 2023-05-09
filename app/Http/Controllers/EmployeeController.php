@@ -19,8 +19,9 @@ class EmployeeController extends Controller
                     ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
                     ->get(); 
         $userList = DB::table('users')->get();
+        $departmentList = DB::table('departments')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+        return view('form.allemployeecard',compact('users','userList','departmentList','permission_lists'));
     }
     // all employee list
     public function listAllEmployee()
@@ -180,6 +181,7 @@ class EmployeeController extends Controller
                     ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
                     ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
                     ->get();
+        $departmentList = DB::table('departments')->get();
         $permission_lists = DB::table('permission_lists')->get();
         $userList = DB::table('users')->get();
 
@@ -241,18 +243,18 @@ class EmployeeController extends Controller
                         ->where('users.position','LIKE','%'.$request->position.'%')
                         ->get();
         }
-         // search by name and position and id
-         if($request->employee_id && $request->name && $request->position)
-         {
-             $users = DB::table('users')
-                         ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
-                         ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                         ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                         ->where('users.name','LIKE','%'.$request->name.'%')
-                         ->where('users.position','LIKE','%'.$request->position.'%')
-                         ->get();
-         }
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+        // search by name and position and id
+        if($request->employee_id && $request->name && $request->position)
+        {
+            $users = DB::table('users')
+                        ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
+                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
+                        ->where('users.name','LIKE','%'.$request->name.'%')
+                        ->where('users.position','LIKE','%'.$request->position.'%')
+                        ->get();
+        }
+        return view('form.allemployeecard',compact('users','userList','departmentList','permission_lists'));
     }
     public function employeeListSearch(Request $request)
     {
