@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <meta name="description" content="Smarthr - Bootstrap Admin Template">
+        <meta name="description" content="Human Resource Management System - Bootstrap Admin Template">
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-        <meta name="author" content="Soeng Souy">
+        <meta name="author" content="Human Resource Management System">
         <meta name="robots" content="noindex, nofollow">
         <title>Settings - HRMS</title>
 		<!-- Favicon -->
@@ -72,8 +72,8 @@
                             <img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="20"> <span>English</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0);" class="dropdown-item"><img src="{{ URL::to('assets/img/flags/my.png') }}" alt="" height="16"> Malaysia</a>
                             <a href="javascript:void(0);" class="dropdown-item"><img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="16"> English</a>
-                            <a href="javascript:void(0);" class="dropdown-item"><img src="{{ URL::to('assets/img/flags/kh.png') }}" alt="" height="16"> Khmer</a>
                         </div>
                     </li>
                     <!-- /Flag -->

@@ -187,7 +187,13 @@
                                             <ul class="personal-info">
                                                 <li>
                                                     <div class="title">Phone:</div>
-                                                    <div class="text"><a href="">{{ Auth::user()->phone_number }}</a></div>
+                                                    <div class="text">
+                                                        @if(Auth::user()->phone_number != null)
+                                                        <a href="">{{ Auth::user()->phone_number }}</a>
+                                                        @else
+                                                        <br>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
                                                     <div class="title">Email:</div>
@@ -206,7 +212,13 @@
                                                     <li>
                                                         @if(Auth::user()->rec_id == $information->rec_id)
                                                         <div class="title">Address:</div>
-                                                        <div class="text">{{ $information->address }}</div>
+                                                        <div class="text">
+                                                            @if($information->address != null)
+                                                                {{ $information->address }}
+                                                            @else
+                                                                <br>
+                                                            @endif
+                                                        </div>
                                                         @else
                                                         <div class="title">Address:</div>
                                                         <div class="text">N/A</div>
@@ -224,13 +236,13 @@
                                                     <li>
                                                         <div class="title">Reports to:</div>
                                                         <div class="text">
-                                                            <div class="avatar-box">
+                                                            <!-- <div class="avatar-box">
                                                                 <div class="avatar avatar-xs">
-                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <a href="profile.html">
-                                                                {{ Auth::user()->name }}
+                                                                {{ $information->reports_to }}
                                                             </a>
                                                         </div>
                                                     </li>
@@ -252,11 +264,11 @@
                                                         <div class="text">
                                                             <div class="avatar-box">
                                                                 <div class="avatar avatar-xs">
-                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->reports_to }}">
                                                                 </div>
                                                             </div>
                                                             <a href="profile.html">
-                                                                {{ Auth::user()->name }}
+                                                                {{ Auth::user()->reports_to }}
                                                             </a>
                                                         </div>
                                                     </li>

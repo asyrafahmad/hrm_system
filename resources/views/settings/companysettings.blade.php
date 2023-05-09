@@ -47,13 +47,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Company Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" value="Soeng Souy">
+                                    <input class="form-control" type="text" value="Signature">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Contact Person</label>
-                                    <input class="form-control " value="Soeng Souy" type="text">
+                                    <input class="form-control " value="Contact Person" type="text">
                                 </div>
                             </div>
                         </div>
@@ -68,9 +68,11 @@
                                 <div class="form-group">
                                     <label>Country</label>
                                     <select class="form-control select">
-                                        <option>KHMER</option>
+                                        <option>Malaysia</option>
                                         <option>USA</option>
                                         <option>United Kingdom</option>
+                                        <option>Canada</option>
+                                        <option>New Zealand</option>
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +132,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Website Url</label>
-                                    <input class="form-control" value="https://www.soengsouy.com" type="text">
+                                    <input class="form-control" value="https://www.hrm_system.com" type="text">
                                 </div>
                             </div>
                         </div>

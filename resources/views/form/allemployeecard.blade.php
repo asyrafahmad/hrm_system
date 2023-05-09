@@ -194,29 +194,27 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">  
-                        <button type="sumit" class="btn btn-success btn-block"> Search </button>  
+                        <button type="submit" class="btn btn-success btn-block"> Search </button>  
                     </div>
                 </div>
             </form>
             <!-- Search Filter -->
-            {{-- message --}}
-            {!! Toastr::message() !!}
             <div class="row staff-grid-row">
                 @foreach ($users as $lists )
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
-                            <a href="{{ url('employee/profile/'.$lists->rec_id) }}" class="avatar"><img src="{{ URL::to('/assets/images/'. $lists->avatar) }}" alt="{{ $lists->avatar }}" alt="{{ $lists->avatar }}"></a>
+                            <a href="}" class="avatar"><img src="" ></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$lists->rec_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$lists->rec_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                <a class="dropdown-item" href=""><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                <a class="dropdown-item" href=""onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                             </div>
                         </div>
-                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html">{{ $lists->name }}</a></h4>
-                        <div class="small text-muted">{{ $lists->position }}</div>
+                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"></a></h4>
+                        <div class="small text-muted"></div>
                     </div>
                 </div>
                 @endforeach
@@ -281,11 +279,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Company</label>
-                                        <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="company" name="company">
+                                        <label class="col-form-label">Department</label>
+                                        <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="department" name="department">
                                             <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                            @foreach ($departmentList as $key=>$dept )
+                                                <option value="{{ $dept->department }}">{{ $dept->department }}</option>
                                             @endforeach
                                         </select>
                                     </div>

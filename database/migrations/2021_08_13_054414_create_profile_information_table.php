@@ -28,6 +28,7 @@ class CreateProfileInformationTable extends Migration
             $table->string('department')->nullable();
             $table->string('designation')->nullable();
             $table->string('reports_to')->nullable();
+            $table->string('user_id')->nullable();
             $table->timestamps();
         });
     }
