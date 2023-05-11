@@ -28,7 +28,7 @@ class CreateProfileInformationTable extends Migration
             $table->string('department')->nullable();
             $table->string('designation')->nullable();
             $table->string('reports_to')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -188,8 +188,8 @@
                                                 <li>
                                                     <div class="title">Phone:</div>
                                                     <div class="text">
-                                                        @if(Auth::user()->phone_number != null)
-                                                        <a href="">{{ Auth::user()->phone_number }}</a>
+                                                        @if($information->phone_number != null)
+                                                        <a href="">{{ $information->phone_number }}</a>
                                                         @else
                                                         <br>
                                                         @endif
