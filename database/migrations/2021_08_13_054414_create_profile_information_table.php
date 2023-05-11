@@ -14,7 +14,7 @@ class CreateProfileInformationTable extends Migration
     public function up()
     {
         Schema::create('profile_information', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id')->unsigned();
             $table->string('name')->nullable();
             $table->string('rec_id')->nullable();
             $table->string('email')->nullable();
@@ -28,7 +28,7 @@ class CreateProfileInformationTable extends Migration
             $table->string('department')->nullable();
             $table->string('designation')->nullable();
             $table->string('reports_to')->nullable();
-            $table->string('user_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

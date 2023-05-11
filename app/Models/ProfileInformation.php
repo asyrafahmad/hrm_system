@@ -25,11 +25,11 @@ class ProfileInformation extends Model
         'department',
         'designation',
         'reports_to',
-        'user_id'
+        'user_id',
     ];
     
     public function User()
     {
-        return $this->hasMany(User::class, 'foreign_key', 'user_id');
+        return $this->belongsTo(User::class);
     }
 }
