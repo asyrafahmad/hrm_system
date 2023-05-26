@@ -205,6 +205,31 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
+
+    // save profile emergency contact
+    public function profileEmergencyContact(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->emergency_contact_name_1          = $request->emergency_contact_name_1;
+            $information->emergency_contact_relationship_1  = $request->emergency_contact_relationship_1;
+            $information->emergency_contact_phone_1         = $request->emergency_contact_phone_1;
+            $information->emergency_contact_mobile_1        = $request->emergency_contact_mobile_1;
+            $information->emergency_contact_name_2          = $request->emergency_contact_name_2;
+            $information->emergency_contact_relationship_2  = $request->emergency_contact_relationship_2;
+            $information->emergency_contact_phone_2         = $request->emergency_contact_phone_2;
+            $information->emergency_contact_mobile_2        = $request->emergency_contact_mobile_2;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Add Profile Emergency Contact successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Add Profile Emergency Contact fail :)','Error');
+            return redirect()->back();
+        }
+    }
    
     // save new user
     public function addNewUserSave(Request $request)
@@ -241,6 +266,7 @@ class UserManagementController extends Controller
             $user->avatar       = $image;
             $user->password     = Hash::make($request->password);
             $user->save();
+
             DB::commit();
             Toastr::success('Create new account successfully :)','Success');
             return redirect()->route('userManagement');

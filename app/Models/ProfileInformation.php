@@ -25,11 +25,20 @@ class ProfileInformation extends Model
         'department',
         'designation',
         'reports_to',
-        'user_id',
+
+        'emergency_contact_name_1',
+        'emergency_contact_relationship_1',
+        'emergency_contact_phone_1',
+        'emergency_contact_mobile_1',
+        'emergency_contact_name_2',
+        'emergency_contact_relationship_2',
+        'emergency_contact_phone_1',
+        'emergency_contact_mobile_1',
+        // 'user_id',
     ];
     
-    public function User()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function User()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 }

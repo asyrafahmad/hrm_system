@@ -28,7 +28,16 @@ class CreateProfileInformationTable extends Migration
             $table->string('department')->nullable();
             $table->string('designation')->nullable();
             $table->string('reports_to')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->string('emergency_contact_name_1')->nullable();
+            $table->string('emergency_contact_relationship_1')->nullable();
+            $table->string('emergency_contact_phone_1')->nullable();
+            $table->string('emergency_contact_mobile_1')->nullable();
+            $table->string('emergency_contact_name_2')->nullable();
+            $table->string('emergency_contact_relationship_2')->nullable();
+            $table->string('emergency_contact_phone_2')->nullable();
+            $table->string('emergency_contact_mobile_2')->nullable();
+            // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

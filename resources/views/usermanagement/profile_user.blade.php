@@ -40,7 +40,7 @@
                             <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
-                            <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
+                            <li><a href="{{ route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
                             <li><a href="{{ route('form/leavesettings/page') }}">Leave Settings</a></li>
                             <li><a href="{{ route('attendance/page') }}">Attendance (Admin)</a></li>
                             <li><a href="{{ route('attendance/employee/page') }}">Attendance (Employee)</a></li>
@@ -185,21 +185,27 @@
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
-                                                <li>
-                                                    <div class="title">Phone:</div>
-                                                    <div class="text">
-                                                        @if($information->phone_number != null)
-                                                        <a href="">{{ $information->phone_number }}</a>
+                                                    @if(!empty($information))
+                                                    <li>
+                                                        <div class="title">Phone:</div>
+                                                        <div class="text">
+                                                            @if($information->phone_number != null)
+                                                            <a href="">{{ $information->phone_number }}</a>
+                                                            @else
+                                                            <br>
+                                                            @endif
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        @if(Auth::user()->rec_id == $information->rec_id)
+
+                                                        <div class="title">Email:</div>
+                                                        <div class="text"><a href="">{{ Auth::user()->email }}</a></div>
                                                         @else
-                                                        <br>
+                                                        <div class="title">Email:</div>
+                                                        <div class="text">N/A</div>
                                                         @endif
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="title">Email:</div>
-                                                    <div class="text"><a href="">{{ Auth::user()->email }}</a></div>
-                                                </li>
-                                                @if(!empty($information))
+                                                    </li>
                                                     <li>
                                                         @if(Auth::user()->rec_id == $information->rec_id)
                                                         <div class="title">Birthday:</div>
@@ -236,17 +242,25 @@
                                                     <li>
                                                         <div class="title">Reports to:</div>
                                                         <div class="text">
-                                                            <!-- <div class="avatar-box">
+                                                           <div class="avatar-box">
                                                                 <div class="avatar avatar-xs">
                                                                     <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
                                                                 </div>
-                                                            </div> -->
+                                                            </div>
                                                             <a href="profile.html">
                                                                 {{ $information->reports_to }}
                                                             </a>
                                                         </div>
                                                     </li>
                                                     @else
+                                                    <li>
+                                                        <div class="title">Phone:</div>
+                                                        <div class="text">N/A</div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="title">Email:</div>
+                                                        <div class="text">N/A</div>
+                                                    </li>
                                                     <li>
                                                         <div class="title">Birthday:</div>
                                                         <div class="text">N/A</div>
@@ -349,15 +363,15 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">John Doe</div>
+                                            <div class="text">{{ $information->emergency_contact_name_1 }}</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Father</div>
+                                            <div class="text">{{ $information->emergency_contact_relationship_1 }}</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            <div class="text">{{ $information->emergency_contact_mobile_1 }}, {{ $information->emergency_contact_phone_1 }}</div>
                                         </li>
                                     </ul>
                                     <hr>
@@ -365,15 +379,15 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">Karen Wills</div>
+                                            <div class="text">{{ $information->emergency_contact_name_2 }}</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Brother</div>
+                                            <div class="text">{{ $information->emergency_contact_relationship_2 }}</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            <div class="text">{{ $information->emergency_contact_mobile_2 }}, {{ $information->emergency_contact_phone_2 }}</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -1440,7 +1454,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile/emergency_contact/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Primary Contact</h3>
@@ -1448,25 +1464,25 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ $information->emergency_contact_name_1 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="{{ $information->emergency_contact_relationship_1 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <label>Mobile <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ $information->emergency_contact_mobile_1 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                <label>Phone</label>
+                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ $information->emergency_contact_phone_1 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -1475,30 +1491,30 @@
                             
                             <div class="card">
                                 <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
+                                    <h3 class="card-title">Secondary Contact</h3>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ $information->emergency_contact_name_2 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="{{ $information->emergency_contact_relationship_2 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <label>Mobile <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ $information->emergency_contact_mobile_2 }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                <label>Phone</label>
+                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ $information->emergency_contact_phone_2 }}">
                                             </div>
                                         </div>
                                     </div>

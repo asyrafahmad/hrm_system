@@ -27,9 +27,14 @@ class CreateUsersTable extends Migration
             $table->string('department')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // $table->renameColumn('password', 'passwordssss');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Schema::table('table_name', function (Blueprint $table) {
+        //     $table->renameColumn('old_column_name', 'new_column_name');
+        // });
     }
     
 

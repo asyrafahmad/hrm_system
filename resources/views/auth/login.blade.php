@@ -5,7 +5,7 @@
             <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>
             <div class="container">
                 <!-- Account Logo -->
-                <div class="account-logo">
+                <div class="account-logo" style="width:100%">
                     <a href="index.html"><img src="{{ URL::to('assets/img/signature-logo.png') }}" alt="Company Picture"></a>
                 </div>
                 {{-- message --}}
@@ -13,8 +13,8 @@
                 <!-- /Account Logo -->
                 <div class="account-box">
                     <div class="account-wrapper">
-                        <h3 class="account-title">Login</h3>
-                        <p class="account-subtitle">Access to our dashboard</p>
+                        <h2 class="account-title">Login</h2>
+                        <p class="account-subtitle"></p>
                         <!-- Account Form -->
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
