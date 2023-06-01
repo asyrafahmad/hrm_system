@@ -149,7 +149,7 @@ class UserManagementController extends Controller
        
     }
 
-    // save profile information
+    // save profile 
     public function profileInformation(Request $request)
     {
         try{
@@ -206,6 +206,30 @@ class UserManagementController extends Controller
         }
     }
 
+    // save profile information
+    public function profilePersonalInformationContact(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->passport_no               = $request->passport_no;
+            $information->passport_expired_date     = $request->passport_expired_date;
+            $information->nationality               = $request->nationality;
+            $information->religion                  = $request->religion;
+            $information->marital_status            = $request->marital_status;
+            $information->employment_of_spouse      = $request->employment_of_spouse;
+            $information->no_of_children            = $request->no_of_children;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Store Profile Personal Information successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Store Profile Personal Information fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
     // save profile emergency contact
     public function profileEmergencyContact(Request $request)
     {
@@ -230,6 +254,77 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
+
+    // save family information contact
+    public function profileFamilyInformationContact(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->family_member_name_1              = $request->family_member_name_1;
+            $information->family_member_relationship_1      = $request->family_member_relationship_1;
+            $information->family_member_DOB_1               = $request->family_member_DOB_1;
+            $information->family_member_phone_1             = $request->family_member_phone_1;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Store Family Information successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Store Family Information fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
+    // save bank information contact
+    public function profileBankInformation(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->bank_name             = $request->bank_name;
+            $information->bank_account_no       = $request->bank_account_no;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Store Bank Information successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Store Bank Information fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
+    // Save Education Information
+    public function profileEducationInformation(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->academic_institution_1            = $request->academic_institution_1;
+            $information->academic_qualification_1          = $request->academic_qualification_1;
+            $information->academic_type_qualification_1     = $request->academic_type_qualification_1;
+            $information->academic_grade_1                  = $request->academic_grade_1;
+            $information->academic_starting_date_1          = $request->academic_starting_date_1;
+            $information->academic_complete_date_1          = $request->academic_complete_date_1;
+            $information->academic_institution_2            = $request->academic_institution_2;
+            $information->academic_qualification_2          = $request->academic_qualification_2;
+            $information->academic_type_qualification_2     = $request->academic_type_qualification_2;
+            $information->academic_grade_2                  = $request->academic_grade_2;
+            $information->academic_starting_date_2          = $request->academic_starting_date_2;
+            $information->academic_complete_date_2          = $request->academic_complete_date_2;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Store Academic Information successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Store Academic Information fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
+    
    
     // save new user
     public function addNewUserSave(Request $request)

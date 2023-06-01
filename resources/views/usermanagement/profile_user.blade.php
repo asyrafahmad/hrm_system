@@ -185,20 +185,18 @@
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
-                                                    @if(!empty($information))
                                                     <li>
                                                         <div class="title">Phone:</div>
                                                         <div class="text">
-                                                            @if($information->phone_number != null)
+                                                            @if(!empty($information->phone_number))
                                                             <a href="">{{ $information->phone_number }}</a>
                                                             @else
-                                                            <br>
+                                                            N/A
                                                             @endif
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        @if(Auth::user()->rec_id == $information->rec_id)
-
+                                                        @if(!empty($information->email))
                                                         <div class="title">Email:</div>
                                                         <div class="text"><a href="">{{ Auth::user()->email }}</a></div>
                                                         @else
@@ -207,7 +205,7 @@
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        @if(Auth::user()->rec_id == $information->rec_id)
+                                                        @if(!empty($information->birth_date))
                                                         <div class="title">Birthday:</div>
                                                         <div class="text">{{date('d F, Y',strtotime($information->birth_date)) }}</div>
                                                         @else
@@ -216,7 +214,7 @@
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        @if(Auth::user()->rec_id == $information->rec_id)
+                                                        @if(!empty($information->address))
                                                         <div class="title">Address:</div>
                                                         <div class="text">
                                                             @if($information->address != null)
@@ -231,7 +229,7 @@
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        @if(Auth::user()->rec_id == $information->rec_id)
+                                                        @if(!empty($information->gender))
                                                         <div class="title">Gender:</div>
                                                         <div class="text">{{ $information->gender }}</div>
                                                         @else
@@ -242,51 +240,20 @@
                                                     <li>
                                                         <div class="title">Reports to:</div>
                                                         <div class="text">
-                                                           <div class="avatar-box">
-                                                                <div class="avatar avatar-xs">
-                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
+                                                            @if(!empty($information->reports_to))
+                                                                <div class="avatar-box">
+                                                                    <div class="avatar avatar-xs">
+                                                                        <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <a href="profile.html">
-                                                                {{ $information->reports_to }}
-                                                            </a>
+                                                                <a href="profile.html">
+                                                                    {{ $information->reports_to }}
+                                                                </a>
+                                                            @else
+                                                                N/A
+                                                            @endif
                                                         </div>
                                                     </li>
-                                                    @else
-                                                    <li>
-                                                        <div class="title">Phone:</div>
-                                                        <div class="text">N/A</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Email:</div>
-                                                        <div class="text">N/A</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Birthday:</div>
-                                                        <div class="text">N/A</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Address:</div>
-                                                        <div class="text">N/A</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Gender:</div>
-                                                        <div class="text">N/A</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Reports to:</div>
-                                                        <div class="text">
-                                                            <div class="avatar-box">
-                                                                <div class="avatar avatar-xs">
-                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->reports_to }}">
-                                                                </div>
-                                                            </div>
-                                                            <a href="profile.html">
-                                                                {{ Auth::user()->reports_to }}
-                                                            </a>
-                                                        </div>
-                                                    </li>
-                                                @endif    
                                             </ul>
                                         </div>
                                     </div>
@@ -321,35 +288,31 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Passport No.</div>
-                                            <div class="text">9876543210</div>
+                                            <div class="text">@if(!empty($information->passport_no)){{ $information->passport_no }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Passport Exp Date.</div>
-                                            <div class="text">9876543210</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">Tel</div>
-                                            <div class="text"><a href="">9876543210</a></div>
+                                            <div class="text">@if(!empty($information->passport_expired_date)){{ $information->passport_expired_date }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Nationality</div>
-                                            <div class="text">Indian</div>
+                                            <div class="text">@if(!empty($information->nationality))<a href="">{{ $information->nationality }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Religion</div>
-                                            <div class="text">Christian</div>
+                                            <div class="text">@if(!empty($information->religion))<a href="">{{ $information->religion }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Marital status</div>
-                                            <div class="text">Married</div>
+                                            <div class="text">@if(!empty($information->marital_status))<a href="">{{ $information->marital_status }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Employment of spouse</div>
-                                            <div class="text">No</div>
+                                            <div class="text">@if(!empty($information->employment_of_spouse))<a href="">{{ $information->employment_of_spouse }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">No. of children</div>
-                                            <div class="text">2</div>
+                                            <div class="text">@if(!empty($information->no_of_children))<a href="">{{ $information->no_of_children }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -359,35 +322,43 @@
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
                                     <h3 class="card-title">Emergency Contact <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
-                                    <h5 class="section-title">Primary</h5>
+                                    <h4 class="section-title">Primary</h4>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">{{ $information->emergency_contact_name_1 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_name_1)){{ $information->emergency_contact_name_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">{{ $information->emergency_contact_relationship_1 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_relationship_1)){{ $information->emergency_contact_relationship_1 }}@else N\A @endif</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Mobile </div>
+                                            <div class="text">@if(!empty($information->emergency_contact_mobile_1)){{ $information->emergency_contact_mobile_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">{{ $information->emergency_contact_mobile_1 }}, {{ $information->emergency_contact_phone_1 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_mobile_1)){{ $information->emergency_contact_phone_1 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                     <hr>
-                                    <h5 class="section-title">Secondary</h5>
+                                    <h4 class="section-title">Secondary</h4>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">{{ $information->emergency_contact_name_2 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_name_2)){{ $information->emergency_contact_name_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">{{ $information->emergency_contact_relationship_2 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_relationship_2)){{ $information->emergency_contact_relationship_2 }}@else N\A @endif</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Mobile </div>
+                                            <div class="text">@if(!empty($information->emergency_contact_mobile_2)){{ $information->emergency_contact_mobile_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">{{ $information->emergency_contact_mobile_2 }}, {{ $information->emergency_contact_phone_2 }}</div>
+                                            <div class="text">@if(!empty($information->emergency_contact_phone_2)){{ $information->emergency_contact_phone_2 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -398,23 +369,15 @@
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
-                                    <h3 class="card-title">Bank information</h3>
+                                    <h3 class="card-title">Bank information <a href="#" class="edit-icon" data-toggle="modal" data-target="#bank_information_modal"><i class="fa fa-pencil"></i></a></h3>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Bank name</div>
-                                            <div class="text">ICICI Bank</div>
+                                            <div class="text">@if(!empty($information->bank_name)){{$information->bank_name}}@else N/A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Bank account No.</div>
-                                            <div class="text">159843014641</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">IFSC Code</div>
-                                            <div class="text">ICI24504</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">PAN No</div>
-                                            <div class="text">TC000Y56</div>
+                                            <div class="text">@if(!empty($information->bank_account_no)){{$information->bank_account_no}}@else N/A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -428,6 +391,7 @@
                                         <table class="table table-nowrap">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Name</th>
                                                     <th>Relationship</th>
                                                     <th>Date of Birth</th>
@@ -436,19 +400,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
                                                 <tr>
-                                                    <td>Leo</td>
-                                                    <td>Brother</td>
-                                                    <td>Feb 16th, 2019</td>
-                                                    <td>9876543210</td>
+                                                    <td>@if(!empty($information->family_member_name_1))@else @endif</td>
+                                                    <td>@if(!empty($information->family_member_name_1)){{ $information->family_member_name_1 }}@else @endif</td>
+                                                    <td>@if(!empty($information->family_member_relationship_1)){{ $information->family_member_relationship_1 }}@else @endif</td>
+                                                    <td>@if(!empty($information->family_member_DOB_1)){{ $information->family_member_DOB_1 }}@else @endif</td>
+                                                    <td>@if(!empty($information->family_member_phone_1)){{ $information->family_member_phone_1 }}@else @endif</td>
                                                     <td class="text-right">
+                                                        @if(!empty($information->family_member_name_1))
                                                         <div class="dropdown dropdown-action">
                                                             <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                {{-- <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a> --}}
                                                                 <a href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
+                                                        @else @endif
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -471,9 +439,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">International College of Arts and Science (UG)</a>
-                                                        <div>Bsc Computer Science</div>
-                                                        <span class="time">2000 - 2003</span>
+                                                        <a href="#/" class="name">@if(!empty($information->academic_institution_1)){{ $information->academic_institution_1 }}@else Academic Institution 1 @endif</a>
+                                                        <div>@if(!empty($information->academic_qualification_1)){{ $information->academic_qualification_1 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty($information->academic_starting_date_1)){{ $information->academic_starting_date_1 }}@else N/A @endif - @if(!empty($information->academic_complete_date_1)){{ $information->academic_complete_date_1 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -483,9 +451,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">International College of Arts and Science (PG)</a>
-                                                        <div>Msc Computer Science</div>
-                                                        <span class="time">2000 - 2003</span>
+                                                        <a href="#/" class="name">@if(!empty($information->academic_institution_2)){{ $information->academic_institution_2 }}@else Academic Institution 2 @endif</a>
+                                                        <div>@if(!empty($information->academic_qualification_2)){{ $information->academic_qualification_2 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty($information->academic_starting_date_2)){{ $information->academic_starting_date_2 }}@else N/A @endif - @if(!empty($information->academic_complete_date_2)){{ $information->academic_complete_date_1 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -1284,47 +1252,40 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile/personal_information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}"> 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport No</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport Expiry Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text">
+                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date">
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Tel</label>
-                                        <input class="form-control" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nationality <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" type="text" id="nationality" name="nationality" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Religion</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control" type="text">
-                                        </div>
+                                        <input class="form-control" type="text" id="religion" name="religion" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Marital status <span class="text-danger">*</span></label>
-                                        <select class="select form-control">
-                                            <option>-</option>
+                                        <select class="select form-control" id="marital_status" name="marital_status">
                                             <option>Single</option>
                                             <option>Married</option>
                                         </select>
@@ -1333,13 +1294,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Employment of spouse</label>
-                                        <input class="form-control" type="text">
+                                        <select class="select form-control" id="employment_of_spouse" name="employment_of_spouse">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>No. of children </label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="">
                                     </div>
                                 </div>
                             </div>
@@ -1364,72 +1328,50 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile/family_information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}"> 
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Family Member <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Family Member 1
+                                            {{-- ** TODO: DELETE FUNCTION **
+                                            <a href="javascript:void(0);" class="delete-icon">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a> --}}
+                                        </h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Date of birth <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <div class="cal-icon">
+                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Date of birth <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {{-- ** TODO : ADD MORE FAMILY INFORMATION **
                                         <div class="add-more">
                                             <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -1457,6 +1399,7 @@
                         <form action="{{ route('profile/emergency_contact/save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            @if(!empty($information))
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Primary Contact</h3>
@@ -1488,7 +1431,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Secondary Contact</h3>
@@ -1520,6 +1462,70 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Primary Contact</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value=" ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Relationship <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Mobile <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Secondary Contact</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Relationship <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Mobile <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <div class="submit-section">
                                 <button class="btn btn-primary submit-btn">Submit</button>
                             </div>
@@ -1529,6 +1535,49 @@
             </div>
         </div>
         <!-- /Emergency Contact Modal -->
+        
+        <!-- Bank Information Modal -->
+        <div id="bank_information_modal" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bank Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('profile/bank_information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Bank Details</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Bank Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="bank_name" name="bank_name" value="@if(!empty($information->bank_name)){{ $information->bank_name }}@endif">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Bank Account No <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="bank_account_no" name="bank_account_no" value="@if(!empty($information->bank_account_no)){{ $information->bank_account_no }}@endif">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bank Information Modal -->
         
         <!-- Education Modal -->
         <div id="education_info" class="modal custom-modal fade" role="dialog">
@@ -1540,8 +1589,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="modal-header">
+                        <h5 class="title">(Highest to Lowest)</h5>
+                    </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile/education_information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1549,20 +1603,32 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Oxford University" class="form-control floating">
+                                                    <input type="text" class="form-control floating" id="academic_institution_1" name="academic_institution_1" value="@if(!empty($information->academic_institution_1)){{ $information->academic_institution_1 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Subject</label>
+                                                    <input type="text" class="form-control floating" id="academic_qualification_1" name="academic_qualification_1" value="@if(!empty($information->academic_qualification_1)){{ $information->academic_qualification_1 }}@endif">
+                                                    <label class="focus-label">Academic Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_1" name="academic_type_qualification_1" value="@if(!empty($information->academic_type_qualification_1)){{ $information->academic_type_qualification_1 }}@endif">
+                                                    <label class="focus-label">Type of Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_grade_1" name="academic_grade_1" value="@if(!empty($information->academic_grade_1)){{ $information->academic_grade_1 }}@endif">
+                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_1" name="academic_starting_date_1" value="@if(!empty($information->academic_starting_date_1)){{ $information->academic_starting_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1570,21 +1636,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_1" name="academic_complete_date_1" value="@if(!empty($information->academic_complete_date_1)){{ $information->academic_complete_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="BE Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Degree</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="Grade A" class="form-control floating">
-                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1597,20 +1651,32 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Oxford University" class="form-control floating">
+                                                    <input type="text" class="form-control floating" id="academic_institution_2" name="academic_institution_2" value="@if(!empty($information->academic_institution_2)){{ $information->academic_institution_2 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Subject</label>
+                                                    <input type="text" class="form-control floating" id="academic_qualification_2" name="academic_qualification_2" value="@if(!empty($information->academic_qualification_2)){{ $information->academic_qualification_2 }}@endif">
+                                                    <label class="focus-label">Academic Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_2" name="academic_type_qualification_2" value="@if(!empty($information->academic_type_qualification_2)){{ $information->academic_type_qualification_2 }}@endif">
+                                                    <label class="focus-label">Type of Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_grade_2" name="academic_grade_2" value="@if(!empty($information->academic_grade_2)){{ $information->academic_grade_2 }}@endif">
+                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_21" name="academic_starting_date_2" value="@if(!empty($information->academic_starting_date_2)){{ $information->academic_starting_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1618,21 +1684,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_2" name="academic_complete_date_2" value="@if(!empty($information->academic_complete_date_2)){{ $information->academic_complete_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="BE Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Degree</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="Grade A" class="form-control floating">
-                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1671,26 +1725,26 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Digital Devlopment Inc">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="United States">
+                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Web Developer">
+                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1698,7 +1752,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
@@ -1713,26 +1767,26 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Digital Devlopment Inc">
+                                                    <input type="text" class="form-control floating" id="exp_company_2" name="exp_company_2" value="">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="United States">
+                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Web Developer">
+                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1740,7 +1794,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
