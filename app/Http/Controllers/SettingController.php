@@ -9,8 +9,10 @@ use DB;
 class SettingController extends Controller
 {
     // company/settings/page
-    public function companySettings()
+    public function companySettings(Request $request)
     {
+
+
         return view('settings.companysettings');
     }
     

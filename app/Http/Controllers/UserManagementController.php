@@ -323,6 +323,33 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
+    
+    // Save Eexperience Information
+    public function profileExperienceInformation(Request $request)
+    {
+        try{
+            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information->exp_company_name_1            = $request->exp_company_name_1;
+            $information->exp_location_1                = $request->exp_location_1;
+            $information->exp_position_1                = $request->exp_position_1;
+            $information->exp_period_from_1             = $request->exp_period_from_1;
+            $information->exp_period_to_1               = $request->exp_period_to_1;
+            $information->exp_company_name_2            = $request->exp_company_name_2;
+            $information->exp_location_2                = $request->exp_location_2;
+            $information->exp_position_2                = $request->exp_position_2;
+            $information->exp_period_from_2             = $request->exp_period_from_2;
+            $information->exp_period_to_2               = $request->exp_period_to_2;
+            $information->save();
+            
+            DB::commit();
+            Toastr::success('Store Experience Information successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Store Experience Information fail :)','Error');
+            return redirect()->back();
+        }
+    }
 
     
    

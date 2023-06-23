@@ -42,12 +42,12 @@
                         </div>
                     </div>
                     <!-- /Page Header -->
-                    <form>
+                    <form action="{{ route('company/settings/page') }}" method="POST">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Company Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" value="Signature">
+                                    <input class="form-control" type="text" name="company_name" disabled value="Signature International Berhad">
                                 </div>
                             </div>
                             <div class="col-sm-6">

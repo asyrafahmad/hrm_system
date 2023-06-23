@@ -48,7 +48,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('em/dashboard', [App\Http\Controllers\HomeController::class, 'emDashboard'])->name('em/dashboard');
 
 // -----------------------------settings----------------------------------------//
-Route::get('company/settings/page', [App\Http\Controllers\SettingController::class, 'companySettings'])->middleware('auth')->name('company/settings/page');
+Route::post('company/settings/page', [App\Http\Controllers\SettingController::class, 'companySettings'])->middleware('auth')->name('company/settings/page');
 Route::get('roles/permissions/page', [App\Http\Controllers\SettingController::class, 'rolesPermissions'])->middleware('auth')->name('roles/permissions/page');
 Route::post('roles/permissions/save', [App\Http\Controllers\SettingController::class, 'addRecord'])->middleware('auth')->name('roles/permissions/save');
 Route::post('roles/permissions/update', [App\Http\Controllers\SettingController::class, 'editRolesPermissions'])->middleware('auth')->name('roles/permissions/update');
@@ -83,6 +83,7 @@ Route::post('profile/emergency_contact/save', [App\Http\Controllers\UserManageme
 Route::post('profile/family_information/save', [App\Http\Controllers\UserManagementController::class, 'profileFamilyInformationContact'])->name('profile/family_information/save');
 Route::post('profile/bank_information/save', [App\Http\Controllers\UserManagementController::class, 'profileBankInformation'])->name('profile/bank_information/save');
 Route::post('profile/education_information/save', [App\Http\Controllers\UserManagementController::class, 'profileEducationInformation'])->name('profile/education_information/save');
+Route::post('profile/experience_information/save', [App\Http\Controllers\UserManagementController::class, 'profileExperienceInformation'])->name('profile/experience_information/save');
 
 // ----------------------------- user userManagement -----------------------//
 Route::get('userManagement', [App\Http\Controllers\UserManagementController::class, 'index'])->middleware('auth')->name('userManagement');

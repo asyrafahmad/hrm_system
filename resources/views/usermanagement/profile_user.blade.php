@@ -468,39 +468,32 @@
                                     <h3 class="card-title">Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                                     <div class="experience-box">
                                         <ul class="experience-list">
+                                            @if(!empty($information->exp_company_name_1))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Zen Corporation</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                                        <a href="#/" class="name">{{ $information->exp_position_1 }} at {{ $information->exp_company_name_1}}</a>
+                                                        <span class="time">{{ $information->exp_period_from_1 }} - {{ $information->exp_period_to_1 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
+                                            @endif
+                                            @if(!empty($information->exp_company_name_2))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Ron-tech</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                                        <a href="#/" class="name">{{ $information->exp_position_2 }} at {{ $information->exp_company_name_2 }}</a>
+                                                        <span class="time">{{ $information->exp_period_from_2 }} - {{ $information->exp_period_to_2 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="experience-user">
-                                                    <div class="before-circle"></div>
-                                                </div>
-                                                <div class="experience-content">
-                                                    <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Dalt Technology</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -1717,34 +1710,36 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile/experience_information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 1<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty($information->exp_company_name_1 )){{ $information->exp_company_1 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="">
+                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="@if(!empty($information->exp_location_1 )){{ $information->exp_location_1 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="">
+                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="@if(!empty($information->exp_position_1 )){{ $information->exp_position_1 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="@if(!empty($information->exp_period_from_1 )){{ $information->exp_period_from_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1752,7 +1747,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="@if(!empty($information->exp_period_to_1 )){{ $information->exp_period_to_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
@@ -1763,30 +1758,30 @@
                                 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 2<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6">  
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_company_2" name="exp_company_2" value="">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_2" name="exp_company_name_2" value="@if(!empty($information->exp_company_name_2 )){{ $information->exp_company_name_2 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="">
+                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="@if(!empty($information->exp_period_from_2 )){{ $information->exp_period_from_2 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="">
+                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="@if(!empty($information->exp_position_2 )){{ $information->exp_position_2 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="@if(!empty($information->exp_period_from_2 )){{ $information->exp_period_from_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1794,7 +1789,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="@if(!empty($information->exp_period_to_2 )){{ $information->exp_period_to_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
