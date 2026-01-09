@@ -33,20 +33,20 @@
 </head>
 
 <body>
-	<style>    
+	<style>
 		.invalid-feedback{
 			font-size: 14px;
 		}
 	</style>
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
-		
+
 		<!-- Header -->
 		{{-- @yield('nav') --}}
 		<div class="header">
 			<!-- Logo -->
 			<div class="header-left">
-				<a href="{{ route('home') }}" class="logo"> <img src="{{ URL::to('assets/img/signature-logo.png') }}" width="140" height="40" alt=""> </a>
+				<a href="{{ route('dashboard.admin') }}" class="logo"> <img src="{{ URL::to('assets/img/signature-logo.png') }}" width="140" height="40" alt=""> </a>
 			</div>
 			<!-- /Logo -->
 			<a id="toggle_btn" href="javascript:void(0);">
@@ -244,7 +244,7 @@
 					<i class="fa fa-ellipsis-v"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">
-					<a class="dropdown-item" href="profile.html">My Profile</a> 
+					<a class="dropdown-item" href="profile.html">My Profile</a>
 					<a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
 				</div>
 			</div>
@@ -277,7 +277,7 @@
 	<script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
 	<!-- Custom JS -->
 	<script src="{{ URL::to('assets/js/app.js') }}"></script>
-	
+
 	@yield('script')
 </body>
 </html>

@@ -29,30 +29,22 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::group(['middleware'=>'auth'],function()
-{
-    Route::get('home',function()
-    {
-        return view('home');
-    });
-    Route::get('home',function()
-    {
-        return view('home');
-    });
-});
-
 Auth::routes();
 
 // ----------------------------- main dashboard ------------------------------//
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('em/dashboard', [App\Http\Controllers\HomeController::class, 'emDashboard'])->name('em/dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('dashboard.admin');
+    Route::get('/dashboard/employee', [App\Http\Controllers\HomeController::class, 'employeeDashboard'])->name('dashboard.employee');
+    Route::redirect('/home', '/dashboard');
+    Route::redirect('home', '/dashboard');
 
-// -----------------------------settings----------------------------------------//
-Route::post('company/settings/page', [App\Http\Controllers\SettingController::class, 'companySettings'])->middleware('auth')->name('company/settings/page');
-Route::get('roles/permissions/page', [App\Http\Controllers\SettingController::class, 'rolesPermissions'])->middleware('auth')->name('roles/permissions/page');
-Route::post('roles/permissions/save', [App\Http\Controllers\SettingController::class, 'addRecord'])->middleware('auth')->name('roles/permissions/save');
-Route::post('roles/permissions/update', [App\Http\Controllers\SettingController::class, 'editRolesPermissions'])->middleware('auth')->name('roles/permissions/update');
-Route::post('roles/permissions/delete', [App\Http\Controllers\SettingController::class, 'deleteRolesPermissions'])->middleware('auth')->name('roles/permissions/delete');
+    // ----------------------------- settings ----------------------------------------//
+    Route::post('company/settings/page', [App\Http\Controllers\SettingController::class, 'companySettings'])->name('company/settings/page');
+    Route::get('roles/permissions/page', [App\Http\Controllers\SettingController::class, 'rolesPermissions'])->name('roles/permissions/page');
+    Route::post('roles/permissions/save', [App\Http\Controllers\SettingController::class, 'addRecord'])->name('roles/permissions/save');
+    Route::post('roles/permissions/update', [App\Http\Controllers\SettingController::class, 'editRolesPermissions'])->name('roles/permissions/update');
+    Route::post('roles/permissions/delete', [App\Http\Controllers\SettingController::class, 'deleteRolesPermissions'])->name('roles/permissions/delete');
+});
 
 // -----------------------------login----------------------------------------//
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');

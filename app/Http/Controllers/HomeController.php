@@ -20,21 +20,24 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the admin dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // main dashboard
-    public function index()
+    public function adminDashboard()
     {
         return view('dashboard.dashboard');
     }
-    // employee dashboard
-    public function emDashboard()
+
+    /**
+     * Show the employee dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function employeeDashboard()
     {
-        $dt        = Carbon::now();
-        $todayDate = $dt->toDayDateTimeString();
-        return view('dashboard.emdashboard',compact('todayDate'));
+        $todayDate = Carbon::now()->toDayDateTimeString();
+        return view('dashboard.emdashboard', compact('todayDate'));
     }
 
     public function generatePDF(Request $request)
