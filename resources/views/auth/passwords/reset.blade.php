@@ -1,13 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 @section('content')
     <div class="main-wrapper">
         <div class="account-content">
-            <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>
             <div class="container">
-                <!-- Account Logo -->
-                <div class="account-logo">
-                    <a href="index.html"><img src="{{ URL::to('assets/img/signature-logo.png') }}" alt="Company Picture"></a>
-                </div>
+
                 {{-- message --}}
                 {!! Toastr::message() !!}
                 <!-- /Account Logo -->

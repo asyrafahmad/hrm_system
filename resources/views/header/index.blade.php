@@ -12,7 +12,13 @@
     </a>
     <!-- Header Title -->
     <div class="page-title-box">
-        <h3>{{ Auth::user()->name }}</h3>
+        @auth
+            <h3>{{ auth()->user()->name }}</h3>
+        @endauth
+
+        @guest
+            <h3>Guest</h3>
+        @endguest
     </div>
     <!-- /Header Title -->
     <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
@@ -49,11 +55,28 @@
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                 <span class="user-img">
-                    <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
-                    <span class="status online"></span>
+                    @auth
+                        <img
+                            src="{{ asset('assets/images/' . auth()->user()->avatar) }}"
+                            alt="{{ auth()->user()->name }}"
+                        >
+                        <span class="status online"></span>
+                    @endauth
+
+                    @guest
+                        <img
+                            src="{{ asset('assets/images/default-avatar.png') }}"
+                            alt="Guest"
+                        >
+                    @endguest
                 </span>
-                <span>{{ Auth::user()->name }}</span>
+
+                <span>
+                    @auth {{ auth()->user()->name }} @endauth
+                    @guest Guest @endguest
+                </span>
             </a>
+
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ route('profile_user') }}">My Profile</a>
                 <a class="dropdown-item" href="{{ route('company/settings/page') }}">Settings</a>

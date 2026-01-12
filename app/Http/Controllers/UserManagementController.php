@@ -32,7 +32,7 @@ class UserManagementController extends Controller
         {
             return redirect()->route('home');
         }
-        
+
     }
     // search user
     public function searchUser(Request $request)
@@ -96,14 +96,14 @@ class UserManagementController extends Controller
                                 ->where('status','LIKE','%'.$request->status.'%')
                                 ->get();
             }
-           
+
             return view('usermanagement.user_control',compact('users','role_name','position','department','status_user','result'));
         }
         else
         {
             return redirect()->route('home');
         }
-    
+
     }
 
     // use activity log
@@ -121,12 +121,12 @@ class UserManagementController extends Controller
 
     // profile user
     public function profile()
-    {   
+    {
         $user = Auth::User();
         Session::put('user', $user);
         $user=Session::get('user');
         $profile = $user->rec_id;
-       
+
         $user = DB::table('users')->get();
         $employees = DB::table('profile_information')->where('rec_id',$profile)->first();
 
@@ -144,12 +144,12 @@ class UserManagementController extends Controller
             }else{
                 $information = ProfileInformation::all();
                 return view('usermanagement.profile_user',compact('information','user'));
-            } 
+            }
         }
-       
+
     }
 
-    // save profile 
+    // save profile
     public function profileInformation(Request $request)
     {
         try{
@@ -178,7 +178,7 @@ class UserManagementController extends Controller
                     'avatar' => $image_name,
                 ];
                 User::where('rec_id',$request->rec_id)->update($update);
-            } 
+            }
 
             $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
             $information->name         = $request->name;
@@ -195,7 +195,7 @@ class UserManagementController extends Controller
             $information->designation  = $request->designation;
             $information->reports_to   = $request->reports_to;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Profile Information successfully :)','Success');
             return redirect()->back();
@@ -219,7 +219,7 @@ class UserManagementController extends Controller
             $information->employment_of_spouse      = $request->employment_of_spouse;
             $information->no_of_children            = $request->no_of_children;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Store Profile Personal Information successfully :)','Success');
             return redirect()->back();
@@ -244,7 +244,7 @@ class UserManagementController extends Controller
             $information->emergency_contact_phone_2         = $request->emergency_contact_phone_2;
             $information->emergency_contact_mobile_2        = $request->emergency_contact_mobile_2;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Add Profile Emergency Contact successfully :)','Success');
             return redirect()->back();
@@ -265,7 +265,7 @@ class UserManagementController extends Controller
             $information->family_member_DOB_1               = $request->family_member_DOB_1;
             $information->family_member_phone_1             = $request->family_member_phone_1;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Store Family Information successfully :)','Success');
             return redirect()->back();
@@ -284,7 +284,7 @@ class UserManagementController extends Controller
             $information->bank_name             = $request->bank_name;
             $information->bank_account_no       = $request->bank_account_no;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Store Bank Information successfully :)','Success');
             return redirect()->back();
@@ -313,7 +313,7 @@ class UserManagementController extends Controller
             $information->academic_starting_date_2          = $request->academic_starting_date_2;
             $information->academic_complete_date_2          = $request->academic_complete_date_2;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Store Academic Information successfully :)','Success');
             return redirect()->back();
@@ -323,7 +323,7 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
-    
+
     // Save Eexperience Information
     public function profileExperienceInformation(Request $request)
     {
@@ -340,7 +340,7 @@ class UserManagementController extends Controller
             $information->exp_period_from_2             = $request->exp_period_from_2;
             $information->exp_period_to_2               = $request->exp_period_to_2;
             $information->save();
-            
+
             DB::commit();
             Toastr::success('Store Experience Information successfully :)','Success');
             return redirect()->back();
@@ -351,8 +351,8 @@ class UserManagementController extends Controller
         }
     }
 
-    
-   
+
+
     // save new user
     public function addNewUserSave(Request $request)
     {
@@ -373,7 +373,7 @@ class UserManagementController extends Controller
             $dt       = Carbon::now();
             $todayDate = $dt->toDayDateTimeString();
 
-            $image = time().'.'.$request->image->extension();  
+            $image = time().'.'.$request->image->extension();
             $request->image->move(public_path('assets/images'), $image);
 
             $user = new User;
@@ -398,7 +398,7 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
-    
+
     // update
     public function update(Request $request)
     {
@@ -426,14 +426,14 @@ class UserManagementController extends Controller
                 }
             }
             else{
-                
+
                 if($image != '')
                 {
                     $image_name = rand() . '.' . $image->getClientOriginalExtension();
                     $image->move(public_path('/assets/images/'), $image_name);
                 }
             }
-            
+
             $update = [
 
                 'rec_id'       => $rec_id,
@@ -508,7 +508,7 @@ class UserManagementController extends Controller
             DB::commit();
             Toastr::success('User deleted successfully :)','Success');
             return redirect()->route('userManagement');
-            
+
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('User deleted fail :)','Error');
@@ -521,7 +521,7 @@ class UserManagementController extends Controller
     {
         return view('settings.changepassword');
     }
-    
+
     // change password in db
     public function changePasswordDB(Request $request)
     {

@@ -1,19 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 @section('content')
     <div class="main-wrapper">
         <div class="account-content">
-            <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>
+
             <div class="container">
-                <!-- Account Logo -->
-                <div class="account-logo">
-                    <a href="index.html"><img src="{{ URL::to('assets/img/signature-logo.png') }}" alt="Company Picture"></a>
-                </div>
                 <!-- /Account Logo -->
                 <div class="account-box">
                     <div class="account-wrapper">
                         <h3 class="account-title">Register</h3>
                         <p class="account-subtitle">Access to our dashboard</p>
-                        
+
                         <!-- Account Form -->
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
