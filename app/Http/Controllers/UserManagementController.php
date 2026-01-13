@@ -22,7 +22,7 @@ class UserManagementController extends Controller
         if (Auth::user()->role_name=='Admin')
         {
             $result      = DB::table('users')->get();
-            $role_name   = DB::table('role_type_users')->get();
+            $role_name   = DB::table('users_role_type')->get();
             $position    = DB::table('position_types')->get();
             $department  = DB::table('departments')->get();
             $status_user = DB::table('user_types')->get();
@@ -41,7 +41,7 @@ class UserManagementController extends Controller
         {
             $users      = DB::table('users')->get();
             $result     = DB::table('users')->get();
-            $role_name  = DB::table('role_type_users')->get();
+            $role_name  = DB::table('users_role_type')->get();
             $position   = DB::table('position_types')->get();
             $department = DB::table('departments')->get();
             $status_user = DB::table('user_types')->get();
