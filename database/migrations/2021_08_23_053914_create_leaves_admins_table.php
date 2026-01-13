@@ -15,7 +15,7 @@ class CreateLeavesAdminsTable extends Migration
     {
         Schema::create('leaves_admins', function (Blueprint $table) {
             $table->id();
-            $table->string('rec_id')->nullable();
+            $table->string('employee_id')->nullable();
             $table->string('leave_type')->nullable();
             $table->string('from_date')->nullable();
             $table->string('to_date')->nullable();

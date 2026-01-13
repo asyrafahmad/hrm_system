@@ -13,7 +13,7 @@ class ProfileInformation extends Model
 
     protected $fillable = [
         'name',
-        'rec_id',
+        'employee_id',
         'email',
         'birth_date',
         'gender',

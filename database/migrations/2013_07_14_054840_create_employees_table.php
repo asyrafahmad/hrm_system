@@ -20,6 +20,9 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_code', 50)->unique();
             $table->string('name', 255);
             $table->string('email', 255)->unique();
+            $table->string('phone_number', 20)->nullable();
+            $table->date('join_date')->nullable();
+            $table->string('address', 500)->nullable();
 
             // Personal info
             $table->date('birth_date')->nullable();

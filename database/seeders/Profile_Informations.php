@@ -16,7 +16,7 @@ class Profile_Informations extends Seeder
         // $data = [
         //     [
         //         'name' => 'Admin',
-        //         'rec_id' => 'Staff_ID_00000',
+        //         'employee_id' => 'Staff_ID_00000',
         //         'email' => 'admin@gmail.com',
         //         'birth_date' => '01-01-1970',
         //         'gender' => 'Male',
@@ -31,7 +31,7 @@ class Profile_Informations extends Seeder
         //     ],
         //     [
         //         'name' => 'Muhammad Nur Asyraf',
-        //         'rec_id' => 'Staff_ID_00001',
+        //         'employee_id' => 'Staff_ID_00001',
         //         'email' => 'asyraf@gmail.com',
         //         'birth_date' => '01-04-1997',
         //         'gender' => 'Male',
@@ -46,7 +46,7 @@ class Profile_Informations extends Seeder
         //     ],
         //     [
         //         'name' => 'Bexter Lim',
-        //         'rec_id' => 'Staff_ID_00002',
+        //         'employee_id' => 'Staff_ID_00002',
         //         'email' => 'bexter@gmail.com',
         //         'birth_date' => '01-04-1985',
         //         'gender' => 'Male',

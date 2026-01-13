@@ -38,7 +38,7 @@
                                                 <h3 class="user-name m-t-0 mb-0">{{ Auth::user()->name }}</h3>
                                                 <h6 class="text-muted">{{ Auth::user()->department }}</h6>
                                                 <small class="text-muted">{{ Auth::user()->position }}</small>
-                                                <div class="staff-id">Employee ID : {{ Auth::user()->rec_id }}</div>
+                                                <div class="staff-id">Employee ID : {{ Auth::user()->employee_id }}</div>
                                                 <div class="small doj text-muted">Date of Join : {{ Auth::user()->join_date }}</div>
                                                 <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
                                             </div>
@@ -864,7 +864,7 @@
                                             <div class="form-group">
                                                 <label>Full Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                                                 <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
@@ -992,7 +992,7 @@
                                             <div class="form-group">
                                                 <label>Full Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                                                 <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
@@ -1107,7 +1107,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/personal_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -1183,7 +1183,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/family_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1251,7 +1251,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/emergency_contact/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             @if(!empty($information))
                             <div class="card">
                                 <div class="card-body">
@@ -1402,7 +1402,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/bank_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Bank Details</h3>
@@ -1448,7 +1448,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/education_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1572,7 +1572,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/experience_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">

@@ -17,7 +17,7 @@ class CreatePerformanceAppraisalsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('date')->nullable();
-            $table->string('rec_id')->nullable();
+            $table->string('employee_id')->nullable();
             $table->string('customer_experience')->nullable();
             $table->string('marketing')->nullable();
             $table->string('management')->nullable();

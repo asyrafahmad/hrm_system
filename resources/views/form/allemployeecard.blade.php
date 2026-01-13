@@ -95,15 +95,15 @@
                             <tbody>
                                 @foreach ($users as $lists )
                                 <tr>
-                                    <td class="id">{{ $lists->rec_id }}</td>
+                                    <td class="id">{{ $lists->employee_id }}</td>
                                     <td class="name">{{ $lists->name }}</td>
                                     <td class="department">{{ $lists->department }}</td>
                                     <td class="position">{{ $lists->position }}</td>
                                     <td class="email">{{ $lists->email }}</td>
                                     <td class="phone_number">{{ $lists->phone_number }}</td>
                                     <td class="image" style="display:none;">{{ $lists->avatar }}</td>
-                                    <td class="role_name" style="display:none;">{{ $lists->role_name }}</td>
-                                    <td class="statuss" style="display:none;">{{ $lists->status }}</td>
+                                    {{-- <td class="role_name" style="display:none;">{{ $lists->role_name }}</td> --}}
+                                    <td class="status" style="display:none;">{{ $lists->status }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>

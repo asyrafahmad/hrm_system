@@ -134,7 +134,7 @@ Route::get('form/job/view', [App\Http\Controllers\JobController::class, 'jobView
 
 
 // ----------------------------- profile employee ------------------------------//
-Route::get('employee/profile/{rec_id}', [App\Http\Controllers\EmployeeController::class, 'profileEmployee'])->middleware('auth');
+Route::get('employee/profile/{employee_id}', [App\Http\Controllers\EmployeeController::class, 'profileEmployee'])->middleware('auth');
 
 
 
@@ -145,7 +145,7 @@ Route::get('form/salary/page', [App\Http\Controllers\PayrollController::class, '
 Route::post('form/salary/save', [App\Http\Controllers\PayrollController::class, 'saveRecord'])->middleware('auth')->name('form/salary/save');
 Route::post('form/salary/update', [App\Http\Controllers\PayrollController::class, 'updateRecord'])->middleware('auth')->name('form/salary/update');
 Route::post('form/salary/delete', [App\Http\Controllers\PayrollController::class, 'deleteRecord'])->middleware('auth')->name('form/salary/delete');
-Route::get('form/salary/view/{rec_id}', [App\Http\Controllers\PayrollController::class, 'salaryView'])->middleware('auth');
+Route::get('form/salary/view/{employee_id}', [App\Http\Controllers\PayrollController::class, 'salaryView'])->middleware('auth');
 Route::get('form/payroll/items', [App\Http\Controllers\PayrollController::class, 'payrollItems'])->middleware('auth')->name('form/payroll/items');
 
 // ----------------------------- reports  ------------------------------//

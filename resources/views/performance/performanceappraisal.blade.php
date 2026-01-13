@@ -279,11 +279,11 @@
                                         <select class="select" id="name" name="name">
                                             <option selected disabled> -- Select Employee -- </option>
                                             @foreach ($users as $user )
-                                            <option value="{{ $user->name }}" data-employee_id={{ $user->rec_id }}>{{ $user->name }}</option>
+                                            <option value="{{ $user->name }}" data-employee_id={{ $user->employee_id }}>{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <input class="form-control" type="hidden" id="employee_id" name="rec_id" readonly>
+                                    <input class="form-control" type="hidden" id="employee_id" name="employee_id" readonly>
                                     <div class="form-group">
                                         <label>Select Date <span class="text-danger">*</span></label>
                                         <div class="cal-icon">

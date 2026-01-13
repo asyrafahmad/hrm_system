@@ -16,7 +16,7 @@ class CreateStaffSalariesTable extends Migration
         Schema::create('staff_salaries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('rec_id')->nullable();
+            $table->string('employee_id')->nullable();
             $table->string('salary')->nullable();
             $table->string('basic')->nullable();
             $table->string('da')->nullable();

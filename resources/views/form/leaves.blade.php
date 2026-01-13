@@ -127,7 +127,7 @@
                                         <tr>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="{{ url('employee/profile/'.$items->rec_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}" alt="{{ $items->name }}"></a>
+                                                    <a href="{{ url('employee/profile/'.$items->employee_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}" alt="{{ $items->name }}"></a>
                                                     <a href="#">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                                 </h2>
                                             </td>
@@ -194,7 +194,7 @@
                                     <option value="Loss of Pay">Loss of Pay</option>
                                 </select>
                             </div>
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-group">
                                 <label>From <span class="text-danger">*</span></label>
                                 <div class="cal-icon">

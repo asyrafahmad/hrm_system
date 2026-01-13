@@ -215,10 +215,10 @@
                                     <td class="training_type">{{ $training->training_type }}</td>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$training->rec_id) }}" class="avatar">
+                                            <a href="{{ url('employee/profile/'.$training->employee_id) }}" class="avatar">
                                                 <img alt="" src="{{ URL::to('/assets/images/'. $training->avatar) }}">
                                             </a>
-                                            <a href="{{ url('employee/profile/'.$training->rec_id) }}">{{ $training->trainer }}</a>
+                                            <a href="{{ url('employee/profile/'.$training->employee_id) }}">{{ $training->trainer }}</a>
                                         </h2>
                                     </td>
                                     <td hidden class="trainer">{{ $training->trainer }}</td>
@@ -349,7 +349,7 @@
                                         <select class="select" id="trainer" name="trainer" @error('trainer') is-invalid @enderror>
                                             @foreach ($user as $items )
                                                 <option selected disabled>-- Select --</option>
-                                                <option value="{{ $items->name }}" data-trainer_id={{ $items->rec_id }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }}" data-trainer_id={{ $items->employee_id }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -361,7 +361,7 @@
                                         <select class="select" id="employees" name="employees" @error('employees') is-invalid @enderror>
                                             @foreach ($user as $items )
                                                 <option selected disabled>-- Select --</option>
-                                                <option value="{{ $items->name }}" data-employees_id={{ $items->rec_id }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }}" data-employees_id={{ $items->employee_id }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -447,7 +447,7 @@
                                         <select class="select" id="e_trainer" name="trainer">
                                             @foreach ($user as $items )
                                                 <option selected disabled>-- Select --</option>
-                                                <option value="{{ $items->name }}" data-e_trainer_id={{ $items->rec_id }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }}" data-e_trainer_id={{ $items->employee_id }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -459,7 +459,7 @@
                                         <select class="select" id="e_employees" name="employees">
                                             @foreach ($user as $items )
                                                 <option selected disabled>-- Select --</option>
-                                                <option value="{{ $items->name }}" data-e_employees_id={{ $items->rec_id }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }}" data-e_employees_id={{ $items->employee_id }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

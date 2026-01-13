@@ -16,7 +16,7 @@ class CreateProfileInformationTable extends Migration
         Schema::create('profile_information', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name')->nullable();
-            $table->string('rec_id')->nullable();
+            $table->string('employee_id')->nullable();
             $table->string('email')->nullable();
             $table->string('birth_date')->nullable();
             $table->string('gender')->nullable();

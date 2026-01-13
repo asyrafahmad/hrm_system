@@ -243,11 +243,11 @@
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$items->rec_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
-                                            <a href="{{ url('employee/profile/'.$items->rec_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
+                                            <a href="{{ url('employee/profile/'.$items->employee_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
+                                            <a href="{{ url('employee/profile/'.$items->employee_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
-                                    <td>{{ $items->rec_id }}</td>
+                                    <td>{{ $items->employee_id }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
                                     <td hidden class="basic">{{ $items->basic }}</td>
@@ -267,7 +267,7 @@
                                     <td>{{ $items->role_name }}</td>
                                     <td>${{ $items->salary }}</td>
                                     <td hidden class="salary">{{ $items->salary }}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->rec_id) }}">Generate Slip</a></td>
+                                    <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->employee_id) }}">Generate Slip</a></td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -308,7 +308,7 @@
                                         <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->rec_id }}>{{ $user->name }}</option>
+                                                <option value="{{ $user->name }}" data-employee_id={{ $user->employee_id }}>{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -318,7 +318,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input class="form-control" type="hidden" name="rec_id" id="employee_id" readonly>
+                                <input class="form-control" type="hidden" name="employee_id" id="employee_id" readonly>
                                 <div class="col-sm-6">
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">

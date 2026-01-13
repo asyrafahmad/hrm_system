@@ -207,10 +207,10 @@
                                     <td>{{ ++$key }}</td>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$trainer->rec_id) }}" class="avatar">
+                                            <a href="{{ url('employee/profile/'.$trainer->employee_id) }}" class="avatar">
                                                 <img alt="" src="{{ URL::to('/assets/images/'. $trainer->avatar) }}">
                                             </a>
-                                            <a href="{{ url('employee/profile/'.$trainer->rec_id) }}">{{ $trainer->full_name }}</a>
+                                            <a href="{{ url('employee/profile/'.$trainer->employee_id) }}">{{ $trainer->full_name }}</a>
                                         </h2>
                                     </td>
                                     <td class="phone">{{ $trainer->phone }}</td>
@@ -286,7 +286,7 @@
                                         <select class="select @error('full_name') is-invalid @enderror" id="trainer" name="full_name">
                                             <option selected disabled>-- Select --</option>
                                             @foreach ($user as $key=>$items )
-                                                <option value="{{ $items->name }} {{ old('full_name') == $items->name ? 'selected' : '' }}" data-trainer_id={{ $items->rec_id }} data-email={{ $items->email }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }} {{ old('full_name') == $items->name ? 'selected' : '' }}" data-trainer_id={{ $items->employee_id }} data-email={{ $items->email }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -356,7 +356,7 @@
                                         <label class="col-form-label">Full Name<span class="text-danger">*</span></label>
                                         <select class="select" id="e_trainer" name="full_name">
                                             @foreach ($user as $key=>$items )
-                                                <option value="{{ $items->name }}" data-trainer_id={{ $items->rec_id }} data-email={{ $items->email }}>{{ $items->name }}</option>
+                                                <option value="{{ $items->name }}" data-trainer_id={{ $items->employee_id }} data-email={{ $items->email }}>{{ $items->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

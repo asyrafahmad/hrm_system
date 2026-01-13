@@ -272,7 +272,7 @@
                     <div class="modal-body">
                         <form action="{{ route('form/performance/indicator/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="rec_id" value="{{ Session::get('rec_id') }}">
+                            <input type="hidden" name="employee_id" value="{{ Session::get('employee_id') }}">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">

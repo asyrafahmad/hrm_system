@@ -15,7 +15,7 @@ class CreatePerformanceIndicatorsTable extends Migration
     {
         Schema::create('performance_indicators', function (Blueprint $table) {
             $table->id();
-            $table->string('rec_id')->nullable();
+            $table->string('employee_id')->nullable();
             $table->string('designation')->nullable();
             $table->string('customer_eperience')->nullable();
             $table->string('marketing')->nullable();

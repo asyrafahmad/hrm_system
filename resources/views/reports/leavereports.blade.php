@@ -230,7 +230,7 @@
                                         <td>
                                             <h2 class="table-avatar">
                                                 <a href="profile.html" class="avatar"><img alt="{{ $items->avatar }}" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
-                                                <a href="profile.html">{{ $items->name }} <span>{{ $items->rec_id }}</span></a>
+                                                <a href="profile.html">{{ $items->name }} <span>{{ $items->employee_id }}</span></a>
                                             </h2>
                                         </td>
                                         <td>{{ $items->join_date }}</td>

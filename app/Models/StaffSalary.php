@@ -10,7 +10,7 @@ class StaffSalary extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'rec_id',
+        'employee_id',
         'salary',
         'basic',
         'da',

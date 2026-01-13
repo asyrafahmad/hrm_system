@@ -15,13 +15,13 @@ class PerformanceController extends Controller
     // view page
     public function index()
     {
-        $rec_id = Auth::User()->rec_id;
-        Session::put('rec_id', $rec_id);
+        $employee_id = Auth::User()->employee_id;
+        Session::put('employee_id', $employee_id);
 
         $indicator = DB::table('performance_indicator_lists')->get();
         $departments = DB::table('departments')->get();
         $performance_indicators = DB::table('users')
-            ->join('performance_indicators', 'users.rec_id', '=', 'performance_indicators.rec_id')
+            ->join('performance_indicators', 'users.employee_id', '=', 'performance_indicators.employee_id')
             ->select('users.*', 'performance_indicators.*')
             ->get(); 
         return view('performance.performanceindicator',compact('indicator','departments','performance_indicators'));
@@ -40,7 +40,7 @@ class PerformanceController extends Controller
         $users = DB::table('users')->get();
         $indicator = DB::table('performance_indicator_lists')->get();
         $appraisals = DB::table('users')
-        ->join('performance_appraisals', 'users.rec_id', '=', 'performance_appraisals.rec_id')
+        ->join('performance_appraisals', 'users.employee_id', '=', 'performance_appraisals.employee_id')
         ->select('users.*', 'performance_appraisals.*')
         ->get(); 
         return view('performance.performanceappraisal',compact('users','indicator','appraisals'));
@@ -72,7 +72,7 @@ class PerformanceController extends Controller
         try {
             
             $indicator = new performanceIndicator;
-            $indicator->rec_id             = $request->rec_id;
+            $indicator->employee_id             = $request->employee_id;
             $indicator->designation        = $request->designation;
             $indicator->customer_eperience = $request->customer_eperience;
             $indicator->marketing          = $request->marketing;
@@ -163,7 +163,7 @@ class PerformanceController extends Controller
         try {
             
             $appraisal = new performance_appraisal;
-            $appraisal->rec_id              = $request->rec_id;
+            $appraisal->employee_id              = $request->employee_id;
             $appraisal->date                = $request->date;
             $appraisal->name                = $request->name;
             $appraisal->customer_experience = $request->customer_experience;

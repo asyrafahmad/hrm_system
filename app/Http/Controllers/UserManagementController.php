@@ -125,21 +125,21 @@ class UserManagementController extends Controller
         $user = Auth::User();
         Session::put('user', $user);
         $user=Session::get('user');
-        $profile = $user->rec_id;
+        $profile = $user->employee_id;
 
         $user = DB::table('users')->get();
-        $employees = DB::table('profile_information')->where('rec_id',$profile)->first();
+        $employees = DB::table('profile_information')->where('employee_id',$profile)->first();
 
         if(empty($employees))
         {
-            $information = DB::table('profile_information')->where('rec_id',$profile)->first();
+            $information = DB::table('profile_information')->where('employee_id',$profile)->first();
             return view('usermanagement.profile_user',compact('information','user'));
 
         }else{
-            $rec_id = $employees->rec_id;
-            if($rec_id == $profile)
+            $employee_id = $employees->employee_id;
+            if($employee_id == $profile)
             {
-                $information = DB::table('profile_information')->where('rec_id',$profile)->first();
+                $information = DB::table('profile_information')->where('employee_id',$profile)->first();
                 return view('usermanagement.profile_user',compact('information','user'));
             }else{
                 $information = ProfileInformation::all();
@@ -173,16 +173,16 @@ class UserManagementController extends Controller
                     }
                 }
                 $update = [
-                    'rec_id' => $request->rec_id,
+                    'employee_id' => $request->employee_id,
                     'name'   => $request->name,
                     'avatar' => $image_name,
                 ];
-                User::where('rec_id',$request->rec_id)->update($update);
+                User::where('employee_id',$request->employee_id)->update($update);
             }
 
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->name         = $request->name;
-            $information->rec_id       = $request->rec_id;
+            $information->employee_id       = $request->employee_id;
             $information->email        = $request->email;
             $information->birth_date   = $request->birthDate;
             $information->gender       = $request->gender;
@@ -210,7 +210,7 @@ class UserManagementController extends Controller
     public function profilePersonalInformationContact(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->passport_no               = $request->passport_no;
             $information->passport_expired_date     = $request->passport_expired_date;
             $information->nationality               = $request->nationality;
@@ -234,7 +234,7 @@ class UserManagementController extends Controller
     public function profileEmergencyContact(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->emergency_contact_name_1          = $request->emergency_contact_name_1;
             $information->emergency_contact_relationship_1  = $request->emergency_contact_relationship_1;
             $information->emergency_contact_phone_1         = $request->emergency_contact_phone_1;
@@ -259,7 +259,7 @@ class UserManagementController extends Controller
     public function profileFamilyInformationContact(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->family_member_name_1              = $request->family_member_name_1;
             $information->family_member_relationship_1      = $request->family_member_relationship_1;
             $information->family_member_DOB_1               = $request->family_member_DOB_1;
@@ -280,7 +280,7 @@ class UserManagementController extends Controller
     public function profileBankInformation(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->bank_name             = $request->bank_name;
             $information->bank_account_no       = $request->bank_account_no;
             $information->save();
@@ -299,7 +299,7 @@ class UserManagementController extends Controller
     public function profileEducationInformation(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->academic_institution_1            = $request->academic_institution_1;
             $information->academic_qualification_1          = $request->academic_qualification_1;
             $information->academic_type_qualification_1     = $request->academic_type_qualification_1;
@@ -328,7 +328,7 @@ class UserManagementController extends Controller
     public function profileExperienceInformation(Request $request)
     {
         try{
-            $information = ProfileInformation::updateOrCreate(['rec_id' => $request->rec_id]);
+            $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
             $information->exp_company_name_1            = $request->exp_company_name_1;
             $information->exp_location_1                = $request->exp_location_1;
             $information->exp_position_1                = $request->exp_position_1;
@@ -404,7 +404,7 @@ class UserManagementController extends Controller
     {
         DB::beginTransaction();
         try{
-            $rec_id       = $request->rec_id;
+            $employee_id       = $request->employee_id;
             $name         = $request->name;
             $email        = $request->email;
             $role_name    = $request->role_name;
@@ -436,7 +436,7 @@ class UserManagementController extends Controller
 
             $update = [
 
-                'rec_id'       => $rec_id,
+                'employee_id'       => $employee_id,
                 'name'         => $name,
                 'role_name'    => $role_name,
                 'email'        => $email,
@@ -458,7 +458,7 @@ class UserManagementController extends Controller
             ];
 
             DB::table('user_activity_logs')->insert($activityLog);
-            User::where('rec_id',$request->rec_id)->update($update);
+            User::where('employee_id',$request->employee_id)->update($update);
             DB::commit();
             Toastr::success('User updated successfully :)','Success');
             return redirect()->route('userManagement');

@@ -37,7 +37,7 @@ class FormController extends Controller
     {
         try{
             $id           = $request->id;
-            $rec_id       = $request->rec_id;
+            $employee_id       = $request->employee_id;
             $fullName     = $request->fullName;
             $sex          = $request->sex;
             $emailAddress = $request->emailAddress;
@@ -49,7 +49,7 @@ class FormController extends Controller
             $update = [
 
                 'id'            => $id,
-                'rec_id'        => $rec_id,
+                'employee_id'        => $employee_id,
                 'full_name'     => $fullName,
                 'sex'           => $sex,
                 'email_address' => $emailAddress,

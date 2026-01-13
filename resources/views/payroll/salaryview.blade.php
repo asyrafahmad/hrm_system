@@ -55,7 +55,7 @@
                                     <ul class="list-unstyled">
                                         <li><h5 class="mb-0"><strong>{{ $users->name }}</strong></h5></li>
                                         <li><span>{{ $users->position }}</span></li>
-                                        <li>Employee ID: {{ $users->rec_id }}</li>
+                                        <li>Employee ID: {{ $users->employee_id }}</li>
                                         <li>Joining Date: {{ $users->join_date }}</li>
                                     </ul>
                                 </div>

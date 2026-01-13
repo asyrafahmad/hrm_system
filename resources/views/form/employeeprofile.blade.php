@@ -36,7 +36,7 @@
                                                 <h3 class="user-name m-t-0 mb-0">{{ $user[0]->name }}</h3>
                                                 <h6 class="text-muted"> {{ $user[0]->department }}</h6>
                                                 <small class="text-muted">{{ $user[0]->position }}</small>
-                                                <div class="staff-id">Employee ID : {{ $user[0]->rec_id }}</div>
+                                                <div class="staff-id">Employee ID : {{ $user[0]->employee_id }}</div>
                                                 <div class="small doj text-muted">Date of Join : {{ $user[0]->join_date }}</div>
                                                 <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
                                             </div>
@@ -843,7 +843,7 @@
                                                 <label>Full Name</label>
                                                 @if(!empty($users))
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
-                                                <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ $users->rec_id }}">
+                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $users->employee_id }}">
                                                 <input type="hidden" class="form-control" id="email" name="email" value="{{ $users->email }}">
                                                 @endif
                                             </div>
