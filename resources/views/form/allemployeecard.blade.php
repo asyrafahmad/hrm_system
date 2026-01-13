@@ -75,6 +75,52 @@
                 </div>
                 @endforeach
             </div>
+
+            <!-- List of Employee Table -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped custom-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $lists )
+                                <tr>
+                                    <td class="id">{{ $lists->rec_id }}</td>
+                                    <td class="name">{{ $lists->name }}</td>
+                                    <td class="department">{{ $lists->department }}</td>
+                                    <td class="position">{{ $lists->position }}</td>
+                                    <td class="email">{{ $lists->email }}</td>
+                                    <td class="phone_number">{{ $lists->phone_number }}</td>
+                                    <td class="image" style="display:none;">{{ $lists->avatar }}</td>
+                                    <td class="role_name" style="display:none;">{{ $lists->role_name }}</td>
+                                    <td class="statuss" style="display:none;">{{ $lists->status }}</td>
+                                    <td class="text-right">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item userUpdate" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="#" onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- List of Employee Table -->
         </div>
         <!-- /Page Content -->
 
@@ -94,25 +140,20 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Full Name</label>
-                                        <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->rec_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label class="col-form-label">Full Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Auto email" readonly>
+                                        <input class="form-control" type="email" id="email" name="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Birth Date</label>
+                                        <label>Birth Date <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
                                             <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
                                         </div>
@@ -120,7 +161,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Gender</label>
+                                        <label>Gender <span class="text-danger">*</span></label>
                                         <select class="select form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="gender" name="gender">
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -135,7 +176,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Department</label>
+                                        <label class="col-form-label">Department <span class="text-danger">*</span></label>
                                         <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="department" name="department">
                                             <option value="">-- Select --</option>
                                             @foreach ($departmentList as $key=>$dept )
@@ -206,6 +247,7 @@
             </div>
         </div>
         <!-- /Add Employee Modal -->
+
 
     </div>
     <!-- /Page Wrapper -->
