@@ -18,7 +18,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -47,7 +47,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -65,7 +65,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -106,13 +106,13 @@
                             <li><a href="{{ route('form/daily/reports/page') }}"> Daily Report </a></li>
                         </ul>
                     </li>
-                    <li class="menu-title"> 
-                        <span>Performance</span> 
+                    <li class="menu-title">
+                        <span>Performance</span>
                     </li>
-                    <li class="submenu"> 
+                    <li class="submenu">
                         <a href="#">
                             <i class="la la-graduation-cap"></i>
-                            <span> Performance </span> 
+                            <span> Performance </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -124,7 +124,7 @@
                     <li class="submenu">
                         <a href="#" class="noti-dot">
                             <i class="la la-edit"></i>
-                            <span> Training </span> 
+                            <span> Training </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <!-- /Page Header -->
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -287,7 +287,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </li> 
+                                            </li>
                                         </ul>
                                     </td>
                                     <td >{{ $training->start_date }} - {{ $training->end_date }}</td>
@@ -389,7 +389,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Description <span class="text-danger">*</span></label>
@@ -415,7 +415,7 @@
             </div>
         </div>
         <!-- /Add Training List Modal -->
-        
+
         <!-- Edit Training List Modal -->
         <div id="edit_training" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -487,7 +487,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Description <span class="text-danger">*</span></label>
@@ -513,7 +513,7 @@
             </div>
         </div>
         <!-- /Edit Training List Modal -->
-        
+
         <!-- Delete Training List Modal -->
         <div class="modal custom-modal fade" id="delete_training" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -542,7 +542,7 @@
             </div>
         </div>
         <!-- /Delete Training List Modal -->
-    
+
     </div>
     <!-- /Page Wrapper -->
     @section('script')
@@ -578,8 +578,8 @@
             $('#e_trainer_id').val(_this.find('.trainer_id').text());
             $('#e_employees_id').val(_this.find('.employees_id').text());
             $('#e_training_cost').val(_this.find('.training_cost').text());
-            $('#e_start_date').val(_this.find('.start_date').text());  
-            $('#e_end_date').val(_this.find('.end_date').text());  
+            $('#e_start_date').val(_this.find('.start_date').text());
+            $('#e_end_date').val(_this.find('.end_date').text());
             $('#e_description').val(_this.find('.description').text());
 
             // training_type

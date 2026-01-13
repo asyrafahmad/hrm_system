@@ -18,7 +18,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -47,7 +47,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -65,7 +65,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -106,13 +106,13 @@
                             <li><a href="{{ route('form/daily/reports/page') }}"> Daily Report </a></li>
                         </ul>
                     </li>
-                    <li class="menu-title"> 
-                        <span>Performance</span> 
+                    <li class="menu-title">
+                        <span>Performance</span>
                     </li>
-                    <li class="submenu"> 
+                    <li class="submenu">
                         <a href="#" class="noti-dot">
                             <i class="la la-graduation-cap"></i>
-                            <span> Performance </span> 
+                            <span> Performance </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -179,7 +179,7 @@
                 </div>
             </div>
             <!-- /Page Header -->
-            
+
             <section class="review-section information">
                 <div class="review-header text-center">
                     <h3 class="review-title">Employee Basic Information</h3>
@@ -249,8 +249,8 @@
                         </div>
                     </div>
                 </div>
-            </section>	 
-            
+            </section>
+
             <section class="review-section professional-excellence">
                 <div class="review-header text-center">
                     <h3 class="review-title">Professional Excellence</h3>
@@ -449,10 +449,10 @@
                                         <td colspan="8" class="text-center">
                                             <div class="grade-span">
                                                 <h4>Grade</h4>
-                                                <span class="badge bg-inverse-danger">Below 65 Poor</span> 
-                                                <span class="badge bg-inverse-warning">65-74 Average</span> 
-                                                <span class="badge bg-inverse-info">75-84 Satisfactory</span> 
-                                                <span class="badge bg-inverse-purple">85-92 Good</span> 
+                                                <span class="badge bg-inverse-danger">Below 65 Poor</span>
+                                                <span class="badge bg-inverse-warning">65-74 Average</span>
+                                                <span class="badge bg-inverse-info">75-84 Satisfactory</span>
+                                                <span class="badge bg-inverse-purple">85-92 Good</span>
                                                 <span class="badge bg-inverse-success">Above 92 Excellent</span>
                                             </div>
                                         </td>
@@ -584,7 +584,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Comments on the role</h3>
@@ -671,7 +671,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Appraisee's Strengths and Areas for Improvement perceived by the Head of the Department</h3>
@@ -710,7 +710,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Personal Goals</h3>
@@ -749,7 +749,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Personal Updates</h3>
@@ -779,7 +779,7 @@
                                                 <option>Select</option>
                                                 <option>Yes</option>
                                                 <option>No</option>
-                                            </select>	
+                                            </select>
                                         </td>
                                         <td><input type="text" class="form-control" ></td>
                                         <td>Marriage Plans</td>
@@ -861,7 +861,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Professional Goals Achieved for last year</h3>
@@ -922,7 +922,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Professional Goals for the forthcoming year</h3>
@@ -983,7 +983,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">Training Requirements</h3>
@@ -1195,7 +1195,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="review-section">
                 <div class="review-header text-center">
                     <h3 class="review-title">For HRD's Use Only</h3>

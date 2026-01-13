@@ -18,7 +18,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -47,7 +47,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -65,7 +65,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -106,13 +106,13 @@
                             <li><a href="{{ route('form/daily/reports/page') }}"> Daily Report </a></li>
                         </ul>
                     </li>
-                    <li class="menu-title"> 
-                        <span>Performance</span> 
+                    <li class="menu-title">
+                        <span>Performance</span>
                     </li>
-                    <li class="submenu"> 
+                    <li class="submenu">
                         <a href="#" class="noti-dot">
                             <i class="la la-graduation-cap"></i>
-                            <span> Performance </span> 
+                            <span> Performance </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -172,7 +172,7 @@
                     <div class="col">
                         <h3 class="page-title">Performance Indicator</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Performance</li>
                         </ul>
                     </div>
@@ -182,7 +182,7 @@
                 </div>
             </div>
             <!-- /Page Header -->
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -280,7 +280,7 @@
                                         <select class="select" id="designation" name="designation">
                                             <option selected disabled>--Select Designation--</option>
                                             @foreach ($departments as $department )
-                                            <option value="{{ $department->department }}">{{ $department->department }}</option> 
+                                            <option value="{{ $department->department }}">{{ $department->department }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -422,7 +422,7 @@
             </div>
         </div>
         <!-- /Add Performance Indicator Modal -->
-        
+
         <!-- Edit Performance Indicator Modal -->
         <div id="edit_indicator" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -443,7 +443,7 @@
                                         <label class="col-form-label">Designation</label>
                                         <select class="select" id="e_designation" name="designation">
                                             @foreach ($departments as $department )
-                                            <option value="{{ $department->department }}">{{ $department->department }}</option> 
+                                            <option value="{{ $department->department }}">{{ $department->department }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -585,7 +585,7 @@
             </div>
         </div>
         <!-- /Edit Performance Indicator Modal -->
-        
+
         <!-- Delete Performance Indicator Modal -->
         <div class="modal custom-modal fade" id="delete_indicator" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -623,7 +623,7 @@
         {
             var _this = $(this).parents('tr');
             $('#e_id').val(_this.find('.id').text());
-        
+
             var designation = (_this.find(".designation").text());
             var _option = '<option selected value="' + designation + '">' + _this.find('.designation').text() + '</option>'
             $( _option).appendTo("#e_designation");

@@ -18,7 +18,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -47,7 +47,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -65,7 +65,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -162,7 +162,7 @@
                     <div class="col">
                         <h3 class="page-title">Employee Salary <span id="year"></span></h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Salary</li>
                         </ul>
                     </div>
@@ -174,15 +174,15 @@
 
             <!-- Search Filter -->
             <div class="row filter-row">
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus">
                         <input type="text" class="form-control floating">
                         <label class="focus-label">Employee Name</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
+                        <select class="select floating">
                             <option value=""> -- Select -- </option>
                             <option value="">Employee</option>
                             <option value="1">Manager</option>
@@ -190,9 +190,9 @@
                         <label class="focus-label">Role</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
+                        <select class="select floating">
                             <option> -- Select -- </option>
                             <option> Pending </option>
                             <option> Approved </option>
@@ -201,7 +201,7 @@
                         <label class="focus-label">Leave Status</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus">
                         <div class="cal-icon">
                             <input class="form-control floating datetimepicker" type="text">
@@ -209,7 +209,7 @@
                         <label class="focus-label">From</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus">
                         <div class="cal-icon">
                             <input class="form-control floating datetimepicker" type="text">
@@ -217,11 +217,11 @@
                         <label class="focus-label">To</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <a href="#" class="btn btn-success btn-block"> Search </a>  
-                </div>     
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                    <a href="#" class="btn btn-success btn-block"> Search </a>
+                </div>
             </div>
-            <!-- /Search Filter -->  
+            <!-- /Search Filter -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -301,8 +301,8 @@
                     <div class="modal-body">
                         <form action="{{ route('form/salary/save') }}" method="POST">
                             @csrf
-                            <div class="row"> 
-                                <div class="col-sm-6"> 
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Select Staff</label>
                                         <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
@@ -319,7 +319,7 @@
                                     @enderror
                                 </div>
                                 <input class="form-control" type="hidden" name="rec_id" id="employee_id" readonly>
-                                <div class="col-sm-6"> 
+                                <div class="col-sm-6">
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">
                                     @error('salary')
@@ -329,8 +329,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row"> 
-                                <div class="col-sm-6"> 
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
                                         <label>Basic</label>
@@ -387,7 +387,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-6">  
+                                <div class="col-sm-6">
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
                                         <label>TDS</label>
@@ -397,7 +397,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <label>ESI</label>
                                         <input class="form-control @error('esi') is-invalid @enderror" type="number" name="esi" id="esi" value="{{ old('esi') }}" placeholder="Enter ESI">
@@ -454,7 +454,7 @@
             </div>
         </div>
         <!-- /Add Salary Modal -->
-        
+
         <!-- Edit Salary Modal -->
         <div id="edit_salary" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -469,8 +469,8 @@
                         <form action="{{ route('form/salary/update') }}" method="POST">
                             @csrf
                             <input class="form-control" type="hidden" name="id" id="e_id" value="" readonly>
-                            <div class="row"> 
-                                <div class="col-sm-6"> 
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Name Staff</label>
                                         <input class="form-control " type="text" name="name" id="e_name" value="" readonly>
@@ -481,13 +481,13 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-sm-6"> 
+                                <div class="col-sm-6">
                                     <label>Net Salary</label>
                                     <input class="form-control" type="text" name="salary" id="e_salary" value="">
                                 </div>
                             </div>
-                            <div class="row"> 
-                                <div class="col-sm-6"> 
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
                                         <label>Basic</label>
@@ -514,12 +514,12 @@
                                         <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">  
+                                <div class="col-sm-6">
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
                                         <label>TDS</label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="">
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <label>ESI</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
@@ -551,7 +551,7 @@
             </div>
         </div>
         <!-- /Edit Salary Modal -->
-        
+
         <!-- Delete Salary Modal -->
         <div class="modal custom-modal fade" id="delete_salary" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -580,7 +580,7 @@
             </div>
         </div>
         <!-- /Delete Salary Modal -->
-     
+
     </div>
     <!-- /Page Wrapper -->
     @section('script')

@@ -16,7 +16,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -45,7 +45,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -63,7 +63,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -160,7 +160,7 @@
                     <div class="col">
                         <h3 class="page-title">Payslip</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Payroll Items</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Payroll Items</a></li>
                             <li class="breadcrumb-item active">Payroll Items</li>
                         </ul>
                     </div>
@@ -186,13 +186,13 @@
                 </div>
             </div>
             <!-- /Page Tab -->
-            
+
             <!-- Tab Content -->
             <div class="tab-content">
-            
+
                 <!-- Additions Tab -->
                 <div class="tab-pane show active" id="tab_additions">
-                
+
                     <!-- Add Addition Button -->
                     <div class="text-right mb-4 clearfix">
                         <button class="btn btn-primary add-btn" type="button" data-toggle="modal" data-target="#add_addition"><i class="fa fa-plus"></i> Add Addition</button>
@@ -259,13 +259,13 @@
                         </div>
                     </div>
                     <!-- /Payroll Additions Table -->
-                    
+
                 </div>
                 <!-- Additions Tab -->
-                
+
                 <!-- Overtime Tab -->
                 <div class="tab-pane" id="tab_overtime">
-                
+
                     <!-- Add Overtime Button -->
                     <div class="text-right mb-4 clearfix">
                         <button class="btn btn-primary add-btn" type="button" data-toggle="modal" data-target="#add_overtime"><i class="fa fa-plus"></i> Add Overtime</button>
@@ -328,13 +328,13 @@
                         </div>
                     </div>
                     <!-- /Payroll Overtime Table -->
-                    
+
                 </div>
                 <!-- /Overtime Tab -->
-                
+
                 <!-- Deductions Tab -->
                 <div class="tab-pane" id="tab_deductions">
-                
+
                     <!-- Add Deductions Button -->
                     <div class="text-right mb-4 clearfix">
                         <button class="btn btn-primary add-btn" type="button" data-toggle="modal" data-target="#add_deduction"><i class="fa fa-plus"></i> Add Deduction</button>
@@ -397,15 +397,15 @@
                         </div>
                     </div>
                     <!-- /Payroll Deduction Table -->
-                    
+
                 </div>
                 <!-- /Deductions Tab -->
-                
+
             </div>
             <!-- Tab Content -->
         </div>
 		<!-- /Page Content -->
-				
+
         <!-- Add Addition Modal -->
         <div id="add_addition" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -487,7 +487,7 @@
             </div>
         </div>
         <!-- /Add Addition Modal -->
-        
+
         <!-- Edit Addition Modal -->
         <div id="edit_addition" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -569,7 +569,7 @@
             </div>
         </div>
         <!-- /Edit Addition Modal -->
-        
+
         <!-- Delete Addition Modal -->
         <div class="modal custom-modal fade" id="delete_addition" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -594,7 +594,7 @@
             </div>
         </div>
         <!-- /Delete Addition Modal -->
-				
+
         <!-- Add Overtime Modal -->
         <div id="add_overtime" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -632,7 +632,7 @@
             </div>
         </div>
         <!-- /Add Overtime Modal -->
-        
+
         <!-- Edit Overtime Modal -->
         <div id="edit_overtime" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -670,7 +670,7 @@
             </div>
         </div>
         <!-- /Edit Overtime Modal -->
-        
+
         <!-- Delete Overtime Modal -->
         <div class="modal custom-modal fade" id="delete_overtime" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -695,7 +695,7 @@
             </div>
         </div>
         <!-- /Delete Overtime Modal -->
-        
+
         <!-- Add Deduction Modal -->
         <div id="add_deduction" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -769,7 +769,7 @@
             </div>
         </div>
         <!-- /Add Deduction Modal -->
-				
+
         <!-- Edit Deduction Modal -->
         <div id="edit_deduction" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -843,7 +843,7 @@
             </div>
         </div>
         <!-- /Edit Addition Modal -->
-        
+
         <!-- Delete Deduction Modal -->
         <div class="modal custom-modal fade" id="delete_deduction" role="dialog">
             <div class="modal-dialog modal-dialog-centered">

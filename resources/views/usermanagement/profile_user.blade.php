@@ -12,7 +12,7 @@
                     <li class="submenu">
                         <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -37,7 +37,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{ route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -55,7 +55,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -150,7 +150,7 @@
                     <div class="col-sm-12">
                         <h3 class="page-title">Profile</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Profile</li>
                         </ul>
                     </div>
@@ -264,7 +264,7 @@
                     </div>
                 </div>
             </div>
-					
+
             <div class="card tab-box">
                 <div class="row user-tabs">
                     <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
@@ -276,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="tab-content">
                 <!-- Profile Info Tab -->
                 <div id="emp_profile" class="pro-overview tab-pane fade show active">
@@ -400,7 +400,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 <tr>
                                                     <td>@if(!empty($information->family_member_name_1))@else @endif</td>
                                                     <td>@if(!empty($information->family_member_name_1)){{ $information->family_member_name_1 }}@else @endif</td>
@@ -502,7 +502,7 @@
                     </div>
                 </div>
                 <!-- /Profile Info Tab -->
-                
+
                 <!-- Projects Tab -->
                 <div class="tab-pane fade" id="emp_projects">
                     <div class="row">
@@ -568,7 +568,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                             <div class="card">
                                 <div class="card-body">
@@ -631,7 +631,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                             <div class="card">
                                 <div class="card-body">
@@ -694,7 +694,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                             <div class="card">
                                 <div class="card-body">
@@ -760,7 +760,7 @@
                     </div>
                 </div>
                 <!-- /Projects Tab -->
-                
+
                 <!-- Bank Statutory Tab -->
                 <div class="tab-pane fade" id="bank_statutory">
                     <div class="card">
@@ -901,7 +901,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <hr>
                                 <h3 class="card-title"> ESI Information</h3>
                                 <div class="row">
@@ -963,7 +963,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="submit-section">
                                     <button class="btn btn-primary submit-btn" type="submit">Save</button>
                                 </div>
@@ -1202,7 +1202,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Designation <span class="text-danger">*</span></label>
-                                        
+
                                         <select class="select" id="" name="designation">
                                             <option selected disabled>Select Designation</option>
                                             <option value="Web Designer">Web Designer</option>
@@ -1233,7 +1233,7 @@
         </div>
         <!-- /Profile Modal -->
         @endif
-    
+
         <!-- Personal Info Modal -->
         <div id="personal_info_modal" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1247,7 +1247,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/personal_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}"> 
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -1309,7 +1309,7 @@
             </div>
         </div>
         <!-- /Personal Info Modal -->
-        
+
         <!-- Family Info Modal -->
         <div id="family_info_modal" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1323,7 +1323,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile/family_information/save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}"> 
+                            <input type="hidden" class="form-control" id="rec_id" name="rec_id" value="{{ Auth::user()->rec_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1377,7 +1377,7 @@
             </div>
         </div>
         <!-- /Family Info Modal -->
-        
+
         <!-- Emergency Contact Modal -->
         <div id="emergency_contact_modal" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1528,7 +1528,7 @@
             </div>
         </div>
         <!-- /Emergency Contact Modal -->
-        
+
         <!-- Bank Information Modal -->
         <div id="bank_information_modal" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1571,7 +1571,7 @@
             </div>
         </div>
         <!-- Bank Information Modal -->
-        
+
         <!-- Education Modal -->
         <div id="education_info" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1637,7 +1637,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
@@ -1698,7 +1698,7 @@
             </div>
         </div>
         <!-- /Education Modal -->
-        
+
         <!-- Experience Modal -->
         <div id="experience_info" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1755,12 +1755,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Experience Informations 2<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
                                         <div class="row">
-                                            <div class="col-md-6">  
+                                            <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <input type="text" class="form-control floating" id="exp_company_name_2" name="exp_company_name_2" value="@if(!empty($information->exp_company_name_2 )){{ $information->exp_company_name_2 }}@endif">
                                                     <label class="focus-label">Company Name</label>

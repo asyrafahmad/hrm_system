@@ -5,7 +5,7 @@
         <div class="sidebar-inner slimscroll">
             <div class="sidebar-menu">
                 <ul>
-                    <li><a href="{{ route('home') }}"><i class="la la-home"></i> <span>Back to Home</span></a></li>
+                    <li><a href="{{ route('dashboard.admin') }}"><i class="la la-home"></i> <span>Back to Home</span></a></li>
                     <li class="menu-title">Settings</li>
                     <li><a href="{{ route('company/settings/page') }}"><i class="la la-building"></i><span>Company Settings</span></a></li>
                     <li><a href="localization.html"><i class="la la-clock-o"></i><span>Localization</span></a></li>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <!-- Sidebar -->
-    
+
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content container-fluid">

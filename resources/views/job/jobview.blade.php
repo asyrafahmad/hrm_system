@@ -6,7 +6,7 @@
         <div class="header">
             <!-- Logo -->
             <div class="header-left">
-                <a href="{{ route('home') }}" class="logo">
+                <a href="{{ route('dashboard.admin') }}" class="logo">
                     <img src="{{ URL::to('assets/img/logo.png') }}" width="40" height="40" alt="">
                 </a>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                 </li>
                 <!-- /Flag -->
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
@@ -76,7 +76,7 @@
                         <div class="col">
                             <h3 class="page-title">Jobs</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Jobs</li>
                             </ul>
                         </div>

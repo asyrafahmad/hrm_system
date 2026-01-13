@@ -18,7 +18,7 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('home') }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
@@ -47,7 +47,7 @@
                         <ul style="display: none;">
                             <li><a href="{{ route('all/employee/card') }}">All Employees</a></li>
                             <li><a href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                            <li><a href="{{ route('form/leaves/new') }}">Leaves (Admin)
                                 <span class="badge badge-pill bg-primary float-right">1</span></a>
                             </li>
                             <li><a href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
@@ -65,7 +65,7 @@
                     <li class="submenu">
                         <a href="#">
                             <i class="la la-files-o"></i>
-                            <span> Sales </span> 
+                            <span> Sales </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -106,13 +106,13 @@
                             <li><a href="{{ route('form/daily/reports/page') }}"> Daily Report </a></li>
                         </ul>
                     </li>
-                    <li class="menu-title"> 
-                        <span>Performance</span> 
+                    <li class="menu-title">
+                        <span>Performance</span>
                     </li>
-                    <li class="submenu"> 
+                    <li class="submenu">
                         <a href="#">
                             <i class="la la-graduation-cap"></i>
-                            <span> Performance </span> 
+                            <span> Performance </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -124,7 +124,7 @@
                     <li class="submenu">
                         <a href="#" class="noti-dot">
                             <i class="la la-edit"></i>
-                            <span> Training </span> 
+                            <span> Training </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul style="display: none;">
@@ -176,7 +176,7 @@
                     <div class="col">
                         <h3 class="page-title">Training Type</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Training Type</li>
                         </ul>
                     </div>
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <!-- /Page Header -->
-           
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -202,7 +202,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($show as $key => $items)
-                                    
+
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td class="type">{{ $items->type }}</td>
@@ -289,7 +289,7 @@
                 </div>
             </div>
             <!-- /Add Training Type Modal -->
-            
+
             <!-- Edit Training Type Modal -->
             <div id="edit_type" class="modal custom-modal fade" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -328,7 +328,7 @@
                 </div>
             </div>
             <!-- /Edit Training Type Modal -->
-            
+
             <!-- Delete Training Type Modal -->
             <div class="modal custom-modal fade" id="delete_type" role="dialog">
                 <div class="modal-dialog modal-dialog-centered">
@@ -370,13 +370,13 @@
                 $('#e_id').val(_this.find('.e_id').text());
                 $('#e_type').val(_this.find('.type').text());
                 $('#e_description').val(_this.find('.description').text());
-                
+
                 // status
                 var status = (_this.find(".status").text());
                 var _option = '<option selected value="' +status+ '">' + _this.find('.status').text() + '</option>'
                 $( _option).appendTo("#e_status");
             });
-            
+
         </script>
         {{-- delete model --}}
         <script>

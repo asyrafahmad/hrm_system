@@ -33,7 +33,7 @@
             <div class="header">
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="{{ route('home') }}" class="logo">
+                    <a href="{{ route('dashboard.admin') }}" class="logo">
 						<img src="{{ URL::to('assets/img/logo.png') }}" width="40" height="40" alt="">
 					</a>
                 </div>
@@ -77,7 +77,7 @@
                         </div>
                     </li>
                     <!-- /Flag -->
-				
+
 					<!-- Notifications -->
 					<li class="nav-item dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -163,7 +163,7 @@
 						</div>
 					</li>
 					<!-- /Notifications -->
-					
+
 					<!-- Message Notifications -->
 					<li class="nav-item dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -290,7 +290,7 @@
                         <i class="fa fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile.html">My Profile</a> 
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                     </div>
                 </div>

@@ -1,13 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HolidayController;
+use App\Http\Controllers\LeavesController;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LockScreen;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ExpenseReportsController;
@@ -33,17 +36,49 @@ Auth::routes();
 
 // ----------------------------- main dashboard ------------------------------//
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('dashboard.admin');
-    Route::get('/dashboard/employee', [App\Http\Controllers\HomeController::class, 'employeeDashboard'])->name('dashboard.employee');
+
+    Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard.admin');
+    Route::get('/dashboard/employee', [HomeController::class, 'employeeDashboard'])->name('dashboard.employee');
     Route::redirect('/home', '/dashboard');
     Route::redirect('home', '/dashboard');
 
     // ----------------------------- settings ----------------------------------------//
-    Route::post('company/settings/page', [App\Http\Controllers\SettingController::class, 'companySettings'])->name('company/settings/page');
-    Route::get('roles/permissions/page', [App\Http\Controllers\SettingController::class, 'rolesPermissions'])->name('roles/permissions/page');
-    Route::post('roles/permissions/save', [App\Http\Controllers\SettingController::class, 'addRecord'])->name('roles/permissions/save');
-    Route::post('roles/permissions/update', [App\Http\Controllers\SettingController::class, 'editRolesPermissions'])->name('roles/permissions/update');
-    Route::post('roles/permissions/delete', [App\Http\Controllers\SettingController::class, 'deleteRolesPermissions'])->name('roles/permissions/delete');
+    Route::post('company/settings/page', [SettingController::class, 'companySettings'])->name('company/settings/page');
+    Route::get('roles/permissions/page', [SettingController::class, 'rolesPermissions'])->name('roles/permissions/page');
+    Route::post('roles/permissions/save', [SettingController::class, 'addRecord'])->name('roles/permissions/save');
+    Route::post('roles/permissions/update', [SettingController::class, 'editRolesPermissions'])->name('roles/permissions/update');
+    Route::post('roles/permissions/delete', [SettingController::class, 'deleteRolesPermissions'])->name('roles/permissions/delete');
+
+    // ----------------------------- form employee ------------------------------//
+    Route::get('all/employee/card', [EmployeeController::class, 'cardAllEmployee'])->name('all.employee.card');
+    Route::get('all/employee/list', [EmployeeController::class, 'listAllEmployee'])->name('all.employee.list');
+    Route::post('all/employee/save', [EmployeeController::class, 'saveRecord'])->name('all.employee.save');
+    Route::get('all/employee/view/edit/{employee_id}', [EmployeeController::class, 'viewRecord']);
+    Route::post('all/employee/update', [EmployeeController::class, 'updateRecord'])->name('all.employee.update');
+    Route::get('all/employee/delete/{employee_id}', [EmployeeController::class, 'deleteRecord']);
+    Route::post('all/employee/search', [EmployeeController::class, 'employeeSearch'])->name('all.employee.search');
+    Route::post('all/employee/list/search', [EmployeeController::class, 'employeeListSearch'])->name('all.employee.list.search');
+
+    // ----------------------------- form holiday ------------------------------//
+    Route::get('form/holidays', [HolidayController::class, 'holiday'])->name('form.holidays');
+    Route::get('form/holidays/new', [HolidayController::class, 'holiday'])->name('form.holidays.new');
+    Route::post('form/holidays/save', [HolidayController::class, 'saveRecord'])->name('form.holidays.save');
+    Route::post('form/holidays/update', [HolidayController::class, 'updateRecord'])->name('form.holidays.update');
+
+    // ----------------------------- form leaves ------------------------------//
+    Route::get('form/leaves/new', [LeavesController::class, 'leaves'])->name('form.leaves.new');
+    Route::get('form/leavesemployee/new', [LeavesController::class, 'leavesEmployee'])->name('form.leaves.employee.new');
+    Route::post('form/leaves/save', [LeavesController::class, 'saveRecord'])->name('form.leaves.save');
+    Route::post('form/leaves/edit', [LeavesController::class, 'editRecordLeave'])->name('form.leaves.edit');
+    Route::post('form/leaves/edit/delete', [LeavesController::class, 'deleteLeave'])->name('form.leaves.edit.delete');
+    Route::get('form/leavesettings/page', [LeavesController::class, 'leaveSettings'])->name('form.leavesettings.page');
+
+    // ----------------------------- form attendance  ------------------------------//
+    Route::get('attendance/page', [LeavesController::class, 'attendanceIndex'])->name('attendance.page');
+    Route::get('attendance/employee/page', [LeavesController::class, 'AttendanceEmployee'])->name('attendance.employee.page');
+    Route::get('form/shiftscheduling/page', [LeavesController::class, 'shiftScheduLing'])->name('form.shift.scheduling.page');
+    Route::get('form/shiftlist/page', [LeavesController::class, 'shiftList'])->name('form.shiftlist.page');
+
 });
 
 // -----------------------------login----------------------------------------//
@@ -97,38 +132,13 @@ Route::post('change/password/db', [App\Http\Controllers\UserManagementController
 Route::get('form/job/list', [App\Http\Controllers\JobController::class, 'jobList'])->name('form/job/list');
 Route::get('form/job/view', [App\Http\Controllers\JobController::class, 'jobView'])->name('form/job/view');
 
-// ----------------------------- form employee ------------------------------//
-Route::get('all/employee/card', [App\Http\Controllers\EmployeeController::class, 'cardAllEmployee'])->middleware('auth')->name('all/employee/card');
-Route::get('all/employee/list', [App\Http\Controllers\EmployeeController::class, 'listAllEmployee'])->middleware('auth')->name('all/employee/list');
-Route::post('all/employee/save', [App\Http\Controllers\EmployeeController::class, 'saveRecord'])->middleware('auth')->name('all/employee/save');
-Route::get('all/employee/view/edit/{employee_id}', [App\Http\Controllers\EmployeeController::class, 'viewRecord'])->middleware('auth');
-Route::post('all/employee/update', [App\Http\Controllers\EmployeeController::class, 'updateRecord'])->middleware('auth')->name('all/employee/update');
-Route::get('all/employee/delete/{employee_id}', [App\Http\Controllers\EmployeeController::class, 'deleteRecord'])->middleware('auth');
-Route::post('all/employee/search', [App\Http\Controllers\EmployeeController::class, 'employeeSearch'])->name('all/employee/search');
-Route::post('all/employee/list/search', [App\Http\Controllers\EmployeeController::class, 'employeeListSearch'])->name('all/employee/list/search');
 
 // ----------------------------- profile employee ------------------------------//
 Route::get('employee/profile/{rec_id}', [App\Http\Controllers\EmployeeController::class, 'profileEmployee'])->middleware('auth');
 
 
-// ----------------------------- form holiday ------------------------------//
-Route::get('form/holidays/new', [App\Http\Controllers\HolidayController::class, 'holiday'])->middleware('auth')->name('form/holidays/new');
-Route::post('form/holidays/save', [App\Http\Controllers\HolidayController::class, 'saveRecord'])->middleware('auth')->name('form/holidays/save');
-Route::post('form/holidays/update', [App\Http\Controllers\HolidayController::class, 'updateRecord'])->middleware('auth')->name('form/holidays/update');
 
-// ----------------------------- form leaves ------------------------------//
-Route::get('form/leaves/new', [App\Http\Controllers\LeavesController::class, 'leaves'])->middleware('auth')->name('form/leaves/new');
-Route::get('form/leavesemployee/new', [App\Http\Controllers\LeavesController::class, 'leavesEmployee'])->middleware('auth')->name('form/leavesemployee/new');
-Route::post('form/leaves/save', [App\Http\Controllers\LeavesController::class, 'saveRecord'])->middleware('auth')->name('form/leaves/save');
-Route::post('form/leaves/edit', [App\Http\Controllers\LeavesController::class, 'editRecordLeave'])->middleware('auth')->name('form/leaves/edit');
-Route::post('form/leaves/edit/delete', [App\Http\Controllers\LeavesController::class, 'deleteLeave'])->middleware('auth')->name('form/leaves/edit/delete');
 
-// ----------------------------- form attendance  ------------------------------//
-Route::get('form/leavesettings/page', [App\Http\Controllers\LeavesController::class, 'leaveSettings'])->middleware('auth')->name('form/leavesettings/page');
-Route::get('attendance/page', [App\Http\Controllers\LeavesController::class, 'attendanceIndex'])->middleware('auth')->name('attendance/page');
-Route::get('attendance/employee/page', [App\Http\Controllers\LeavesController::class, 'AttendanceEmployee'])->middleware('auth')->name('attendance/employee/page');
-Route::get('form/shiftscheduling/page', [App\Http\Controllers\LeavesController::class, 'shiftScheduLing'])->middleware('auth')->name('form/shiftscheduling/page');
-Route::get('form/shiftlist/page', [App\Http\Controllers\LeavesController::class, 'shiftList'])->middleware('auth')->name('form/shiftlist/page');
 
 // ----------------------------- form payroll  ------------------------------//
 Route::get('form/salary/page', [App\Http\Controllers\PayrollController::class, 'salary'])->middleware('auth')->name('form/salary/page');

@@ -17,7 +17,7 @@ class EmployeeController extends Controller
         $users = DB::table('users')
                     ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
                     ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get(); 
+                    ->get();
         $userList = DB::table('users')->get();
         $departmentList = DB::table('departments')->get();
         $permission_lists = DB::table('permission_lists')->get();
@@ -62,7 +62,7 @@ class EmployeeController extends Controller
                 $employee->employee_id  = $request->employee_id;
                 $employee->company      = $request->company;
                 $employee->save();
-    
+
                 for($i=0;$i<count($request->id_count);$i++)
                 {
                     $module_permissions = [
@@ -78,7 +78,7 @@ class EmployeeController extends Controller
                     ];
                     DB::table('module_permissions')->insert($module_permissions);
                 }
-                
+
                 DB::commit();
                 Toastr::success('Add new employee successfully :)','Success');
                 return redirect()->route('all/employee/card');
@@ -145,7 +145,7 @@ class EmployeeController extends Controller
 
             User::where('id',$request->id)->update($updateUser);
             Employee::where('id',$request->id)->update($updateEmployee);
-        
+
             DB::commit();
             Toastr::success('updated record successfully :)','Success');
             return redirect()->route('all/employee/card');
@@ -261,7 +261,7 @@ class EmployeeController extends Controller
         $users = DB::table('users')
                     ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
                     ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get(); 
+                    ->get();
         $permission_lists = DB::table('permission_lists')->get();
         $userList = DB::table('users')->get();
 
