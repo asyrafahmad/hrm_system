@@ -29,8 +29,8 @@ class CreateEmployeesTable extends Migration
 
             // Organization
             $table->string('company', 255)->nullable();
-            $table->string('department', 255)->nullable();
-            $table->string('position', 255)->nullable();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('position_id')->nullable()->constrained()->nullOnDelete();
 
             // Status
             $table->enum('status', ['1', '2', '3'])->default('1'); // 1 = Active, 2 = Inactive, 3 = Resigned

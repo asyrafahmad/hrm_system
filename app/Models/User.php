@@ -11,6 +11,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 use App\Models\ProfileInformation;
 use App\Models\Employee;
+use App\Models\UserRoleType;
+use App\Models\UserStatus;
 
 class User extends Authenticatable
 {
@@ -29,7 +31,8 @@ class User extends Authenticatable
         'email',
         'join_date',
         'phone_number',
-        'status',
+        // 'user_role_types_id',
+        'user_status_id',
         'role_name',
         'avatar',
         'position',
@@ -59,6 +62,16 @@ class User extends Authenticatable
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    // public function userRoleType()
+    // {
+    //     return $this->belongsTo(UserRoleType::class);
+    // }
+
+    public function userStatus()
+    {
+        return $this->belongsTo(UserStatus::class);
     }
 
     // public function ProfileInformation()

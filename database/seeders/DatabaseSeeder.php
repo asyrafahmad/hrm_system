@@ -9,6 +9,8 @@ use Database\Seeders\SequenceTableSeeder;
 use Database\Seeders\EmployeeSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\ProfileInformationSeeder;
+use Database\Seeders\UserRoleTypeSeeder;
+use Database\Seeders\UserStatusSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +25,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
+            // UserRoleTypeSeeder::class,
+            // UserStatusSeeder::class,
             EmployeeSeeder::class,
             UserSeeder::class,
             ProfileInformationSeeder::class,

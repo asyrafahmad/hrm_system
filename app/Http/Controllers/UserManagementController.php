@@ -23,7 +23,7 @@ class UserManagementController extends Controller
         {
             $result      = DB::table('users')->get();
             $role_name   = DB::table('users_role_type')->get();
-            $position    = DB::table('position_types')->get();
+            $position    = DB::table('position')->get();
             $department  = DB::table('departments')->get();
             $status_user = DB::table('user_types')->get();
             return view('usermanagement.user_control',compact('result','role_name','position','department','status_user'));
@@ -42,7 +42,7 @@ class UserManagementController extends Controller
             $users      = DB::table('users')->get();
             $result     = DB::table('users')->get();
             $role_name  = DB::table('users_role_type')->get();
-            $position   = DB::table('position_types')->get();
+            $position   = DB::table('position')->get();
             $department = DB::table('departments')->get();
             $status_user = DB::table('user_types')->get();
 
@@ -539,14 +539,8 @@ class UserManagementController extends Controller
 
     public function profileReportTo(Request $request)
     {
-        // $user = Auth::User();
-        // Session::put('user', $user);
-        // $user=Session::get('user');
-
-// dd($request->employee_id);die();
         $profile = $request->employee_id;
 
-        // $user = DB::table('users')->get();
         $employees = Employee::where('id',$profile)->first();
 
         if(empty($employees))

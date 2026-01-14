@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('role_id'); // Better for future roles
+            // $table->foreignId('user_role_types_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
             $table->string('avatar')->nullable();
-            $table->enum('status', ['1', '2'])->default('1'); // 1 = Active, 2 = Inactive
+            $table->foreignId('user_status_id')->nullable()->constrained()->nullOnDelete()->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
 use App\Models\ProfileInformation;
+use App\Models\Department;
+use App\Models\Positions;
 
 class Employee extends Model
 {
@@ -16,8 +18,10 @@ class Employee extends Model
         'email',
         'birth_date',
         'gender',
-        'employee_id',
+        'employee_code',
         'company',
+        'department_id',
+        'position_id',
         'holidays',
         'leaves',
         'clients',
@@ -35,5 +39,15 @@ class Employee extends Model
     public function profileInformation()
     {
         return $this->hasOne(ProfileInformation::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function positions()
+    {
+        return $this->belongsTo(Positions::class);
     }
 }

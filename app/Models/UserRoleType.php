@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Employee;
+use App\Models\User;
 
-class Department extends Model
+class UserRoleType extends Model
 {
     use HasFactory;
 
-    public function employee()
-    {
-        return $this->hasMany(Employee::class);
-    }
+    // public function user()
+    // {
+    //     return $this->hasMany(User::class);
+    // }
 }
