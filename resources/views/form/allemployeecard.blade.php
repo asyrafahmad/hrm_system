@@ -151,14 +151,14 @@
                                         <input class="form-control" type="email" id="email" name="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Birth Date <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
                                             <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Gender <span class="text-danger">*</span></label>

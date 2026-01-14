@@ -21,10 +21,10 @@ class CreateEmployeesTable extends Migration
             $table->string('name', 255);
             $table->string('email', 255)->unique();
             $table->string('join_date',100)->nullable()->default('1970-01-01');
+            $table->string('avatar')->nullable();
 
             // Personal info
-            $table->date('birth_date')->nullable();
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->string('phone_number', 20)->nullable();
 
             // Organization
@@ -33,7 +33,7 @@ class CreateEmployeesTable extends Migration
             $table->string('position', 255)->nullable();
 
             // Status
-            $table->enum('status', ['active', 'inactive', 'resigned'])->default('active');
+            $table->enum('status', ['1', '2', '3'])->default('1'); // 1 = Active, 2 = Inactive, 3 = Resigned
 
             $table->timestamps();
         });

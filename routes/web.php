@@ -80,7 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('form/shiftlist/page', [LeavesController::class, 'shiftList'])->name('form.shiftlist.page');
 
     // ----------------------------- user profile ------------------------------//
-    Route::get('profile_user', [UserManagementController::class, 'profile'])->middleware('auth')->name('profile_user');
+    Route::get('profile_user', [UserManagementController::class, 'profile'])->name('profile_user');
+    Route::get('profile_user/report_to/{employee_id}', [UserManagementController::class, 'profileReportTo'])->name('profile_user.report_to');
     Route::post('profile/information/save', [UserManagementController::class, 'profileInformation'])->name('profile.information.save');
     Route::post('profile/personal_information/save', [UserManagementController::class, 'profilePersonalInformationContact'])->name('profile.personal_information.save');
     Route::post('profile/emergency_contact/save', [UserManagementController::class, 'profileEmergencyContact'])->name('profile.emergency_contact.save');

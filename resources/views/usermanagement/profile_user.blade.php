@@ -105,7 +105,7 @@
                                                                         <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
                                                                     </div>
                                                                 </div>
-                                                                <a href="profile.html">
+                                                                <a href="{{ route('profile_user.report_to', ['employee_id' => $information->reports_to]) }}">
                                                                     {{ $information->reports_to }}
                                                                 </a>
                                                             @else
@@ -910,7 +910,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="pin_code" name="pin_code" value="{{ $information->pin_code }}">
+                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $information->postcode }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -1037,7 +1037,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="pin_code" name="pin_code">
+                                            <input type="text" class="form-control" id="postcode" name="postcode">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

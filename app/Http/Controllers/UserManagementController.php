@@ -189,7 +189,7 @@ class UserManagementController extends Controller
             $information->address      = $request->address;
             $information->state        = $request->state;
             $information->country      = $request->country;
-            $information->pin_code     = $request->pin_code;
+            $information->postcode     = $request->postcode;
             $information->phone_number = $request->phone_number;
             $information->department   = $request->department;
             $information->designation  = $request->designation;
@@ -535,6 +535,36 @@ class UserManagementController extends Controller
         DB::commit();
         Toastr::success('User change successfully :)','Success');
         return redirect()->intended('home');
+    }
+
+    public function profileReportTo(Request $request)
+    {
+        // $user = Auth::User();
+        // Session::put('user', $user);
+        // $user=Session::get('user');
+
+// dd($request->employee_id);die();
+        $profile = $request->employee_id;
+
+        // $user = DB::table('users')->get();
+        $employees = Employee::where('id',$profile)->first();
+
+        if(empty($employees))
+        {
+            $employees = Employee::where('id',$profile)->first();
+            $profile_information = ProfileInformation::where('employee_id',$profile)->first();
+            return view('usermanagement.report_to',compact('employees','profile_information'));
+
+        }else{
+            $employee_id = $employees->id;
+            if($employee_id == $profile)
+            {
+                $employees = Employee::where('id',$profile)->first();
+                $profile_information = ProfileInformation::where('employee_id',$profile)->first();
+                return view('usermanagement.report_to',compact('employees','profile_information'));
+            }
+        }
+
     }
 }
 

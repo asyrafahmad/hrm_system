@@ -20,12 +20,12 @@ class ProfileInformation extends Model
         'address',
         'state',
         'country',
-        'pin_code',
+        'postcode',
         'phone_number',
         'department',
         'designation',
         'reports_to',
-        
+
         // Emergency Contact
         'emergency_contact_name_1',
         'emergency_contact_relationship_1',
@@ -86,7 +86,7 @@ class ProfileInformation extends Model
         'exp_position_2',
         'exp_period_from_2',
         'exp_period_to_2',
-        
+
         // 'user_id',
     ];
 

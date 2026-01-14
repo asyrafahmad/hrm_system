@@ -16,18 +16,19 @@ class CreateProfileInformationTable extends Migration
         Schema::create('profile_information', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name')->nullable();
-            $table->string('employee_id')->nullable();
+            $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
             $table->string('email')->nullable();
             $table->string('birth_date')->nullable();
             $table->string('gender')->nullable();
             $table->string('address')->nullable();
+            $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
-            $table->string('pin_code')->nullable();
+            $table->string('postcode')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('department')->nullable();
             $table->string('designation')->nullable();
-            $table->string('reports_to')->nullable();
+            $table->integer('reports_to')->nullable(); // Employee ID of the reporting manager
             $table->timestamps();
 
             //Emergency Contact
@@ -58,7 +59,7 @@ class CreateProfileInformationTable extends Migration
             // Bank Informations
             $table->string('bank_name')->nullable();
             $table->string('bank_account_no')->nullable();
-            
+
             // Academic Informations
             $table->string('academic_institution_1')->nullable();
             $table->string('academic_qualification_1')->nullable();
@@ -72,7 +73,7 @@ class CreateProfileInformationTable extends Migration
             $table->string('academic_grade_2')->nullable();
             $table->string('academic_starting_date_2')->nullable();
             $table->string('academic_complete_date_2')->nullable();
-            
+
             // Experience Informations
             $table->string('exp_company_name_1')->nullable();
             $table->string('exp_location_1')->nullable();
@@ -84,7 +85,7 @@ class CreateProfileInformationTable extends Migration
             $table->string('exp_position_2')->nullable();
             $table->string('exp_period_from_2')->nullable();
             $table->string('exp_period_to_2')->nullable();
-            
+
         });
     }
 

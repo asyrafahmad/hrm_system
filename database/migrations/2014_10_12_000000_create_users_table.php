@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('role_id'); // Better for future roles
             $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
             $table->string('avatar')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['1', '2'])->default('1'); // 1 = Active, 2 = Inactive
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -902,7 +902,7 @@
                                     <div class="form-group">
                                         <label>Pin Code</label>
                                         @if(!empty($users))
-                                        <input type="text" class="form-control" id="pin_code" name="pin_code" value="{{ $users->pin_code }}">
+                                        <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $users->postcode }}">
                                         @endif
                                     </div>
                                 </div>
