@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
+use App\Models\ProfileInformation;
 
 class Employee extends Model
 {
@@ -29,5 +30,10 @@ class Employee extends Model
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function profileInformation()
+    {
+        return $this->hasOne(ProfileInformation::class);
     }
 }

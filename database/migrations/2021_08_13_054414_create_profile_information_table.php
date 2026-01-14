@@ -85,7 +85,6 @@ class CreateProfileInformationTable extends Migration
             $table->string('exp_period_from_2')->nullable();
             $table->string('exp_period_to_2')->nullable();
             
-            // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -89,9 +89,10 @@ class ProfileInformation extends Model
         
         // 'user_id',
     ];
-    
-    // public function User()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
 }

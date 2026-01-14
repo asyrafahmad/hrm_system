@@ -8,6 +8,7 @@ use Database\Seeders\RolePermissionSeeder;
 use Database\Seeders\SequenceTableSeeder;
 use Database\Seeders\EmployeeSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ProfileInformationSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             EmployeeSeeder::class,
             UserSeeder::class,
+            ProfileInformationSeeder::class,
             RolePermissionSeeder::class,
             SequenceTableSeeder::class,
         ]);

@@ -20,13 +20,12 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_code', 50)->unique();
             $table->string('name', 255);
             $table->string('email', 255)->unique();
-            $table->string('phone_number', 20)->nullable();
-            $table->date('join_date')->nullable();
-            $table->string('address', 500)->nullable();
+            $table->string('join_date',100)->nullable()->default('1970-01-01');
 
             // Personal info
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->string('phone_number', 20)->nullable();
 
             // Organization
             $table->string('company', 255)->nullable();

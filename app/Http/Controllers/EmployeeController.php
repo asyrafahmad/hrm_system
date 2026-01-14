@@ -27,6 +27,7 @@ class EmployeeController extends Controller
 
         return view('form.allemployeecard', compact('users','userList','departmentList','permission_lists'));
     }
+
     // all employee list
     public function listAllEmployee()
     {
@@ -359,6 +360,7 @@ class EmployeeController extends Controller
                 ->select('profile_information.*', 'users.*')
                 ->where('profile_information.employee_id','=',$employee_id)
                 ->first();
+                
         $user = DB::table('users')->where('employee_id',$employee_id)->get();
         return view('form.employeeprofile',compact('user','users'));
     }

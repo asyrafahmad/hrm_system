@@ -35,12 +35,11 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">{{ Auth::user()->name }}</h3>
-                                                <h6 class="text-muted">{{ Auth::user()->department }}</h6>
-                                                <small class="text-muted">{{ Auth::user()->position }}</small>
-                                                <div class="staff-id">Employee ID : {{ Auth::user()->employee_id }}</div>
-                                                <div class="small doj text-muted">Date of Join : {{ Auth::user()->join_date }}</div>
-                                                <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
+                                                <h4 class="title">{{ Auth::user()->name }} (Staff ID : {{ Auth::user()->employee->employee_code }})</h4>
+                                                <h6 class="text-muted">Position: {{ Auth::user()->employee->position }}</h6>
+                                                <h6 class="text-muted">Department: {{ Auth::user()->employee->department }}</h6>
+                                                <h6 class="text-muted">Date of Join : {{ Auth::user()->employee->join_date }}</h6>
+                                                {{-- <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div> --}}
                                             </div>
                                         </div>
                                         <div class="col-md-7">
@@ -130,7 +129,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
                         <ul class="nav nav-tabs nav-tabs-bottom">
                             <li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Profile</a></li>
-                            <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li>
+                            {{-- <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li> --}}
                             <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>
                         </ul>
                     </div>
@@ -364,7 +363,7 @@
                 <!-- /Profile Info Tab -->
 
                 <!-- Projects Tab -->
-                <div class="tab-pane fade" id="emp_projects">
+                {{-- <div class="tab-pane fade" id="emp_projects">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                             <div class="card">
@@ -618,7 +617,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /Projects Tab -->
 
                 <!-- Bank Statutory Tab -->
@@ -836,262 +835,262 @@
         </div>
         <!-- /Page Content -->
         @if(!empty($information))
-         <!-- Profile Modal -->
-         <div id="profile_info" class="modal custom-modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Profile Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('profile/information/save') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="profile-img-wrap edit-img">
-                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
-                                        <div class="fileupload btn">
-                                            <span class="btn-text">edit</span>
-                                            <input class="upload" type="file" id="image" name="images">
-                                            <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
-                                                <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
+            <!-- Profile Modal -->
+            <div id="profile_info" class="modal custom-modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Profile Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('profile.information.save') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="profile-img-wrap edit-img">
+                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <div class="fileupload btn">
+                                                <span class="btn-text">edit</span>
+                                                <input class="upload" type="file" id="image" name="images">
+                                                <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Birth Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" value="{{ $information->birth_date }}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Full Name</label>
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                                                    <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Birth Date</label>
+                                                    <div class="cal-icon">
+                                                        <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" value="{{ $information->birth_date }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Gender</label>
+                                                    <select class="select form-control" id="gender" name="gender">
+                                                        {{-- <option value="{{ $information->gender }}" {{ ( $information->gender == $information->gender) ? 'selected' : '' }}>{{ $information->gender }} </option> --}}
+                                                        <option value="Male" {{ ( $information->gender == 'Male') ? 'selected' : '' }}>Male</option>
+                                                        <option value="Female" {{ ( $information->gender == 'Female') ? 'selected' : '' }}>Female</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Gender</label>
-                                                <select class="select form-control" id="gender" name="gender">
-                                                    <option value="{{ $information->gender }}" {{ ( $information->gender == $information->gender) ? 'selected' : '' }}>{{ $information->gender }} </option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" class="form-control" id="address" name="address" value="{{ $information->address }}">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <input type="text" class="form-control" id="address" name="address" value="{{ $information->address }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>State</label>
-                                        <input type="text" class="form-control" id="state" name="state" value="{{ $information->state }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <input type="text" class="form-control" id="" name="country" value="{{ $information->country }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Pin Code</label>
-                                        <input type="text" class="form-control" id="pin_code" name="pin_code" value="{{ $information->pin_code }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                      <label>Phone Number</label>
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $information->phone_number }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Department <span class="text-danger">*</span></label>
-                                        <select class="select" id="department" name="department">
-                                            <option value="{{ $information->department }}" {{ ( $information->department == $information->department) ? 'selected' : '' }}>{{ $information->department }} </option>
-                                            <option value="Web Development">Web Development</option>
-                                            <option value="IT Management">IT Management</option>
-                                            <option value="Marketing">Marketing</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Designation <span class="text-danger">*</span></label>
-                                        <select class="select" id="" name="designation">
-                                            <option value="{{ $information->designation }}" {{ ( $information->designation == $information->designation) ? 'selected' : '' }}>{{ $information->designation }} </option>
-                                            <option value="Web Designer">Web Designer</option>
-                                            <option value="Web Developer">Web Developer</option>
-                                            <option value="Android Developer">Android Developer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Reports To <span class="text-danger">*</span></label>
-                                        <select class="select" id="" name="reports_to">
-                                            <option value="{{ $information->reports_to }}" {{ ( $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ $information->reports_to }} </option>
-                                            @foreach ($user as $users )
-                                            <option value="{{ $users->name }}">{{ $users->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="submit-section">
-                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Profile Modal -->
-        @else
-         <!-- Profile Modal -->
-         <div id="profile_info" class="modal custom-modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Profile Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('profile/information/save') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="profile-img-wrap edit-img">
-                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
-                                        <div class="fileupload btn">
-                                            <span class="btn-text">edit</span>
-                                            <input class="upload" type="file" id="upload" name="upload">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input type="text" class="form-control" id="state" name="state" value="{{ $information->state }}">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
-                                                <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Birth Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Gender</label>
-                                                <select class="select form-control" id="gender" name="gender">
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <input type="text" class="form-control" id="" name="country" value="{{ $information->country }}">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <input type="text" class="form-control" id="address" name="address">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Pin Code</label>
+                                            <input type="text" class="form-control" id="pin_code" name="pin_code" value="{{ $information->pin_code }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>State</label>
-                                        <input type="text" class="form-control" id="state" name="state">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <input type="text" class="form-control" id="" name="country">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Pin Code</label>
-                                        <input type="text" class="form-control" id="pin_code" name="pin_code">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="text" class="form-control" id="phoneNumber" name="phone_number">
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $information->phone_number }}">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Department <span class="text-danger">*</span></label>
-                                        <select class="select" id="department" name="department">
-                                            <option selected disabled>Select Department</option>
-                                            <option value="Web Development">Web Development</option>
-                                            <option value="IT Management">IT Management</option>
-                                            <option value="Marketing">Marketing</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Department <span class="text-danger">*</span></label>
+                                            <select class="select" id="department" name="department">
+                                                <option value="{{ $information->department }}" {{ ( $information->department == $information->department) ? 'selected' : '' }}>{{ $information->department }} </option>
+                                                <option value="Web Development">Web Development</option>
+                                                <option value="IT Management">IT Management</option>
+                                                <option value="Marketing">Marketing</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Designation <span class="text-danger">*</span></label>
+                                            <select class="select" id="" name="designation">
+                                                <option value="{{ $information->designation }}" {{ ( $information->designation == $information->designation) ? 'selected' : '' }}>{{ $information->designation }} </option>
+                                                <option value="Web Designer">Web Designer</option>
+                                                <option value="Web Developer">Web Developer</option>
+                                                <option value="Android Developer">Android Developer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Reports To <span class="text-danger">*</span></label>
+                                            <select class="select" id="" name="reports_to">
+                                                <option value="{{ $information->reports_to }}" {{ ( $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ $information->reports_to }} </option>
+                                                @foreach ($user as $users )
+                                                <option value="{{ $users->name }}">{{ $users->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Designation <span class="text-danger">*</span></label>
-
-                                        <select class="select" id="" name="designation">
-                                            <option selected disabled>Select Designation</option>
-                                            <option value="Web Designer">Web Designer</option>
-                                            <option value="Web Developer">Web Developer</option>
-                                            <option value="Android Developer">Android Developer</option>
-                                        </select>
-                                    </div>
+                                <div class="submit-section">
+                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Reports To <span class="text-danger">*</span></label>
-                                        <select class="select" id="" name="reports_to">
-                                            <option selected disabled>-- select --</option>
-                                            @foreach ($user as $users )
-                                            <option value="{{ $users->name }}">{{ $users->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="submit-section">
-                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /Profile Modal -->
+            <!-- /Profile Modal -->
+        @else
+            <!-- Profile Modal -->
+            <div id="profile_info" class="modal custom-modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Profile Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('profile.information.save') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="profile-img-wrap edit-img">
+                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <div class="fileupload btn">
+                                                <span class="btn-text">edit</span>
+                                                <input class="upload" type="file" id="upload" name="upload">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Full Name</label>
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                                                    <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Birth Date</label>
+                                                    <div class="cal-icon">
+                                                        <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Gender</label>
+                                                    <select class="select form-control" id="gender" name="gender">
+                                                        <option value="{{ Auth::user()->gender == 'Male' ? 'Male' : '' }}">Male</option>
+                                                        <option value="{{ Auth::user()->gender == 'Female' ? 'Female' : '' }}">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" class="form-control" id="address" name="address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input type="text" class="form-control" id="state" name="state">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <input type="text" class="form-control" id="" name="country">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Pin Code</label>
+                                            <input type="text" class="form-control" id="pin_code" name="pin_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" id="phoneNumber" name="phone_number">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Department <span class="text-danger">*</span></label>
+                                            <select class="select" id="department" name="department">
+                                                <option selected disabled>Select Department</option>
+                                                <option value="Web Development">Web Development</option>
+                                                <option value="IT Management">IT Management</option>
+                                                <option value="Marketing">Marketing</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Designation <span class="text-danger">*</span></label>
+
+                                            <select class="select" id="" name="designation">
+                                                <option selected disabled>Select Designation</option>
+                                                <option value="Web Designer">Web Designer</option>
+                                                <option value="Web Developer">Web Developer</option>
+                                                <option value="Android Developer">Android Developer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Reports To <span class="text-danger">*</span></label>
+                                            <select class="select" id="" name="reports_to">
+                                                <option selected disabled>-- select --</option>
+                                                @foreach ($user as $users )
+                                                <option value="{{ $users->name }}">{{ $users->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="submit-section">
+                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Profile Modal -->
         @endif
 
         <!-- Personal Info Modal -->
@@ -1105,42 +1104,42 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/personal_information/save') }}" method="POST">
+                        <form action="{{ route('profile.personal_information.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport No</label>
-                                        <input type="text" class="form-control" id="passport_no" name="passport_no">
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ $information->passport_no ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport Expiry Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date">
+                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date" value="{{ $information->passport_expired_date ?? '' }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nationality <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" id="nationality" name="nationality" value="">
+                                        <input class="form-control" type="text" id="nationality" name="nationality" value="{{ $information->nationality ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Religion</label>
-                                        <input class="form-control" type="text" id="religion" name="religion" value="">
+                                        <input class="form-control" type="text" id="religion" name="religion" value="{{ $information->religion ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Marital status <span class="text-danger">*</span></label>
                                         <select class="select form-control" id="marital_status" name="marital_status">
-                                            <option>Single</option>
-                                            <option>Married</option>
+                                            <option value="Single" {{ (isset($information->marital_status) && $information->marital_status == 'Single') ? 'selected' : '' }}>Single</option>
+                                            <option value="Married" {{ (isset($information->marital_status) && $information->marital_status == 'Married') ? 'selected' : '' }}>Married</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1148,15 +1147,15 @@
                                     <div class="form-group">
                                         <label>Employment of spouse</label>
                                         <select class="select form-control" id="employment_of_spouse" name="employment_of_spouse">
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option value="Yes" {{ (isset($information->employment_of_spouse) && $information->employment_of_spouse == 'Yes') ? 'selected' : '' }}>Yes</option>
+                                            <option value="No" {{ (isset($information->employment_of_spouse) && $information->employment_of_spouse == 'No') ? 'selected' : '' }}>No</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>No. of children </label>
-                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="">
+                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="{{ $information->no_of_children ?? '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -1181,50 +1180,50 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/family_information/save') }}" method="POST">
+                        <form action="{{ route('profile.family_information.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Family Member 1
-                                            {{-- ** TODO: DELETE FUNCTION **
+
                                             <a href="javascript:void(0);" class="delete-icon">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a> --}}
+                                                <i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i>
+                                            </a>
                                         </h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="">
+                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ $information->family_member_name_1 ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="">
+                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="{{ $information->family_member_relationship_1 ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Date of birth <span class="text-danger">*</span></label>
                                                     <div class="cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="">
+                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ $information->family_member_DOB_1 ?? '' }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="">
+                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="{{ $information->family_member_phone_1 ?? '' }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- ** TODO : ADD MORE FAMILY INFORMATION **
+                                        ** TODO : ADD MORE FAMILY INFORMATION **
                                         <div class="add-more">
                                             <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1249,7 +1248,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/emergency_contact/save') }}" method="POST">
+                        <form action="{{ route('profile.emergency_contact.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             @if(!empty($information))
@@ -1400,7 +1399,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/bank_information/save') }}" method="POST">
+                        <form action="{{ route('profile.bank_information.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="card">
@@ -1446,13 +1445,13 @@
                         <h5 class="title">(Highest to Lowest)</h5>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/education_information/save') }}" method="POST">
+                        <form action="{{ route('profile.education_information.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
@@ -1500,7 +1499,7 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"> ** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
@@ -1544,7 +1543,7 @@
                                             </div>
                                         </div>
                                         <div class="add-more">
-                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
+                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More ** TODO : ADD MORE EDUCATION INFORMATION **</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1570,17 +1569,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/experience_information/save') }}" method="POST">
+                        <form action="{{ route('profile.experience_information.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations 1<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 1<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty($information->exp_company_name_1 )){{ $information->exp_company_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty($information->exp_company_name_1 )){{ $information->exp_company_name_1 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
@@ -1618,7 +1617,7 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations 2<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 2<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
@@ -1656,7 +1655,7 @@
                                             </div>
                                         </div>
                                         <div class="add-more">
-                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
+                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle">** TODO: ADD MORE EXPERIENCE FUNCTION **</i> Add More</a>
                                         </div>
                                     </div>
                                 </div>
