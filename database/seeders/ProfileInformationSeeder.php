@@ -23,11 +23,8 @@ class ProfileInformationSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
             [
-                'name' => 'Super Admin',
                 'employee_id' => $superadmin->id,
-                'email' => 'superadmin@gmail.com',
                 'birth_date' => '1990-01-01',
-                'gender' => 'Male',
                 'address' => 'No 1, Jalan Utama',
                 'city' => 'Seremban',
                 'state' => 'Negeri Sembilan',
@@ -97,11 +94,8 @@ class ProfileInformationSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
             [
-                'name' => 'HR Admin',
                 'employee_id' => $hr->id,
-                'email' => 'hr@gmail.com',
                 'birth_date' => '1990-02-02',
-                'gender' => 'Male',
                 'address' => 'Seremban 2',
                 'city' => 'Seremban',
                 'state' => 'Negeri Sembilan',
@@ -171,11 +165,8 @@ class ProfileInformationSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
             [
-                'name' => 'User',
                 'employee_id' => $employee->id,
-                'email' => 'user@gmail.com',
                 'birth_date' => '1990-03-03',
-                'gender' => 'Male',
                 'address' => 'Nilai',
                 'city' => 'Seremban',
                 'state' => 'Negeri Sembilan',

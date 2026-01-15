@@ -57,19 +57,19 @@ class RegisterController extends Controller
                 $employeeCode = $employeeIdService->generate();
 
                 // 4️⃣ Create employee
-                Employee::create([
+                $employee = Employee::create([
                     'user_id'       => $user->id,
                     'employee_code' => $employeeCode,
                     'name'          => $request->name,
                     'email'         => $request->email,
                 ]);
-            });
 
-            // ProfileInformation::create([
-            //     'name'      => $request->name,
-            //     'email'     => $request->email,
-            //     'designation' => $request->role_name,
-            // ]);
+                ProfileInformation::create([
+                    'name'          => $request->name,
+                    'email'         => $request->email,
+                    'employee_id'   => $employee->id,
+                ]);
+            });
 
             Toastr::success('Create new account successfully :)','Success');
             return redirect('login');

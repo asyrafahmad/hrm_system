@@ -126,24 +126,31 @@ class UserManagementController extends Controller
         Session::put('user', $user);
         $user=Session::get('user');
         $profile = $user->employee_id;
+        $user_id = $user->id;
 
         $user = DB::table('users')->get();
-        $employees = DB::table('profile_information')->where('employee_id',$profile)->first();
+        $employees = DB::table('employees')->where('user_id', $user_id)->first();
+        $information = DB::table('profile_information')->where('employee_id', $employees->id)->first();
+        $positions = DB::table('positions')->pluck('name','id');
+        $departments = DB::table('departments')->pluck('name','id');
+
+        $employee_id = $employees->id;
+
+// var_dump($information);die();
 
         if(empty($employees))
         {
-            $information = DB::table('profile_information')->where('employee_id',$profile)->first();
-            return view('usermanagement.profile_user',compact('information','user'));
+            $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
+            return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
 
         }else{
-            $employee_id = $employees->employee_id;
             if($employee_id == $profile)
             {
-                $information = DB::table('profile_information')->where('employee_id',$profile)->first();
-                return view('usermanagement.profile_user',compact('information','user'));
+                $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
+                return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
             }else{
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information','user'));
+                return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
             }
         }
 

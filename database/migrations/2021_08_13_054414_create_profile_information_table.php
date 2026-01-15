@@ -15,11 +15,11 @@ class CreateProfileInformationTable extends Migration
     {
         Schema::create('profile_information', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            // $table->string('name')->nullable();
             $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
-            $table->string('email')->nullable();
+            // $table->string('email')->nullable();
             $table->string('birth_date')->nullable();
-            $table->string('gender')->nullable();
+            // $table->string('gender')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

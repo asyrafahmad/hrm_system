@@ -12,11 +12,11 @@ class ProfileInformation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        // 'name',
         'employee_id',
-        'email',
+        // 'email',
         'birth_date',
-        'gender',
+        // 'gender',
         'address',
         'state',
         'country',

@@ -63,7 +63,7 @@
                                                         <div class="text">N/A</div>
                                                         @endif
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         @if(!empty($information->birth_date))
                                                         <div class="title">Birthday:</div>
                                                         <div class="text">{{date('d F, Y',strtotime($information->birth_date)) }}</div>
@@ -71,7 +71,7 @@
                                                         <div class="title">Birthday:</div>
                                                         <div class="text">N/A</div>
                                                         @endif
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         @if(!empty($information->address))
                                                         <div class="title">Address:</div>
@@ -867,21 +867,27 @@
                                                     <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            {{-- <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Birth Date</label>
                                                     <div class="cal-icon">
                                                         <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" value="{{ $information->birth_date }}">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Gender</label>
-                                                    <select class="select form-control" id="gender" name="gender">
-                                                        {{-- <option value="{{ $information->gender }}" {{ ( $information->gender == $information->gender) ? 'selected' : '' }}>{{ $information->gender }} </option> --}}
-                                                        <option value="Male" {{ ( $information->gender == 'Male') ? 'selected' : '' }}>Male</option>
-                                                        <option value="Female" {{ ( $information->gender == 'Female') ? 'selected' : '' }}>Female</option>
+                                                    <select class="form-control" id="gender" name="gender">
+                                                        <option value="" disabled {{ empty($employees->gender) ? 'selected' : '' }}>
+                                                            Select Gender
+                                                        </option>
+                                                        <option value="Male" {{ $employees->gender === 'Male' ? 'selected' : '' }}>
+                                                            Male
+                                                        </option>
+                                                        <option value="Female" {{ $employees->gender === 'Female' ? 'selected' : '' }}>
+                                                            Female
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -892,61 +898,71 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" value="{{ $information->address }}">
+                                            <input type="text" class="form-control" id="address" name="address" value="{{ !empty($information->address) ? $information->address : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>State</label>
-                                            <input type="text" class="form-control" id="state" name="state" value="{{ $information->state }}">
+                                            <input type="text" class="form-control" id="state" name="state" value="{{ !empty($information->state) ? $information->state : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country</label>
-                                            <input type="text" class="form-control" id="" name="country" value="{{ $information->country }}">
+                                            <input type="text" class="form-control" id="" name="country" value="{{ !empty($information->country) ? $information->country : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $information->postcode }}">
+                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ !empty($information->postcode) ? $information->postcode : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                         <label>Phone Number</label>
-                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $information->phone_number }}">
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ !empty($information->phone_number) ? $information->phone_number : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Department <span class="text-danger">*</span></label>
-                                            <select class="select" id="department" name="department">
-                                                <option value="{{ $information->department }}" {{ ( $information->department == $information->department) ? 'selected' : '' }}>{{ $information->department }} </option>
-                                                <option value="Web Development">Web Development</option>
-                                                <option value="IT Management">IT Management</option>
-                                                <option value="Marketing">Marketing</option>
+                                            <select class="form-control" id="department" name="department">
+                                                <option value="" disabled {{ empty($employees->department_id) ? 'selected' : '' }}>
+                                                    Select Department
+                                                </option>
+
+                                                @foreach ($departments as $id => $name)
+                                                    <option value="{{ $id }}" {{ $employees->department_id == $id ? 'selected' : '' }}>
+                                                        {{ $name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Designation <span class="text-danger">*</span></label>
-                                            <select class="select" id="" name="designation">
-                                                <option value="{{ $information->designation }}" {{ ( $information->designation == $information->designation) ? 'selected' : '' }}>{{ $information->designation }} </option>
-                                                <option value="Web Designer">Web Designer</option>
-                                                <option value="Web Developer">Web Developer</option>
-                                                <option value="Android Developer">Android Developer</option>
+                                            <select class="form-control" name="designation">
+                                                <option value="" disabled {{ empty($employees->position_id) ? 'selected' : '' }}>
+                                                    Select Designation
+                                                </option>
+
+                                                @foreach ($positions as $id => $name)
+                                                    <option value="{{ $id }}" {{ $employees->position_id == $id ? 'selected' : '' }}>
+                                                        {{ $name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Reports To <span class="text-danger">*</span></label>
-                                            <select class="select" id="" name="reports_to">
-                                                <option value="{{ $information->reports_to }}" {{ ( $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ $information->reports_to }} </option>
+                                            <select class="form-control" id="" name="reports_to">
+                                                <option value="{{ !empty($information->reports_to) ? $information->reports_to : '' }}" {{ ( !empty($information->reports_to) && $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ !empty($information->reports_to) ? $information->reports_to : '' }} </option>
                                                 @foreach ($user as $users )
                                                 <option value="{{ $users->name }}">{{ $users->name }}</option>
                                                 @endforeach
@@ -1061,12 +1077,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Designation <span class="text-danger">*</span></label>
-
                                             <select class="select" id="" name="designation">
-                                                <option selected disabled>Select Designation</option>
-                                                <option value="Web Designer">Web Designer</option>
-                                                <option value="Web Developer">Web Developer</option>
-                                                <option value="Android Developer">Android Developer</option>
+                                                @foreach ($positions as $id => $name)
+                                                    <option value="{{ $id }} {{ $employees->position_id == $id ? 'selected' : '' }}">{{ $name }} </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -1111,27 +1125,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport No</label>
-                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ $information->passport_no ?? '' }}">
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ !empty($information->passport_no) ? $information->passport_no : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Passport Expiry Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date" value="{{ $information->passport_expired_date ?? '' }}">
+                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date" value="{{ !empty($information->passport_expired_date) ? $information->passport_expired_date : '' }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nationality <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" id="nationality" name="nationality" value="{{ $information->nationality ?? '' }}">
+                                        <input class="form-control" type="text" id="nationality" name="nationality" value="{{ !empty($information->nationality) ? $information->nationality : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Religion</label>
-                                        <input class="form-control" type="text" id="religion" name="religion" value="{{ $information->religion ?? '' }}">
+                                        <input class="form-control" type="text" id="religion" name="religion" value="{{ !empty($information->religion) ? $information->religion : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1155,7 +1169,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>No. of children </label>
-                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="{{ $information->no_of_children ?? '' }}">
+                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="{{ !empty($information->no_of_children) ? $information->no_of_children : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -1196,27 +1210,27 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ $information->family_member_name_1 ?? '' }}">
+                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ !empty($information->family_member_name_1) ? $information->family_member_name_1 : '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="{{ $information->family_member_relationship_1 ?? '' }}">
+                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="{{ !empty($information->family_member_relationship_1) ? $information->family_member_relationship_1 : '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Date of birth <span class="text-danger">*</span></label>
                                                     <div class="cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ $information->family_member_DOB_1 ?? '' }}">
+                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ !empty($information->family_member_DOB_1) ? $information->family_member_DOB_1 : '' }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="{{ $information->family_member_phone_1 ?? '' }}">
+                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="{{ !empty($information->family_member_phone_1) ? $information->family_member_phone_1 : '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -1259,25 +1273,25 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ $information->emergency_contact_name_1 }}">
+                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ !empty($information->emergency_contact_name_1) ? $information->emergency_contact_name_1 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="{{ $information->emergency_contact_relationship_1 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="{{ !empty($information->emergency_contact_relationship_1) ? $information->emergency_contact_relationship_1 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ $information->emergency_contact_mobile_1 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ !empty($information->emergency_contact_mobile_1) ? $information->emergency_contact_mobile_1 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ $information->emergency_contact_phone_1 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ !empty($information->emergency_contact_phone_1) ? $information->emergency_contact_phone_1 : '' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -1290,25 +1304,25 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ $information->emergency_contact_name_2 }}">
+                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ !empty($information->emergency_contact_name_2) ? $information->emergency_contact_name_2 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="{{ $information->emergency_contact_relationship_2 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="{{ !empty($information->emergency_contact_relationship_2) ? $information->emergency_contact_relationship_2 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ $information->emergency_contact_mobile_2 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ !empty($information->emergency_contact_mobile_2) ? $information->emergency_contact_mobile_2 : '' }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ $information->emergency_contact_phone_2 }}">
+                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ !empty($information->emergency_contact_phone_2) ? $information->emergency_contact_phone_2 : '' }}">
                                             </div>
                                         </div>
                                     </div>
