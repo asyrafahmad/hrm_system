@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             // $table->foreignId('user_role_types_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
+            // $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
             $table->string('avatar')->nullable();
             $table->foreignId('user_status_id')->nullable()->constrained()->nullOnDelete()->default(1);
             $table->timestamp('email_verified_at')->nullable();

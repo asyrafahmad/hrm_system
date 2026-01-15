@@ -9,7 +9,7 @@ class EmployeeIdService
     public function generate(): string
     {
         return DB::transaction(function () {
-            $sequence = DB::table('sequences')
+            $sequence = DB::table('sequence')
                 ->where('key', 'employee')
                 ->lockForUpdate()
                 ->first();
@@ -20,11 +20,11 @@ class EmployeeIdService
 
             $next = $sequence->current_value + 1;
 
-            DB::table('sequences')
+            DB::table('sequence')
                 ->where('key', 'employee')
                 ->update(['current_value' => $next]);
 
-            return 'E' . str_pad($next, 5, '0', STR_PAD_LEFT);
+            return 'E' . str_pad($next, 6, '0', STR_PAD_LEFT);
         });
     }
 }

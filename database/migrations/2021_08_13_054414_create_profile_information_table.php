@@ -14,9 +14,9 @@ class CreateProfileInformationTable extends Migration
     public function up()
     {
         Schema::create('profile_information', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->id();
             $table->string('name')->nullable();
-            $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
             $table->string('email')->nullable();
             $table->string('birth_date')->nullable();
             $table->string('gender')->nullable();

@@ -17,6 +17,8 @@ class CreateEmployeesTable extends Migration
             $table->id(); // ✅ REQUIRED PRIMARY KEY
 
             // Core identity
+
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('employee_code', 50)->unique();
             $table->string('name', 255);
             $table->string('email', 255)->unique();

@@ -5,10 +5,16 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Employee;
+
 class ProfileInformationSeeder extends Seeder
 {
     public function run()
     {
+        $superadmin = Employee::where('email', 'superadmin@gmail.com')->first();
+        $hr = Employee::where('email', 'hr@gmail.com')->first();
+        $employee = Employee::where('email', 'employee@gmail.com')->first();
+
         DB::table('profile_information')->insert([
 
             /*
@@ -18,7 +24,7 @@ class ProfileInformationSeeder extends Seeder
             */
             [
                 'name' => 'Super Admin',
-                'employee_id' => 1,
+                'employee_id' => $superadmin->id,
                 'email' => 'superadmin@gmail.com',
                 'birth_date' => '1990-01-01',
                 'gender' => 'Male',
@@ -92,7 +98,7 @@ class ProfileInformationSeeder extends Seeder
             */
             [
                 'name' => 'HR Admin',
-                'employee_id' => 2,
+                'employee_id' => $hr->id,
                 'email' => 'hr@gmail.com',
                 'birth_date' => '1990-02-02',
                 'gender' => 'Male',
@@ -166,7 +172,7 @@ class ProfileInformationSeeder extends Seeder
             */
             [
                 'name' => 'User',
-                'employee_id' => 3,
+                'employee_id' => $employee->id,
                 'email' => 'user@gmail.com',
                 'birth_date' => '1990-03-03',
                 'gender' => 'Male',
@@ -228,80 +234,6 @@ class ProfileInformationSeeder extends Seeder
                 'exp_position_2' => 'Software Engineer',
                 'exp_period_from_2' => '2018',
                 'exp_period_to_2' => '2022',
-
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Employee 4 – Asyraf
-            |--------------------------------------------------------------------------
-            */
-            [
-                'name' => 'Asyraf',
-                'employee_id' => 4,
-                'email' => 'asyraf@gmail.com',
-                'birth_date' => '1997-04-01',
-                'gender' => 'Male',
-                'address' => 'Seremban',
-                'city' => 'Seremban',
-                'state' => 'Negeri Sembilan',
-                'country' => 'Malaysia',
-                'postcode' => '70000',
-                'phone_number' => '0192675699',
-                'department' => 'Information Technology',
-                'designation' => 'Senior Software Engineer',
-                'reports_to' => 2,
-
-                'emergency_contact_name_1' => 'Rahim',
-                'emergency_contact_relationship_1' => 'Father',
-                'emergency_contact_phone_1' => '0171234567',
-                'emergency_contact_mobile_1' => '0171234567',
-                'emergency_contact_name_2' => 'Salmah',
-                'emergency_contact_relationship_2' => 'Mother',
-                'emergency_contact_phone_2' => '0167654321',
-                'emergency_contact_mobile_2' => '0167654321',
-
-                'passport_no' => 'D44556677',
-                'passport_expired_date' => '2032-10-10',
-                'nationality' => 'Malaysian',
-                'religion' => 'Islam',
-                'marital_status' => 'Married',
-                'employment_of_spouse' => 'Accountant',
-                'no_of_children' => '1',
-
-                'family_member_name_1' => 'Aiman',
-                'family_member_relationship_1' => 'Son',
-                'family_member_DOB_1' => '2021-09-01',
-                'family_member_phone_1' => '0195555555',
-
-                'bank_name' => 'Public Bank',
-                'bank_account_no' => '999900001111',
-
-                'academic_institution_1' => 'UTHM',
-                'academic_qualification_1' => 'Bachelor Degree',
-                'academic_type_qualification_1' => 'Software Engineering',
-                'academic_grade_1' => 'First Class',
-                'academic_starting_date_1' => '2015',
-                'academic_complete_date_1' => '2019',
-                'academic_institution_2' => 'UMS',
-                'academic_qualification_2' => 'Diploma',
-                'academic_type_qualification_2' => 'Computer Science',
-                'academic_grade_2' => 'First Class',
-                'academic_starting_date_2' => '2007',
-                'academic_complete_date_2' => '2009',
-
-                'exp_company_name_1' => 'StartupX',
-                'exp_location_1' => 'Kuala Lumpur',
-                'exp_position_1' => 'Software Engineer',
-                'exp_period_from_1' => '2019',
-                'exp_period_to_1' => '2021',
-                'exp_company_name_2' => 'EnterpriseTech',
-                'exp_location_2' => 'Cyberjaya',
-                'exp_position_2' => 'Senior Software Engineer',
-                'exp_period_from_2' => '2021',
-                'exp_period_to_2' => 'Present',
 
                 'created_at' => now(),
                 'updated_at' => now(),

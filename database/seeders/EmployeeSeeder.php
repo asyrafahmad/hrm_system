@@ -11,7 +11,7 @@ class EmployeeSeeder extends Seeder
     {
         DB::table('employees')->insert([
             [
-                'id'            => 1,
+                'user_id'       => 1,
                 'employee_code' => 'E000001',
                 'name'          => 'Super Admin',
                 'email'         => 'superadmin@gmail.com',
@@ -26,7 +26,7 @@ class EmployeeSeeder extends Seeder
                 'updated_at'    => now(),
             ],
             [
-                'id'            => 2,
+                'user_id'       => 2,
                 'employee_code' => 'E000002',
                 'name'          => 'HR Admin',
                 'email'         => 'hr@gmail.com',
@@ -41,25 +41,10 @@ class EmployeeSeeder extends Seeder
                 'updated_at'    => now(),
             ],
             [
-                'id'            => 3,
+                'user_id'       => 3,
                 'employee_code' => 'E000003',
-                'name'          => 'User',
-                'email'         => 'user@gmail.com',
-                'gender'        => 'Male',
-                'company'       => 'Sunway Group',
-                'department_id' => 2,
-                'position_id'   => 3,
-                'phone_number'  => '0192675697',
-                'join_date'     => '1970-01-01',
-                'status'        => 1,
-                'created_at'    => now(),
-                'updated_at'    => now(),
-            ],
-            [
-                'id'            => 4,
-                'employee_code' => 'E000004',
-                'name'          => 'Asyraf',
-                'email'         => 'asyraf@gmail.com',
+                'name'          => 'Employee',
+                'email'         => 'employee@gmail.com',
                 'gender'        => 'Male',
                 'company'       => 'Sunway Group',
                 'department_id' => 2,

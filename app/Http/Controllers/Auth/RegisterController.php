@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
 use Spatie\Permission\Models\Role;
+use App\Models\Employee;
+use App\Services\HR\EmployeeIdService;
 
 class RegisterController extends Controller
 {
@@ -23,11 +25,11 @@ class RegisterController extends Controller
         return view('auth.register',compact('roles'));
     }
 
-    public function storeUser(Request $request)
+    public function storeUser(Request $request, EmployeeIdService $employeeIdService)
     {
         $request->validate([
             'name'      => 'required|string|max:255',
-            'email'     => 'required|string|email|max:255|unique:users',
+            'email'     => 'required|string|email|max:255|unique:users,email',
             'role_name' => 'required|string',
             'password'  => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
@@ -36,29 +38,45 @@ class RegisterController extends Controller
         // $dt       = Carbon::now();
         // $todayDate = $dt->toDayDateTimeString();
 
-        $user = User::create([
-            'name'      => $request->name,
-            'avatar'    => $request->image,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
-        ]);
+        try {
+            DB::transaction(function () use ($request, $employeeIdService) {
 
-        // Make sure the role exists
-        if (Role::where('name', $request->role_name)->exists()) {
-            $user->assignRole($request->role_name);
-        } else {
-            // Optional: handle invalid role input
-            Toastr::error('Role does not exist!', 'Error');
-            return redirect()->back();
+                // 1️⃣ Create user FIRST
+                $user = User::create([
+                    'name'              => $request->name,
+                    'avatar'            => $request->image ?? null,
+                    'email'             => $request->email,
+                    'user_status_id'    => 1,
+                    'password'          => Hash::make($request->password),
+                ]);
+
+                // 2️⃣ Assign role
+                $user->assignRole($request->role_name);
+
+                // 3️⃣ Generate employee code
+                $employeeCode = $employeeIdService->generate();
+
+                // 4️⃣ Create employee
+                Employee::create([
+                    'user_id'       => $user->id,
+                    'employee_code' => $employeeCode,
+                    'name'          => $request->name,
+                    'email'         => $request->email,
+                ]);
+            });
+
+            // ProfileInformation::create([
+            //     'name'      => $request->name,
+            //     'email'     => $request->email,
+            //     'designation' => $request->role_name,
+            // ]);
+
+            Toastr::success('Create new account successfully :)','Success');
+            return redirect('login');
+
+        } catch (\Exception $e) {
+            Toastr::error('Fail to create new account :)','Error');
+            return $e->getMessage();
         }
-
-        // ProfileInformation::create([
-        //     'name'      => $request->name,
-        //     'email'     => $request->email,
-        //     'designation' => $request->role_name,
-        // ]);
-
-        Toastr::success('Create new account successfully :)','Success');
-        return redirect('login');
     }
 }
