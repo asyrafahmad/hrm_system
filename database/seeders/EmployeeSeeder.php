@@ -13,7 +13,7 @@ class EmployeeSeeder extends Seeder
             [
                 'user_id'       => 1,
                 'employee_code' => 'E000001',
-                'name'          => 'Super Admin',
+                'fullname'      => 'Super Admin',
                 'email'         => 'superadmin@gmail.com',
                 'company'       => 'Sunway Group',
                 'department_id' => 1,
@@ -27,7 +27,7 @@ class EmployeeSeeder extends Seeder
             [
                 'user_id'       => 2,
                 'employee_code' => 'E000002',
-                'name'          => 'HR Admin',
+                'fullname'      => 'HR Admin',
                 'email'         => 'hr@gmail.com',
                 'company'       => 'Sunway Group',
                 'department_id' => 1,
@@ -41,7 +41,7 @@ class EmployeeSeeder extends Seeder
             [
                 'user_id'       => 3,
                 'employee_code' => 'E000003',
-                'name'          => 'Employee',
+                'fullname'      => 'Employee',
                 'email'         => 'employee@gmail.com',
                 'company'       => 'Sunway Group',
                 'department_id' => 2,

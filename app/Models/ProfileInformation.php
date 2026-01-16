@@ -21,9 +21,9 @@ class ProfileInformation extends Model
         'state',
         'country',
         'postcode',
-        'phone_number',
-        'department',
-        'designation',
+        // 'phone_number',
+        // 'department',
+        // 'designation',
         'reports_to',
 
         // Emergency Contact

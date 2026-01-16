@@ -25,9 +25,9 @@ class CreateProfileInformationTable extends Migration
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('department')->nullable();
-            $table->string('designation')->nullable();
+            // $table->string('phone_number')->nullable();
+            // $table->string('department')->nullable();
+            // $table->string('designation')->nullable();
             $table->integer('reports_to')->nullable(); // Employee ID of the reporting manager
             $table->timestamps();
 

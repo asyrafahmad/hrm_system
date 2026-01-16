@@ -129,28 +129,29 @@ class UserManagementController extends Controller
         $user_id = $user->id;
 
         $user = DB::table('users')->get();
-        $employees = DB::table('employees')->where('user_id', $user_id)->first();
-        $information = DB::table('profile_information')->where('employee_id', $employees->id)->first();
+        $employee = DB::table('employees')->where('user_id', $user_id)->first();
+        $employees = DB::table('employees')->pluck('fullname','id')->first();
+        $information = DB::table('profile_information')->where('employee_id', $employee->id)->first();
         $positions = DB::table('positions')->pluck('name','id');
         $departments = DB::table('departments')->pluck('name','id');
 
-        $employee_id = $employees->id;
+        $employee_id = $employee->id;
 
 // var_dump($information);die();
 
-        if(empty($employees))
+        if(empty($employee))
         {
             $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
-            return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
+            return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'positions', 'departments'));
 
         }else{
             if($employee_id == $profile)
             {
                 $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
-                return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
+                return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'positions', 'departments'));
             }else{
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information', 'employees','user', 'positions', 'departments'));
+                return view('usermanagement.profile_user',compact('information', 'employee','employees','user', 'positions', 'departments'));
             }
         }
 
@@ -160,6 +161,7 @@ class UserManagementController extends Controller
     public function profileInformation(Request $request)
     {
         try{
+            // var_dump($request->position);die();
             if(!empty($request->images))
             {
                 $image_name = $request->hidden_image;
@@ -179,29 +181,35 @@ class UserManagementController extends Controller
                         $image->move(public_path('/assets/images/'), $image_name);
                     }
                 }
+
                 $update = [
                     'employee_id' => $request->employee_id,
-                    'name'   => $request->name,
+                    'fullname'   => $request->fullname,
                     'avatar' => $image_name,
                 ];
                 User::where('employee_id',$request->employee_id)->update($update);
+
+
             }
 
+            $employee = Employee::updateOrCreate(['id' => $request->employee_id]);
+            $employee->fullname         = $request->fullname;
+            $employee->email            = $request->email;
+            $employee->gender           = $request->gender;
+            $employee->phone_number     = $request->phone_number;
+            $employee->department_id    = $request->department;
+            $employee->position_id      = $request->position;
+            $employee->save();
+
             $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
-            $information->name         = $request->name;
-            $information->employee_id       = $request->employee_id;
-            $information->email        = $request->email;
-            $information->birth_date   = $request->birthDate;
-            $information->gender       = $request->gender;
-            $information->address      = $request->address;
-            $information->state        = $request->state;
-            $information->country      = $request->country;
-            $information->postcode     = $request->postcode;
-            $information->phone_number = $request->phone_number;
-            $information->department   = $request->department;
-            $information->designation  = $request->designation;
-            $information->reports_to   = $request->reports_to;
+            $information->address       = $request->address;
+            $information->city          = $request->city;
+            $information->state         = $request->state;
+            $information->country       = $request->country;
+            $information->postcode      = $request->postcode;
+            $information->reports_to    = $request->reports_to;
             $information->save();
+
 
             DB::commit();
             Toastr::success('Profile Information successfully :)','Success');

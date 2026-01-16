@@ -27,7 +27,7 @@
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
                                         <a href="#">
-                                            <img alt="" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <img alt="" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
                                         </a>
                                     </div>
                                 </div>
@@ -35,10 +35,10 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h4 class="title">{{ Auth::user()->name }} (Staff ID : {{ Auth::user()->employee->employee_code }})</h4>
-                                                <h6 class="text-muted">Position: {{ Auth::user()->employee->position }}</h6>
-                                                <h6 class="text-muted">Department: {{ Auth::user()->employee->department }}</h6>
-                                                <h6 class="text-muted">Date of Join : {{ Auth::user()->employee->join_date }}</h6>
+                                                <h4 class="title">{{ Auth::user()->employee->fullname }} (Staff ID : {{ Auth::user()->employee->employee_code }})</h4>
+                                                <h6 class="text-muted">Position: {{ Auth::user()->employee->positions }}</h6>
+                                                <h6 class="text-muted">Department: {{ Auth::user()->employee->department->name ?? '-'}}</h6>
+                                                <h6 class="text-muted">Date of Join : {{ Auth::user()->employee->join_date ?? '-' }}</h6>
                                                 {{-- <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div> --}}
                                             </div>
                                         </div>
@@ -47,17 +47,17 @@
                                                     <li>
                                                         <div class="title">Phone:</div>
                                                         <div class="text">
-                                                            @if(!empty($information->phone_number))
-                                                            <a href="">{{ $information->phone_number }}</a>
+                                                            @if(!empty(Auth::user()->employee->phone_number))
+                                                            <a href="">{{ Auth::user()->employee->phone_number }}</a>
                                                             @else
                                                             N/A
                                                             @endif
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        @if(!empty($information->email))
+                                                        @if(!empty(Auth::user()->employee->email))
                                                         <div class="title">Email:</div>
-                                                        <div class="text"><a href="">{{ Auth::user()->email }}</a></div>
+                                                        <div class="text"><a href="">{{ Auth::user()->employee->email }}</a></div>
                                                         @else
                                                         <div class="title">Email:</div>
                                                         <div class="text">N/A</div>
@@ -73,11 +73,15 @@
                                                         @endif
                                                     </li> --}}
                                                     <li>
-                                                        @if(!empty($information->address))
+                                                        @if(!empty(Auth::user()->employee->profileInformation->address ))
                                                         <div class="title">Address:</div>
                                                         <div class="text">
-                                                            @if($information->address != null)
-                                                                {{ $information->address }}
+                                                            @if(Auth::user()->employee->profileInformation->address != null)
+                                                                {{ Auth::user()->employee->profileInformation->address }},
+                                                                {{ Auth::user()->employee->profileInformation->postcode }},
+                                                                {{ Auth::user()->employee->profileInformation->city }},
+                                                                {{ Auth::user()->employee->profileInformation->state }},
+                                                                {{ Auth::user()->employee->profileInformation->country }}
                                                             @else
                                                                 <br>
                                                             @endif
@@ -88,9 +92,9 @@
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        @if(!empty($information->gender))
+                                                        @if(!empty(Auth::user()->employee->gender))
                                                         <div class="title">Gender:</div>
-                                                        <div class="text">{{ $information->gender }}</div>
+                                                        <div class="text">{{ Auth::user()->employee->gender }}</div>
                                                         @else
                                                         <div class="title">Gender:</div>
                                                         <div class="text">N/A</div>
@@ -99,14 +103,18 @@
                                                     <li>
                                                         <div class="title">Reports to:</div>
                                                         <div class="text">
-                                                            @if(!empty($information->reports_to))
+                                                            @if(!empty(Auth::user()->employee->profileInformation->reports_to))
                                                                 <div class="avatar-box">
                                                                     <div class="avatar avatar-xs">
-                                                                        <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ $information->reports_to }}">
+                                                                        <img src="{{ URL::to('/assets/images/'. Auth::user()->employee->avatar) }}" alt="{{ Auth::user()->employee->profileInformation->reports_to }}">
                                                                     </div>
                                                                 </div>
-                                                                <a href="{{ route('profile_user.report_to', ['employee_id' => $information->reports_to]) }}">
-                                                                    {{ $information->reports_to }}
+                                                                <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
+                                                                    @if(Auth::user()->employee->profileInformation->reports_to)
+                                                                        {{$employees}}
+                                                                    @else
+                                                                        N/A
+                                                                    @endif
                                                                 </a>
                                                             @else
                                                                 N/A
@@ -834,6 +842,7 @@
             </div>
         </div>
         <!-- /Page Content -->
+
         @if(!empty($information))
             <!-- Profile Modal -->
             <div id="profile_info" class="modal custom-modal fade" role="dialog">
@@ -851,7 +860,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="profile-img-wrap edit-img">
-                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
                                             <div class="fileupload btn">
                                                 <span class="btn-text">edit</span>
                                                 <input class="upload" type="file" id="image" name="images">
@@ -862,8 +871,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                                                    <input type="text" class="form-control" id="fullname" name="fullname" value="{{ Auth::user()->employee->fullname }}">
+                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                                                     <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                                 </div>
                                             </div>
@@ -879,13 +888,13 @@
                                                 <div class="form-group">
                                                     <label>Gender</label>
                                                     <select class="form-control" id="gender" name="gender">
-                                                        <option value="" disabled {{ empty($employees->gender) ? 'selected' : '' }}>
+                                                        <option value="" disabled {{ empty(Auth::user()->employee->gender) ? 'selected' : '' }}>
                                                             Select Gender
                                                         </option>
-                                                        <option value="Male" {{ $employees->gender === 'Male' ? 'selected' : '' }}>
+                                                        <option value="Male" {{ Auth::user()->employee->gender === 'Male' ? 'selected' : '' }}>
                                                             Male
                                                         </option>
-                                                        <option value="Female" {{ $employees->gender === 'Female' ? 'selected' : '' }}>
+                                                        <option value="Female" {{ Auth::user()->employee->gender === 'Female' ? 'selected' : '' }}>
                                                             Female
                                                         </option>
                                                     </select>
@@ -899,6 +908,12 @@
                                         <div class="form-group">
                                             <label>Address</label>
                                             <input type="text" class="form-control" id="address" name="address" value="{{ !empty($information->address) ? $information->address : '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" class="form-control" id="city" name="city" value="{{ !empty($information->city) ? $information->city : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -930,12 +945,12 @@
                                         <div class="form-group">
                                             <label>Department <span class="text-danger">*</span></label>
                                             <select class="form-control" id="department" name="department">
-                                                <option value="" disabled {{ empty($employees->department_id) ? 'selected' : '' }}>
+                                                <option value="" disabled {{ empty($employee->department_id) ? 'selected' : '' }}>
                                                     Select Department
                                                 </option>
 
                                                 @foreach ($departments as $id => $name)
-                                                    <option value="{{ $id }}" {{ $employees->department_id == $id ? 'selected' : '' }}>
+                                                    <option value="{{ $id }}" {{ $employee->department_id == $id ? 'selected' : '' }}>
                                                         {{ $name }}
                                                     </option>
                                                 @endforeach
@@ -945,13 +960,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Designation <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="designation">
-                                                <option value="" disabled {{ empty($employees->position_id) ? 'selected' : '' }}>
+                                            <select class="form-control" name="position">
+                                                <option value="" disabled {{ empty($employee->position_id) ? 'selected' : '' }}>
                                                     Select Designation
                                                 </option>
 
                                                 @foreach ($positions as $id => $name)
-                                                    <option value="{{ $id }}" {{ $employees->position_id == $id ? 'selected' : '' }}>
+                                                    <option value="{{ $id }}" {{ $employee->position_id == $id ? 'selected' : '' }}>
                                                         {{ $name }}
                                                     </option>
                                                 @endforeach
@@ -964,7 +979,7 @@
                                             <select class="form-control" id="" name="reports_to">
                                                 <option value="{{ !empty($information->reports_to) ? $information->reports_to : '' }}" {{ ( !empty($information->reports_to) && $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ !empty($information->reports_to) ? $information->reports_to : '' }} </option>
                                                 @foreach ($user as $users )
-                                                <option value="{{ $users->name }}">{{ $users->name }}</option>
+                                                <option value="{{ $users->username }}">{{ $users->username }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -996,7 +1011,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="profile-img-wrap edit-img">
-                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
                                             <div class="fileupload btn">
                                                 <span class="btn-text">edit</span>
                                                 <input class="upload" type="file" id="upload" name="upload">
@@ -1006,8 +1021,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
-                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->username }}">
+                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                                                     <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                                 </div>
                                             </div>
@@ -1079,7 +1094,7 @@
                                             <label>Designation <span class="text-danger">*</span></label>
                                             <select class="select" id="" name="designation">
                                                 @foreach ($positions as $id => $name)
-                                                    <option value="{{ $id }} {{ $employees->position_id == $id ? 'selected' : '' }}">{{ $name }} </option>
+                                                    <option value="{{ $id }} {{ $employee->position_id == $id ? 'selected' : '' }}">{{ $name }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -1090,7 +1105,7 @@
                                             <select class="select" id="" name="reports_to">
                                                 <option selected disabled>-- select --</option>
                                                 @foreach ($user as $users )
-                                                <option value="{{ $users->name }}">{{ $users->name }}</option>
+                                                <option value="{{ $users->username }}">{{ $users->username }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -1120,7 +1135,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.personal_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -1196,7 +1211,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.family_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1264,7 +1279,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.emergency_contact.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             @if(!empty($information))
                             <div class="card">
                                 <div class="card-body">
@@ -1415,7 +1430,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.bank_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Bank Details</h3>
@@ -1461,7 +1476,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.education_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
@@ -1585,7 +1600,7 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.experience_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee_id }}">
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">

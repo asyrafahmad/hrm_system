@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('employee_code', 50)->unique();
-            $table->string('name', 255);
+            $table->string('fullname', 255);
             $table->string('email', 255)->unique();
             $table->string('join_date',100)->nullable()->default('1970-01-01');
             $table->string('avatar')->nullable();
