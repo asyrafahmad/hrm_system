@@ -28,18 +28,34 @@ class RolePermissionSeeder extends Seeder
         }
 
         // Roles
+        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
         $admin = Role::firstOrCreate(['name' => 'Admin']);
         $hr = Role::firstOrCreate(['name' => 'HR']);
         $employee = Role::firstOrCreate(['name' => 'Employee']);
 
         // Assign permissions
-        $admin->givePermissionTo(Permission::all());
+        $superAdmin->givePermissionTo(Permission::all());
+
+        $admin->givePermissionTo([
+            'employee.view',
+            'employee.create',
+            'employee.update',
+            'attendance.manage',
+            'leave.approve',
+            'payroll.manage',
+        ]);
+
         $hr->givePermissionTo([
             'employee.view',
             'employee.create',
             'employee.update',
             'attendance.manage',
             'leave.approve',
+            'payroll.manage',
+        ]);
+
+        $employee->givePermissionTo([
+            'employee.view',
         ]);
     }
 }

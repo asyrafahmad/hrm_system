@@ -110,11 +110,11 @@
                                                                     </div>
                                                                 </div>
                                                                 <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
-                                                                    @if(Auth::user()->employee->profileInformation->reports_to)
-                                                                        {{$employees}}
-                                                                    @else
-                                                                        N/A
-                                                                    @endif
+                                                                    @foreach ($employees as $employee)
+                                                                        @if(Auth::user()->employee->profileInformation->reports_to === $employee->id)
+                                                                            {{ $employee->fullname }}
+                                                                        @endif
+                                                                    @endforeach
                                                                 </a>
                                                             @else
                                                                 N/A
@@ -864,7 +864,7 @@
                                             <div class="fileupload btn">
                                                 <span class="btn-text">edit</span>
                                                 <input class="upload" type="file" id="image" name="images">
-                                                <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}">
+                                                {{-- <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}"> --}}
                                             </div>
                                         </div>
                                         <div class="row">
@@ -907,37 +907,37 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" value="{{ !empty($information->address) ? $information->address : '' }}">
+                                            <input type="text" class="form-control" id="address" name="address" value="{{ !empty(Auth::user()->employee->profileInformation->address) ? Auth::user()->employee->profileInformation->address : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>City</label>
-                                            <input type="text" class="form-control" id="city" name="city" value="{{ !empty($information->city) ? $information->city : '' }}">
+                                            <input type="text" class="form-control" id="city" name="city" value="{{ !empty(Auth::user()->employee->profileInformation->city) ? Auth::user()->employee->profileInformation->city : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>State</label>
-                                            <input type="text" class="form-control" id="state" name="state" value="{{ !empty($information->state) ? $information->state : '' }}">
+                                            <input type="text" class="form-control" id="state" name="state" value="{{ !empty(Auth::user()->employee->profileInformation->state) ? Auth::user()->employee->profileInformation->state : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country</label>
-                                            <input type="text" class="form-control" id="" name="country" value="{{ !empty($information->country) ? $information->country : '' }}">
+                                            <input type="text" class="form-control" id="" name="country" value="{{ !empty(Auth::user()->employee->profileInformation->country) ? Auth::user()->employee->profileInformation->country : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ !empty($information->postcode) ? $information->postcode : '' }}">
+                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ !empty(Auth::user()->employee->profileInformation->postcode) ? Auth::user()->employee->profileInformation->postcode : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                         <label>Phone Number</label>
-                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ !empty($information->phone_number) ? $information->phone_number : '' }}">
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ !empty(Auth::user()->employee->phone_number) ? Auth::user()->employee->phone_number : '' }}">
                                         </div>
                                     </div>
 
@@ -973,17 +973,26 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Reports To <span class="text-danger">*</span></label>
-                                            <select class="form-control" id="" name="reports_to">
-                                                <option value="{{ !empty($information->reports_to) ? $information->reports_to : '' }}" {{ ( !empty($information->reports_to) && $information->reports_to == $information->reports_to) ? 'selected' : '' }}>{{ !empty($information->reports_to) ? $information->reports_to : '' }} </option>
-                                                @foreach ($user as $users )
-                                                <option value="{{ $users->username }}">{{ $users->username }}</option>
-                                                @endforeach
-                                            </select>
+                                    @if((Auth::user()->hasRole('Super Admin','Admin','HR')))
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Reports To <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="reports_to" name="reports_to">
+                                                    <option value="" disabled {{ empty(Auth::user()->employee->profileInformation->reports_to) ? 'selected' : '' }}>
+                                                        Select Manager
+                                                    </option>
+
+                                                    @foreach ($employees as $employee)
+                                                        <option value="{{ $employee->id }}"
+                                                            {{ optional(Auth::user()->employee->profileInformation)->reports_to == $employee->id ? 'selected' : '' }}>
+                                                            {{ $employee->fullname }}, ({{ $employee->employee_code }})
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                                 <div class="submit-section">
                                     <button type="submit" class="btn btn-primary submit-btn">Submit</button>

@@ -28,7 +28,7 @@ class RegisterController extends Controller
     public function storeUser(Request $request, EmployeeIdService $employeeIdService)
     {
         $request->validate([
-            'name'      => 'required|string|max:255',
+            'username'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users,email',
             'role_name' => 'required|string',
             'password'  => 'required|string|min:8|confirmed',
@@ -43,7 +43,7 @@ class RegisterController extends Controller
 
                 // 1️⃣ Create user FIRST
                 $user = User::create([
-                    'name'              => $request->name,
+                    'username'          => $request->username,
                     'avatar'            => $request->image ?? null,
                     'email'             => $request->email,
                     'user_status_id'    => 1,
