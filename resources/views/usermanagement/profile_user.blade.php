@@ -63,15 +63,15 @@
                                                         <div class="text">N/A</div>
                                                         @endif
                                                     </li>
-                                                    {{-- <li>
-                                                        @if(!empty($information->birth_date))
+                                                    <li>
+                                                        @if(!empty(Auth::user()->employee->profileInformation->birth_date))
                                                         <div class="title">Birthday:</div>
-                                                        <div class="text">{{date('d F, Y',strtotime($information->birth_date)) }}</div>
+                                                        <div class="text">{{date('d F, Y',strtotime(Auth::user()->employee->profileInformation->birth_date)) }}</div>
                                                         @else
                                                         <div class="title">Birthday:</div>
                                                         <div class="text">N/A</div>
                                                         @endif
-                                                    </li> --}}
+                                                    </li>
                                                     <li>
                                                         @if(!empty(Auth::user()->employee->profileInformation->address ))
                                                         <div class="title">Address:</div>
@@ -155,31 +155,31 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Passport No.</div>
-                                            <div class="text">@if(!empty($information->passport_no)){{ $information->passport_no }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->passport_no)){{ Auth::user()->employee->profileInformation->passport_no }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Passport Exp Date.</div>
-                                            <div class="text">@if(!empty($information->passport_expired_date)){{ $information->passport_expired_date }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->passport_expired_date)){{ Auth::user()->employee->profileInformation->passport_expired_date }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Nationality</div>
-                                            <div class="text">@if(!empty($information->nationality))<a href="">{{ $information->nationality }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->nationality))<a href="">{{ Auth::user()->employee->profileInformation->nationality }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Religion</div>
-                                            <div class="text">@if(!empty($information->religion))<a href="">{{ $information->religion }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->religion))<a href="">{{ Auth::user()->employee->profileInformation->religion }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Marital status</div>
-                                            <div class="text">@if(!empty($information->marital_status))<a href="">{{ $information->marital_status }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->marital_status))<a href="">{{ Auth::user()->employee->profileInformation->marital_status }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Employment of spouse</div>
-                                            <div class="text">@if(!empty($information->employment_of_spouse))<a href="">{{ $information->employment_of_spouse }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->employment_of_spouse))<a href="">{{ Auth::user()->employee->profileInformation->employment_of_spouse }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">No. of children</div>
-                                            <div class="text">@if(!empty($information->no_of_children))<a href="">{{ $information->no_of_children }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->no_of_children))<a href="">{{ Auth::user()->employee->profileInformation->no_of_children }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -193,19 +193,19 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">@if(!empty($information->emergency_contact_name_1)){{ $information->emergency_contact_name_1 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_name_1)){{ Auth::user()->employee->profileInformation->emergency_contact_name_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">@if(!empty($information->emergency_contact_relationship_1)){{ $information->emergency_contact_relationship_1 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_relationship_1)){{ Auth::user()->employee->profileInformation->emergency_contact_relationship_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Mobile </div>
-                                            <div class="text">@if(!empty($information->emergency_contact_mobile_1)){{ $information->emergency_contact_mobile_1 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_mobile_1)){{ Auth::user()->employee->profileInformation->emergency_contact_mobile_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">@if(!empty($information->emergency_contact_mobile_1)){{ $information->emergency_contact_phone_1 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_phone_1)){{ Auth::user()->employee->profileInformation->emergency_contact_phone_1 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                     <hr>
@@ -213,19 +213,19 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">@if(!empty($information->emergency_contact_name_2)){{ $information->emergency_contact_name_2 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_name_2)){{ Auth::user()->employee->profileInformation->emergency_contact_name_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">@if(!empty($information->emergency_contact_relationship_2)){{ $information->emergency_contact_relationship_2 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_relationship_2)){{ Auth::user()->employee->profileInformation->emergency_contact_relationship_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Mobile </div>
-                                            <div class="text">@if(!empty($information->emergency_contact_mobile_2)){{ $information->emergency_contact_mobile_2 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_mobile_2)){{ Auth::user()->employee->profileInformation->emergency_contact_mobile_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">@if(!empty($information->emergency_contact_phone_2)){{ $information->emergency_contact_phone_2 }}@else N\A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->emergency_contact_phone_2)){{ Auth::user()->employee->profileInformation->emergency_contact_phone_2 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -240,11 +240,11 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Bank name</div>
-                                            <div class="text">@if(!empty($information->bank_name)){{$information->bank_name}}@else N/A @endif</div>
+                                            <div class="text">@if(!empty(Auth::user()->employee->profileInformation->bank_name)){{ Auth::user()->employee->profileInformation->bank_name }}@else N/A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Bank account No.</div>
-                                            <div class="text">@if(!empty($information->bank_account_no)){{$information->bank_account_no}}@else N/A @endif</div>
+                                            <div class="number">@if(!empty(Auth::user()->employee->profileInformation->bank_account_no)){{ Auth::user()->employee->profileInformation->bank_account_no }}@else N/A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -269,13 +269,13 @@
                                             <tbody>
 
                                                 <tr>
-                                                    <td>@if(!empty($information->family_member_name_1))@else @endif</td>
-                                                    <td>@if(!empty($information->family_member_name_1)){{ $information->family_member_name_1 }}@else @endif</td>
-                                                    <td>@if(!empty($information->family_member_relationship_1)){{ $information->family_member_relationship_1 }}@else @endif</td>
-                                                    <td>@if(!empty($information->family_member_DOB_1)){{ $information->family_member_DOB_1 }}@else @endif</td>
-                                                    <td>@if(!empty($information->family_member_phone_1)){{ $information->family_member_phone_1 }}@else @endif</td>
+                                                    <td>@if(!empty(Auth::user()->employee->profileInformation->family_member_name_1))@else @endif</td>
+                                                    <td>@if(!empty(Auth::user()->employee->profileInformation->family_member_name_1)){{ Auth::user()->employee->profileInformation->family_member_name_1 }}@else @endif</td>
+                                                    <td>@if(!empty(Auth::user()->employee->profileInformation->family_member_relationship_1)){{ Auth::user()->employee->profileInformation->family_member_relationship_1 }}@else @endif</td>
+                                                    <td>@if(!empty(Auth::user()->employee->profileInformation->family_member_DOB_1)){{ Auth::user()->employee->profileInformation->family_member_DOB_1 }}@else @endif</td>
+                                                    <td>@if(!empty(Auth::user()->employee->profileInformation->family_member_phone_1)){{ Auth::user()->employee->profileInformation->family_member_phone_1 }}@else @endif</td>
                                                     <td class="text-right">
-                                                        @if(!empty($information->family_member_name_1))
+                                                        @if(!empty(Auth::user()->employee->profileInformation->family_member_name_1))
                                                         <div class="dropdown dropdown-action">
                                                             <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
@@ -306,9 +306,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">@if(!empty($information->academic_institution_1)){{ $information->academic_institution_1 }}@else Academic Institution 1 @endif</a>
-                                                        <div>@if(!empty($information->academic_qualification_1)){{ $information->academic_qualification_1 }}@else Academic Qualification 1 @endif</div>
-                                                        <span class="time">@if(!empty($information->academic_starting_date_1)){{ $information->academic_starting_date_1 }}@else N/A @endif - @if(!empty($information->academic_complete_date_1)){{ $information->academic_complete_date_1 }}@else N/A @endif</span>
+                                                        <a href="#/" class="name">@if(!empty(Auth::user()->employee->profileInformation->academic_institution_1)){{ Auth::user()->employee->profileInformation->academic_institution_1 }}@else Academic Institution 1 @endif</a>
+                                                        <div>@if(!empty(Auth::user()->employee->profileInformation->academic_qualification_1)){{ Auth::user()->employee->profileInformation->academic_qualification_1 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty(Auth::user()->employee->profileInformation->academic_starting_date_1)){{ Auth::user()->employee->profileInformation->academic_starting_date_1 }}@else N/A @endif - @if(!empty(Auth::user()->employee->profileInformation->academic_complete_date_1)){{ Auth::user()->employee->profileInformation->academic_complete_date_1 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -318,9 +318,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">@if(!empty($information->academic_institution_2)){{ $information->academic_institution_2 }}@else Academic Institution 2 @endif</a>
-                                                        <div>@if(!empty($information->academic_qualification_2)){{ $information->academic_qualification_2 }}@else Academic Qualification 1 @endif</div>
-                                                        <span class="time">@if(!empty($information->academic_starting_date_2)){{ $information->academic_starting_date_2 }}@else N/A @endif - @if(!empty($information->academic_complete_date_2)){{ $information->academic_complete_date_1 }}@else N/A @endif</span>
+                                                        <a href="#/" class="name">@if(!empty(Auth::user()->employee->profileInformation->academic_institution_2)){{ Auth::user()->employee->profileInformation->academic_institution_2 }}@else Academic Institution 2 @endif</a>
+                                                        <div>@if(!empty(Auth::user()->employee->profileInformation->academic_qualification_2)){{ Auth::user()->employee->profileInformation->academic_qualification_2 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty(Auth::user()->employee->profileInformation->academic_starting_date_2)){{ Auth::user()->employee->profileInformation->academic_starting_date_2 }}@else N/A @endif - @if(!empty(Auth::user()->employee->profileInformation->academic_complete_date_2)){{ Auth::user()->employee->profileInformation->academic_complete_date_2 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -335,28 +335,28 @@
                                     <h3 class="card-title">Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                                     <div class="experience-box">
                                         <ul class="experience-list">
-                                            @if(!empty($information->exp_company_name_1))
+                                            @if(!empty(Auth::user()->employee->profileInformation->exp_company_name_1))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">{{ $information->exp_position_1 }} at {{ $information->exp_company_name_1}}</a>
-                                                        <span class="time">{{ $information->exp_period_from_1 }} - {{ $information->exp_period_to_1 }}</span>
+                                                        <a href="#/" class="name">{{ Auth::user()->employee->profileInformation->exp_position_1 }} at {{ Auth::user()->employee->profileInformation->exp_company_name_1}}</a>
+                                                        <span class="time">{{ Auth::user()->employee->profileInformation->exp_period_from_1 }} - {{ Auth::user()->employee->profileInformation->exp_period_to_1 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
                                             @endif
-                                            @if(!empty($information->exp_company_name_2))
+                                            @if(!empty(Auth::user()->employee->profileInformation->exp_company_name_2))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">{{ $information->exp_position_2 }} at {{ $information->exp_company_name_2 }}</a>
-                                                        <span class="time">{{ $information->exp_period_from_2 }} - {{ $information->exp_period_to_2 }}</span>
+                                                        <a href="#/" class="name">{{ Auth::user()->employee->profileInformation->exp_position_2 }} at {{ Auth::user()->employee->profileInformation->exp_company_name_2 }}</a>
+                                                        <span class="time">{{ Auth::user()->employee->profileInformation->exp_period_from_2 }} - {{ Auth::user()->employee->profileInformation->exp_period_to_2 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -843,293 +843,181 @@
         </div>
         <!-- /Page Content -->
 
-        @if(!empty($information))
-            <!-- Profile Modal -->
-            <div id="profile_info" class="modal custom-modal fade" role="dialog">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Profile Information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('profile.information.save') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="profile-img-wrap edit-img">
-                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
-                                            <div class="fileupload btn">
-                                                <span class="btn-text">edit</span>
-                                                <input class="upload" type="file" id="image" name="images">
-                                                {{-- <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}"> --}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Full Name</label>
-                                                    <input type="text" class="form-control" id="fullname" name="fullname" value="{{ Auth::user()->employee->fullname }}">
-                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
-                                                    <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Birth Date</label>
-                                                    <div class="cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" value="{{ $information->birth_date }}">
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Gender</label>
-                                                    <select class="form-control" id="gender" name="gender">
-                                                        <option value="" disabled {{ empty(Auth::user()->employee->gender) ? 'selected' : '' }}>
-                                                            Select Gender
-                                                        </option>
-                                                        <option value="Male" {{ Auth::user()->employee->gender === 'Male' ? 'selected' : '' }}>
-                                                            Male
-                                                        </option>
-                                                        <option value="Female" {{ Auth::user()->employee->gender === 'Female' ? 'selected' : '' }}>
-                                                            Female
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" value="{{ !empty(Auth::user()->employee->profileInformation->address) ? Auth::user()->employee->profileInformation->address : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" id="city" name="city" value="{{ !empty(Auth::user()->employee->profileInformation->city) ? Auth::user()->employee->profileInformation->city : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" class="form-control" id="state" name="state" value="{{ !empty(Auth::user()->employee->profileInformation->state) ? Auth::user()->employee->profileInformation->state : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            <input type="text" class="form-control" id="" name="country" value="{{ !empty(Auth::user()->employee->profileInformation->country) ? Auth::user()->employee->profileInformation->country : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ !empty(Auth::user()->employee->profileInformation->postcode) ? Auth::user()->employee->profileInformation->postcode : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                        <label>Phone Number</label>
-                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ !empty(Auth::user()->employee->phone_number) ? Auth::user()->employee->phone_number : '' }}">
+        <!-- Profile Modal -->
+        <div id="profile_info" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Profile Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('profile.information.save') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="profile-img-wrap edit-img">
+                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
+                                        <div class="fileupload btn">
+                                            <span class="btn-text">edit</span>
+                                            <input class="upload" type="file" id="image" name="images">
+                                            {{-- <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}"> --}}
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Department <span class="text-danger">*</span></label>
-                                            <select class="form-control" id="department" name="department">
-                                                <option value="" disabled {{ empty($employee->department_id) ? 'selected' : '' }}>
-                                                    Select Department
-                                                </option>
-
-                                                @foreach ($departments as $id => $name)
-                                                    <option value="{{ $id }}" {{ $employee->department_id == $id ? 'selected' : '' }}>
-                                                        {{ $name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control" id="fullname" name="fullname" value="{{ Auth::user()->employee->fullname }}">
+                                                <input type="hidden" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
+                                                <input type="hidden" id="email" name="email" value="{{ Auth::user()->email }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Designation <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="position">
-                                                <option value="" disabled {{ empty($employee->position_id) ? 'selected' : '' }}>
-                                                    Select Designation
-                                                </option>
 
-                                                @foreach ($positions as $id => $name)
-                                                    <option value="{{ $id }}" {{ $employee->position_id == $id ? 'selected' : '' }}>
-                                                        {{ $name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    @if((Auth::user()->hasRole('Super Admin','Admin','HR')))
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Reports To <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="reports_to" name="reports_to">
-                                                    <option value="" disabled {{ empty(Auth::user()->employee->profileInformation->reports_to) ? 'selected' : '' }}>
-                                                        Select Manager
-                                                    </option>
+                                                <label>Birth Date</label>
+                                                <div class="cal-icon">
+                                                    <input class="form-control datetimepicker" type="text" id="birth_date" name="birth_date" value="{{ !empty($information->birth_date) ? $information->birth_date : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                                    @foreach ($employees as $employee)
-                                                        <option value="{{ $employee->id }}"
-                                                            {{ optional(Auth::user()->employee->profileInformation)->reports_to == $employee->id ? 'selected' : '' }}>
-                                                            {{ $employee->fullname }}, ({{ $employee->employee_code }})
-                                                        </option>
-                                                    @endforeach
-
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select class="form-control" id="gender" name="gender">
+                                                    <option value="" disabled {{ empty(Auth::user()->employee->gender) ? 'selected' : '' }}>Select Gender</option>
+                                                    <option value="Male" {{ Auth::user()->employee->gender === 'Male' ? 'selected' : '' }}>Male</option>
+                                                    <option value="Female" {{ Auth::user()->employee->gender === 'Female' ? 'selected' : '' }}>Female</option>
                                                 </select>
                                             </div>
                                         </div>
-                                    @endif
-                                </div>
-                                <div class="submit-section">
-                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Profile Modal -->
-        @else
-            <!-- Profile Modal -->
-            <div id="profile_info" class="modal custom-modal fade" role="dialog">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Profile Information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('profile.information.save') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="profile-img-wrap edit-img">
-                                            <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
-                                            <div class="fileupload btn">
-                                                <span class="btn-text">edit</span>
-                                                <input class="upload" type="file" id="upload" name="upload">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Full Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->username }}">
-                                                    <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
-                                                    <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
-                                                </div>
-                                            </div>
+
+                                        @if(Auth::user()->hasRole(['Super Admin','Admin','HR']))
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Birth Date</label>
+                                                    <label>Date of Joining</label>
                                                     <div class="cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
+                                                        <input class="form-control datetimepicker" type="text" id="join_date" name="join_date" value="{{ !empty(Auth::user()->employee->join_date) ? Auth::user()->employee->join_date : '' }}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Gender</label>
-                                                    <select class="select form-control" id="gender" name="gender">
-                                                        <option value="{{ Auth::user()->gender == 'Male' ? 'Male' : '' }}">Male</option>
-                                                        <option value="{{ Auth::user()->gender == 'Female' ? 'Female' : '' }}">Female</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control" id="address" name="address">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" class="form-control" id="state" name="state">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            <input type="text" class="form-control" id="" name="country">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Pin Code</label>
-                                            <input type="text" class="form-control" id="postcode" name="postcode">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Phone Number</label>
-                                            <input type="text" class="form-control" id="phoneNumber" name="phone_number">
-                                        </div>
-                                    </div>
+                            </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Department <span class="text-danger">*</span></label>
-                                            <select class="select" id="department" name="department">
-                                                <option selected disabled>Select Department</option>
-                                                <option value="Web Development">Web Development</option>
-                                                <option value="IT Management">IT Management</option>
-                                                <option value="Marketing">Marketing</option>
-                                            </select>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" value="{{ !empty(Auth::user()->employee->profileInformation->address) ? Auth::user()->employee->profileInformation->address : '' }}">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Designation <span class="text-danger">*</span></label>
-                                            <select class="select" id="" name="designation">
-                                                @foreach ($positions as $id => $name)
-                                                    <option value="{{ $id }} {{ $employee->position_id == $id ? 'selected' : '' }}">{{ $name }} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" class="form-control" id="city" name="city" value="{{ !empty(Auth::user()->employee->profileInformation->city) ? Auth::user()->employee->profileInformation->city : '' }}">
                                     </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <input type="text" class="form-control" id="state" name="state" value="{{ !empty(Auth::user()->employee->profileInformation->state) ? Auth::user()->employee->profileInformation->state : '' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+
+                                        <select class="form-control" id="country" name="country">
+                                            <option value="">-- Select Country --</option>
+
+                                            @foreach (config('country') as $country)
+                                                <option value="{{ $country }}"
+                                                    {{ (!empty(Auth::user()->employee->profileInformation->country)
+                                                        && Auth::user()->employee->profileInformation->country === $country)
+                                                        ? 'selected' : '' }}>
+                                                    {{ $country }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Post Code</label>
+                                        <input type="number" class="form-control" id="postcode" name="postcode" value="{{ !empty(Auth::user()->employee->profileInformation->postcode) ? Auth::user()->employee->profileInformation->postcode : '' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{ !empty(Auth::user()->employee->phone_number) ? Auth::user()->employee->phone_number : '' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Department <span class="text-danger">*</span></label>
+                                        <select class="form-control" id="department" name="department">
+                                            <option value="" disabled {{ empty($employee->department_id) ? 'selected' : '' }}>Select Department</option>
+                                            @foreach ($departments as $id => $name)
+                                                <option value="{{ $id }}" {{ $employee->department_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Designation <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="position">
+                                            <option value="" disabled {{ empty($employee->position_id) ? 'selected' : '' }}>Select Designation</option>
+                                            @foreach ($positions as $id => $name)
+                                                <option value="{{ $id }}" {{ $employee->position_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                @if(Auth::user()->hasRole(['Super Admin','Admin','HR']))
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Reports To <span class="text-danger">*</span></label>
-                                            <select class="select" id="" name="reports_to">
-                                                <option selected disabled>-- select --</option>
-                                                @foreach ($user as $users )
-                                                <option value="{{ $users->username }}">{{ $users->username }}</option>
+                                            <select class="form-control" id="reports_to" name="reports_to">
+                                                <option value="" disabled {{ empty(Auth::user()->employee->profileInformation->reports_to) ? 'selected' : '' }}>Select Manager</option>
+                                                @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->id }}" {{ optional(Auth::user()->employee->profileInformation)->reports_to == $employee->id ? 'selected' : '' }}>
+                                                        {{ $employee->fullname }}, ({{ $employee->employee_code }})
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="submit-section">
-                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                </div>
-                            </form>
-                        </div>
+                                @endif
+                            </div>
+
+                            <div class="submit-section">
+                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
-            <!-- /Profile Modal -->
-        @endif
+        </div>
+        <!-- /Profile Modal -->
 
         <!-- Personal Info Modal -->
         <div id="personal_info_modal" class="modal custom-modal fade" role="dialog">
@@ -1144,63 +1032,104 @@
                     <div class="modal-body">
                         <form action="{{ route('profile.personal_information.save') }}" method="POST">
                             @csrf
-                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
+                            <input type="hidden" name="employee_id" value="{{ Auth::user()->employee->id }}">
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Passport No</label>
-                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ !empty($information->passport_no) ? $information->passport_no : '' }}">
+                                        <label for="passport_no">Passport No</label>
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ !empty(Auth::user()->employee->profileInformation->passport_no) ? Auth::user()->employee->profileInformation->passport_no : '' }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Passport Expiry Date</label>
+                                        <label for="passport_expired_date">Passport Expiry Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="passport_expired_date" name="passport_expired_date" value="{{ !empty($information->passport_expired_date) ? $information->passport_expired_date : '' }}">
+                                            <input type="text" class="form-control datetimepicker" id="passport_expired_date" name="passport_expired_date" value="{{ !empty($information->passport_expired_date) ? $information->passport_expired_date : '' }}">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nationality <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" id="nationality" name="nationality" value="{{ !empty($information->nationality) ? $information->nationality : '' }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Religion</label>
-                                        <input class="form-control" type="text" id="religion" name="religion" value="{{ !empty($information->religion) ? $information->religion : '' }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Marital status <span class="text-danger">*</span></label>
-                                        <select class="select form-control" id="marital_status" name="marital_status">
-                                            <option value="Single" {{ (isset($information->marital_status) && $information->marital_status == 'Single') ? 'selected' : '' }}>Single</option>
-                                            <option value="Married" {{ (isset($information->marital_status) && $information->marital_status == 'Married') ? 'selected' : '' }}>Married</option>
+                                        <label for="nationality">
+                                            Nationality <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control" id="nationality" name="nationality" required>
+                                            <option value="">-- Select Nationality --</option>
+
+                                            @foreach (config('country') as $nationality)
+                                                <option value="{{ $nationality }}"
+                                                    {{ (!empty(Auth::user()->employee->profileInformation->nationality) && Auth::user()->employee->profileInformation->nationality === $nationality) ? 'selected' : '' }}>
+                                                    {{ $nationality }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Employment of spouse</label>
-                                        <select class="select form-control" id="employment_of_spouse" name="employment_of_spouse">
-                                            <option value="Yes" {{ (isset($information->employment_of_spouse) && $information->employment_of_spouse == 'Yes') ? 'selected' : '' }}>Yes</option>
-                                            <option value="No" {{ (isset($information->employment_of_spouse) && $information->employment_of_spouse == 'No') ? 'selected' : '' }}>No</option>
+                                        <label for="religion">Religion</label>
+
+                                        <select class="form-control" id="religion" name="religion">
+                                            <option value="">-- Select Religion --</option>
+
+                                            @foreach (config('religious') as $religion)
+                                                <option value="{{ $religion }}"
+                                                    {{ (!empty(Auth::user()->employee->profileInformation->religion) && Auth::user()->employee->profileInformation->religion === $religion) ? 'selected' : '' }}>
+                                                    {{ $religion }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>No. of children </label>
-                                        <input class="form-control" type="text" id="no_of_children" name="no_of_children" value="{{ !empty($information->no_of_children) ? $information->no_of_children : '' }}">
+                                        <label for="marital_status">
+                                            Marital Status <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control" id="marital_status" name="marital_status" required>
+                                            <option value="">-- Select Marital Status --</option>
+
+                                            @foreach (config('marital_status') as $status)
+                                                <option value="{{ $status }}"
+                                                    {{ (!empty(Auth::user()->employee->profileInformation->marital_status) && Auth::user()->employee->profileInformation->marital_status === $status) ? 'selected' : '' }}>
+                                                    {{ $status }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="employment_of_spouse">Employment of Spouse</label>
+                                        <select class="form-control" id="employment_of_spouse" name="employment_of_spouse">
+                                            <option value="Yes" {{ !empty(Auth::user()->employee->profileInformation->employment_of_spouse) && Auth::user()->employee->profileInformation->employment_of_spouse == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                            <option value="No" {{ !empty(Auth::user()->employee->profileInformation->employment_of_spouse) && Auth::user()->employee->profileInformation->employment_of_spouse == 'No' ? 'selected' : '' }}>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="no_of_children">No. of Children</label>
+                                        <input type="number" min="0" class="form-control" id="no_of_children" name="no_of_children" value="{{ !empty(Auth::user()->employee->profileInformation->no_of_children) ? Auth::user()->employee->profileInformation->no_of_children : '' }}">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -1234,27 +1163,35 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ !empty($information->family_member_name_1) ? $information->family_member_name_1 : '' }}">
+                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ !empty(Auth::user()->employee->profileInformation->family_member_name_1) ? Auth::user()->employee->profileInformation->family_member_name_1 : '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_relationship_1" name="family_member_relationship_1" value="{{ !empty($information->family_member_relationship_1) ? $information->family_member_relationship_1 : '' }}">
+                                                    <select class="form-control" id="family_member_relationship_1" name="family_member_relationship_1">
+                                                        <option value="" disabled selected>Select Relationship</option>
+                                                        @foreach(config('relationship') as $relationship)
+                                                            <option value="{{ $relationship }}" {{ Auth::user()->employee->profileInformation->family_member_relationship_1 == $relationship ? 'selected' : '' }}>{{ $relationship }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
+
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Date of birth <span class="text-danger">*</span></label>
                                                     <div class="cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ !empty($information->family_member_DOB_1) ? $information->family_member_DOB_1 : '' }}">
+                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ !empty(Auth::user()->employee->profileInformation->family_member_DOB_1) ? Auth::user()->employee->profileInformation->family_member_DOB_1 : '' }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="family_member_phone_1" name="family_member_phone_1"  value="{{ !empty($information->family_member_phone_1) ? $information->family_member_phone_1 : '' }}">
+                                                    <input class="form-control" type="number" id="family_member_phone_1" name="family_member_phone_1"  value="{{ !empty(Auth::user()->employee->profileInformation->family_member_phone_1) ? Auth::user()->employee->profileInformation->family_member_phone_1 : '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -1289,132 +1226,94 @@
                         <form action="{{ route('profile.emergency_contact.save') }}" method="POST">
                             @csrf
                             <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ Auth::user()->employee->id }}">
-                            @if(!empty($information))
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ !empty($information->emergency_contact_name_1) ? $information->emergency_contact_name_1 : '' }}">
+                            @if(!empty(Auth::user()->employee->profileInformation))
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Primary Contact</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_name_1) ? Auth::user()->employee->profileInformation->emergency_contact_name_1 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="{{ !empty($information->emergency_contact_relationship_1) ? $information->emergency_contact_relationship_1 : '' }}">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Relationship <span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="relationship" name="relationship">
+                                                        <option value="" disabled {{ empty(optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_1) ? 'selected' : '' }}>
+                                                            Select Relationship
+                                                        </option>
+
+                                                        @foreach (config('relationship') as $relationship)
+                                                            <option value="{{ $relationship }}"
+                                                                {{ optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_1 == $relationship ? 'selected' : '' }}>
+                                                                {{ $relationship }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ !empty($information->emergency_contact_mobile_1) ? $information->emergency_contact_mobile_1 : '' }}">
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Mobile <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="number" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_mobile_1) ? Auth::user()->employee->profileInformation->emergency_contact_mobile_1 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ !empty($information->emergency_contact_phone_1) ? $information->emergency_contact_phone_1 : '' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Secondary Contact</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ !empty($information->emergency_contact_name_2) ? $information->emergency_contact_name_2 : '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="{{ !empty($information->emergency_contact_relationship_2) ? $information->emergency_contact_relationship_2 : '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ !empty($information->emergency_contact_mobile_2) ? $information->emergency_contact_mobile_2 : '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ !empty($information->emergency_contact_phone_2) ? $information->emergency_contact_phone_2 : '' }}">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" type="number" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_phone_1) ? Auth::user()->employee->profileInformation->emergency_contact_phone_1 : '' }}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            @else
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value=" ">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Secondary Contact</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_name_2) ? Auth::user()->employee->profileInformation->emergency_contact_name_2 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_1" name="emergency_contact_relationship_1" value="">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Relationship <span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2">
+                                                        <option value="" disabled {{ empty(optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_2) ? 'selected' : '' }}>
+                                                            Select Relationship
+                                                        </option>
+
+                                                        @foreach (config('relationship') as $relationship)
+                                                            <option value="{{ $relationship }}"
+                                                                {{ optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_2 == $relationship ? 'selected' : '' }}>
+                                                                {{ $relationship }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Mobile <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="number" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_mobile_2) ? Auth::user()->employee->profileInformation->emergency_contact_mobile_2 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Secondary Contact</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mobile <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <input class="form-control" type="text" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" type="number" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ !empty(Auth::user()->employee->profileInformation->emergency_contact_phone_2) ? Auth::user()->employee->profileInformation->emergency_contact_phone_2 : '' }}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endif
                             <div class="submit-section">
                                 <button class="btn btn-primary submit-btn">Submit</button>
@@ -1447,13 +1346,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Bank Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="bank_name" name="bank_name" value="@if(!empty($information->bank_name)){{ $information->bank_name }}@endif">
+                                                <input type="text" class="form-control" id="bank_name" name="bank_name" value="@if(!empty(Auth::user()->employee->profileInformation->bank_name)){{ Auth::user()->employee->profileInformation->bank_name }}@endif">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Bank Account No <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="bank_account_no" name="bank_account_no" value="@if(!empty($information->bank_account_no)){{ $information->bank_account_no }}@endif">
+                                                <input class="form-control" type="text" id="bank_account_no" name="bank_account_no" value="@if(!empty(Auth::user()->employee->profileInformation->bank_account_no)){{ Auth::user()->employee->profileInformation->bank_account_no }}@endif">
                                             </div>
                                         </div>
                                     </div>
@@ -1493,32 +1392,32 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_institution_1" name="academic_institution_1" value="@if(!empty($information->academic_institution_1)){{ $information->academic_institution_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_institution_1" name="academic_institution_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_institution_1)){{ Auth::user()->employee->profileInformation->academic_institution_1 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_qualification_1" name="academic_qualification_1" value="@if(!empty($information->academic_qualification_1)){{ $information->academic_qualification_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_qualification_1" name="academic_qualification_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_qualification_1)){{ Auth::user()->employee->profileInformation->academic_qualification_1 }}@endif">
                                                     <label class="focus-label">Academic Qualification</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_type_qualification_1" name="academic_type_qualification_1" value="@if(!empty($information->academic_type_qualification_1)){{ $information->academic_type_qualification_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_1" name="academic_type_qualification_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_type_qualification_1)){{ Auth::user()->employee->profileInformation->academic_type_qualification_1 }}@endif">
                                                     <label class="focus-label">Type of Qualification</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_grade_1" name="academic_grade_1" value="@if(!empty($information->academic_grade_1)){{ $information->academic_grade_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_grade_1" name="academic_grade_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_grade_1)){{ Auth::user()->employee->profileInformation->academic_grade_1 }}@endif">
                                                     <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_1" name="academic_starting_date_1" value="@if(!empty($information->academic_starting_date_1)){{ $information->academic_starting_date_1 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_1" name="academic_starting_date_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_starting_date_1)){{ Auth::user()->employee->profileInformation->academic_starting_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1526,7 +1425,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_1" name="academic_complete_date_1" value="@if(!empty($information->academic_complete_date_1)){{ $information->academic_complete_date_1 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_1" name="academic_complete_date_1" value="@if(!empty(Auth::user()->employee->profileInformation->academic_complete_date_1)){{ Auth::user()->employee->profileInformation->academic_complete_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
                                                 </div>
@@ -1541,32 +1440,32 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_institution_2" name="academic_institution_2" value="@if(!empty($information->academic_institution_2)){{ $information->academic_institution_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_institution_2" name="academic_institution_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_institution_2)){{ Auth::user()->employee->profileInformation->academic_institution_2 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_qualification_2" name="academic_qualification_2" value="@if(!empty($information->academic_qualification_2)){{ $information->academic_qualification_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_qualification_2" name="academic_qualification_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_qualification_2)){{ Auth::user()->employee->profileInformation->academic_qualification_2 }}@endif">
                                                     <label class="focus-label">Academic Qualification</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_type_qualification_2" name="academic_type_qualification_2" value="@if(!empty($information->academic_type_qualification_2)){{ $information->academic_type_qualification_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_2" name="academic_type_qualification_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_type_qualification_2)){{ Auth::user()->employee->profileInformation->academic_type_qualification_2 }}@endif">
                                                     <label class="focus-label">Type of Qualification</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" class="form-control floating" id="academic_grade_2" name="academic_grade_2" value="@if(!empty($information->academic_grade_2)){{ $information->academic_grade_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="academic_grade_2" name="academic_grade_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_grade_2)){{ Auth::user()->employee->profileInformation->academic_grade_2 }}@endif">
                                                     <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_21" name="academic_starting_date_2" value="@if(!empty($information->academic_starting_date_2)){{ $information->academic_starting_date_2 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_21" name="academic_starting_date_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_starting_date_2)){{ Auth::user()->employee->profileInformation->academic_starting_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1574,7 +1473,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_2" name="academic_complete_date_2" value="@if(!empty($information->academic_complete_date_2)){{ $information->academic_complete_date_2 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_2" name="academic_complete_date_2" value="@if(!empty(Auth::user()->employee->profileInformation->academic_complete_date_2)){{ Auth::user()->employee->profileInformation->academic_complete_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
                                                 </div>
@@ -1617,26 +1516,26 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty($information->exp_company_name_1 )){{ $information->exp_company_name_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty(Auth::user()->employee->profileInformation->exp_company_name_1 )){{ Auth::user()->employee->profileInformation->exp_company_name_1 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="@if(!empty($information->exp_location_1 )){{ $information->exp_location_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="@if(!empty(Auth::user()->employee->profileInformation->exp_location_1 )){{ Auth::user()->employee->profileInformation->exp_location_1 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="@if(!empty($information->exp_position_1 )){{ $information->exp_position_1 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="@if(!empty(Auth::user()->employee->profileInformation->exp_position_1 )){{ Auth::user()->employee->profileInformation->exp_position_1 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="@if(!empty($information->exp_period_from_1 )){{ $information->exp_period_from_1 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="@if(!empty(Auth::user()->employee->profileInformation->exp_period_from_1 )){{ Auth::user()->employee->profileInformation->exp_period_from_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1644,7 +1543,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="@if(!empty($information->exp_period_to_1 )){{ $information->exp_period_to_1 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="@if(!empty(Auth::user()->employee->profileInformation->exp_period_to_1 )){{ Auth::user()->employee->profileInformation->exp_period_to_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
@@ -1659,26 +1558,26 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_company_name_2" name="exp_company_name_2" value="@if(!empty($information->exp_company_name_2 )){{ $information->exp_company_name_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_2" name="exp_company_name_2" value="@if(!empty(Auth::user()->employee->profileInformation->exp_company_name_2 )){{ Auth::user()->employee->profileInformation->exp_company_name_2 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="@if(!empty($information->exp_period_from_2 )){{ $information->exp_period_from_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="@if(!empty(Auth::user()->employee->profileInformation->exp_location_2 )){{ Auth::user()->employee->profileInformation->exp_location_2 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="@if(!empty($information->exp_position_2 )){{ $information->exp_position_2 }}@endif">
+                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="@if(!empty(Auth::user()->employee->profileInformation->exp_position_2 )){{ Auth::user()->employee->profileInformation->exp_position_2 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="@if(!empty($information->exp_period_from_2 )){{ $information->exp_period_from_2 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="@if(!empty(Auth::user()->employee->profileInformation->exp_period_from_2 )){{ Auth::user()->employee->profileInformation->exp_period_from_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1686,7 +1585,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="@if(!empty($information->exp_period_to_2 )){{ $information->exp_period_to_2 }}@endif">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="@if(!empty(Auth::user()->employee->profileInformation->exp_period_to_2 )){{ Auth::user()->employee->profileInformation->exp_period_to_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>

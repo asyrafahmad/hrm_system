@@ -28,15 +28,15 @@ class RegisterController extends Controller
     public function storeUser(Request $request, EmployeeIdService $employeeIdService)
     {
         $request->validate([
-            'username'      => 'required|string|max:255',
-            'email'     => 'required|string|email|max:255|unique:users,email',
-            'role_name' => 'required|string',
-            'password'  => 'required|string|min:8|confirmed',
+            'username'              => 'required|string|max:255',
+            'email'                 => 'required|string|email|max:255|unique:users,email',
+            'role'                  => 'required|integer|exists:roles,id',
+            'password'              => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
         ]);
 
-        // $dt       = Carbon::now();
-        // $todayDate = $dt->toDayDateTimeString();
+        $dt       = Carbon::now();
+        $todayDate = $dt->toDayDateTimeString();
 
         try {
             DB::transaction(function () use ($request, $employeeIdService) {
@@ -51,7 +51,7 @@ class RegisterController extends Controller
                 ]);
 
                 // 2️⃣ Assign role
-                $user->assignRole($request->role_name);
+                $user->assignRole($request->role);
 
                 // 3️⃣ Generate employee code
                 $employeeCode = $employeeIdService->generate();
@@ -60,6 +60,7 @@ class RegisterController extends Controller
                 $employee = Employee::create([
                     'user_id'       => $user->id,
                     'employee_code' => $employeeCode,
+                    'join_date'     => $todayDate,
                     'name'          => $request->name,
                     'email'         => $request->email,
                 ]);

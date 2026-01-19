@@ -194,12 +194,14 @@ class UserManagementController extends Controller
             $employee->fullname         = $request->fullname;
             $employee->email            = $request->email;
             $employee->gender           = $request->gender;
+            $employee->join_date        = $request->join_date;
             $employee->phone_number     = $request->phone_number;
             $employee->department_id    = $request->department;
             $employee->position_id      = $request->position;
             $employee->save();
 
             $information = ProfileInformation::updateOrCreate(['employee_id' => $request->employee_id]);
+            $information->birth_date    = $request->birth_date;
             $information->address       = $request->address;
             $information->city          = $request->city;
             $information->state         = $request->state;
@@ -207,7 +209,6 @@ class UserManagementController extends Controller
             $information->postcode      = $request->postcode;
             $information->reports_to    = $request->reports_to;
             $information->save();
-
 
             DB::commit();
             Toastr::success('Profile Information successfully :)','Success');

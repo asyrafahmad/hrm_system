@@ -35,13 +35,13 @@
                             <input type="hidden" class="image" name="image" value="photo_defaults.jpg">
                             <div class="form-group">
                                 <label class="col-form-label">Role Name</label>
-                                <select class="select @error('role_name') is-invalid @enderror" name="role_name" id="role_name">
+                                <select class="select @error('role') is-invalid @enderror" name="role" id="role">
                                     <option selected disabled>-- Select Role Name --</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('role_name')
+                                @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
