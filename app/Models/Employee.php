@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\ProfileInformation;
 use App\Models\Department;
-use App\Models\Positions;
+use App\Models\Position;
 
 class Employee extends Model
 {
@@ -44,11 +44,11 @@ class Employee extends Model
 
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
-    public function positions()
+    public function position()
     {
-        return $this->belongsTo(Positions::class);
+        return $this->belongsTo(Position::class, 'position_id');
     }
 }

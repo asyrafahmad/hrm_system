@@ -7,6 +7,8 @@ use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Employee;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\PermissionList;
 use App\Models\module_permission;
 
 use App\Services\HR\EmployeeIdService;
@@ -16,16 +18,22 @@ class EmployeeController extends Controller
     // all employee card view
     public function cardAllEmployee(Request $request)
     {
-        $users = DB::table('users')
-                    ->join('employees', 'users.employee_id', '=', 'employees.id')
-                    ->join('roles', 'users.role_id', '=', 'roles.id')
-                    ->select('users.*', 'employees.gender', 'employees.company', 'employees.department_id', 'employees.position_id', 'employees.phone_number', 'employees.join_date','roles.name as role_name')
-                    ->get();
-        $userList = DB::table('users')->get();
-        $departmentList = DB::table('departments')->get();
-        $permission_lists = DB::table('permission_lists')->get();
+        // $users = DB::table('users')
+        //             ->join('employees', 'users.id', '=', 'employees.user_id')
+        //             ->select('users.*', 'employees.gender', 'employees.company', 'employees.department_id', 'employees.position_id', 'employees.phone_number', 'employees.join_date')
+        //             ->get();
+        // $userList = DB::table('users')->get();
+        // $departmentList = DB::table('departments')->get();
+        // $permission_lists = DB::table('permission_lists')->get();
 
-        return view('form.allemployeecard', compact('users','userList','departmentList','permission_lists'));
+        // return view('form.allemployeecard', compact('users','userList','departmentList','permission_lists'));
+
+
+        $employees = Employee::with('department', 'position')->get();
+        $all_department = Department::get();
+        $permission_lists = PermissionList::get();
+
+        return view('form.allemployeecard', compact('employees', 'all_department', 'permission_lists'));
     }
 
     // all employee list

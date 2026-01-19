@@ -12,11 +12,10 @@ class SettingController extends Controller
     public function companySettings(Request $request)
     {
 
-
         return view('settings.companysettings');
     }
-    
-    // Roles & Permissions 
+
+    // Roles & Permissions
     public function rolesPermissions()
     {
         $rolesPermissions = RolesPermissions::All();
@@ -29,7 +28,7 @@ class SettingController extends Controller
         $request->validate([
             'roleName' => 'required|string|max:255',
         ]);
-        
+
         DB::beginTransaction();
         try{
 
@@ -65,7 +64,7 @@ class SettingController extends Controller
         try{
             $id        = $request->id;
             $roleName  = $request->roleName;
-            
+
             $update = [
                 'id'               => $id,
                 'permissions_name' => $roleName,
@@ -89,7 +88,7 @@ class SettingController extends Controller
             RolesPermissions::destroy($request->id);
             Toastr::success('Role Name deleted successfully :)','Success');
             return redirect()->back();
-        
+
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('Role Name delete fail :)','Error');

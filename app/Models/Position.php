@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Employee;
 
-class Positions extends Model
+class Position extends Model
 {
     use HasFactory;
 
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Employee::class, 'position_id');
     }
 }

@@ -56,7 +56,7 @@
             </form>
             <!-- Search Filter -->
             <div class="row staff-grid-row">
-                @foreach ($users as $lists )
+                @foreach ($employees as $employee)
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
@@ -93,17 +93,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $lists )
+                                @foreach ($employees as $employee )
                                 <tr>
-                                    <td class="id">{{ $lists->employee_id }}</td>
-                                    <td class="name">{{ $lists->name }}</td>
-                                    <td class="department">{{ $lists->department }}</td>
-                                    <td class="position">{{ $lists->position }}</td>
-                                    <td class="email">{{ $lists->email }}</td>
-                                    <td class="phone_number">{{ $lists->phone_number }}</td>
-                                    <td class="image" style="display:none;">{{ $lists->avatar }}</td>
-                                    {{-- <td class="role_name" style="display:none;">{{ $lists->role_name }}</td> --}}
-                                    <td class="status" style="display:none;">{{ $lists->status }}</td>
+                                    <td class="id">{{ $employee->employee_code }}</td>
+                                    <td class="name">{{ $employee->fullname }}</td>
+                                    <td class="department">{{ optional($employee->department)->name }}</td>
+                                    <td class="position">{{ optional($employee->position)->name }}</td>
+                                    <td class="email">{{ $employee->email }}</td>
+                                    <td class="phone_number">{{ $employee->phone_number }}</td>
+                                    <td class="image" style="display:none;">{{ $employee->avatar }}</td>
+                                    {{-- <td class="role_name" style="display:none;">{{ $employee->role_name }}</td> --}}
+                                    <td class="status" style="display:none;">{{ $employee->status }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -173,8 +173,8 @@
                                         <label class="col-form-label">Department <span class="text-danger">*</span></label>
                                         <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="department" name="department">
                                             <option value="">-- Select --</option>
-                                            @foreach ($departmentList as $key=>$dept )
-                                                <option value="{{ $dept->department }}">{{ $dept->department }}</option>
+                                            @foreach ($all_department as $key => $dept )
+                                                <option value="{{ $dept->name }}">{{ $dept->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

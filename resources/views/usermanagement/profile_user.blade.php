@@ -940,7 +940,7 @@
                                         <select class="form-control" id="country" name="country">
                                             <option value="">-- Select Country --</option>
 
-                                            @foreach (config('country') as $country)
+                                            @foreach (config('nationalities') as $country)
                                                 <option value="{{ $country }}"
                                                     {{ (!empty(Auth::user()->employee->profileInformation->country)
                                                         && Auth::user()->employee->profileInformation->country === $country)
@@ -1060,7 +1060,7 @@
                                         <select class="form-control" id="nationality" name="nationality" required>
                                             <option value="">-- Select Nationality --</option>
 
-                                            @foreach (config('country') as $nationality)
+                                            @foreach (config('nationalities') as $nationality)
                                                 <option value="{{ $nationality }}"
                                                     {{ (!empty(Auth::user()->employee->profileInformation->nationality) && Auth::user()->employee->profileInformation->nationality === $nationality) ? 'selected' : '' }}>
                                                     {{ $nationality }}
@@ -1171,7 +1171,7 @@
                                                     <label>Relationship <span class="text-danger">*</span></label>
                                                     <select class="form-control" id="family_member_relationship_1" name="family_member_relationship_1">
                                                         <option value="" disabled selected>Select Relationship</option>
-                                                        @foreach(config('relationship') as $relationship)
+                                                        @foreach(config('family_members') as $relationship)
                                                             <option value="{{ $relationship }}" {{ Auth::user()->employee->profileInformation->family_member_relationship_1 == $relationship ? 'selected' : '' }}>{{ $relationship }}</option>
                                                         @endforeach
                                                     </select>
@@ -1246,7 +1246,7 @@
                                                             Select Relationship
                                                         </option>
 
-                                                        @foreach (config('relationship') as $relationship)
+                                                        @foreach (config('family_members') as $relationship)
                                                             <option value="{{ $relationship }}"
                                                                 {{ optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_1 == $relationship ? 'selected' : '' }}>
                                                                 {{ $relationship }}
@@ -1290,7 +1290,7 @@
                                                             Select Relationship
                                                         </option>
 
-                                                        @foreach (config('relationship') as $relationship)
+                                                        @foreach (config('family_members') as $relationship)
                                                             <option value="{{ $relationship }}"
                                                                 {{ optional(Auth::user()->employee->profileInformation)->emergency_contact_relationship_2 == $relationship ? 'selected' : '' }}>
                                                                 {{ $relationship }}

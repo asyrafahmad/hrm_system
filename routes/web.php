@@ -43,11 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::redirect('home', '/dashboard');
 
     // ----------------------------- settings ----------------------------------------//
-    Route::post('company/settings/page', [SettingController::class, 'companySettings'])->name('company/settings/page');
-    Route::get('roles/permissions/page', [SettingController::class, 'rolesPermissions'])->name('roles/permissions/page');
-    Route::post('roles/permissions/save', [SettingController::class, 'addRecord'])->name('roles/permissions/save');
-    Route::post('roles/permissions/update', [SettingController::class, 'editRolesPermissions'])->name('roles/permissions/update');
-    Route::post('roles/permissions/delete', [SettingController::class, 'deleteRolesPermissions'])->name('roles/permissions/delete');
+    Route::get('company/settings/page', [SettingController::class, 'companySettings'])->name('company.settings.page');
+    Route::get('roles/permissions/page', [SettingController::class, 'rolesPermissions'])->name('roles.permissions.page');
+    Route::post('roles/permissions/save', [SettingController::class, 'addRecord'])->name('roles.permissions.save');
+    Route::post('roles/permissions/update', [SettingController::class, 'editRolesPermissions'])->name('roles.permissions.update');
+    Route::post('roles/permissions/delete', [SettingController::class, 'deleteRolesPermissions'])->name('roles.permissions.delete');
 
     // ----------------------------- form employee ------------------------------//
     Route::get('all/employee/card', [EmployeeController::class, 'cardAllEmployee'])->name('all.employee.card');
@@ -90,6 +90,11 @@ Route::middleware('auth')->group(function () {
     Route::post('profile/education_information/save', [UserManagementController::class, 'profileEducationInformation'])->name('profile.education_information.save');
     Route::post('profile/experience_information/save', [UserManagementController::class, 'profileExperienceInformation'])->name('profile.experience_information.save');
 
+    // ----------------------------- form change password ------------------------------//
+    Route::get('change/password', [UserManagementController::class, 'changePasswordView'])->name('change.password');
+    Route::post('change/password/db', [UserManagementController::class, 'changePasswordDB'])->name('change/password/db');
+
+
 });
 
 // -----------------------------login----------------------------------------//
@@ -126,9 +131,6 @@ Route::get('activity/login/logout', [App\Http\Controllers\UserManagementControll
 // ----------------------------- search user management ------------------------------//
 Route::post('search/user/list', [App\Http\Controllers\UserManagementController::class, 'searchUser'])->name('search/user/list');
 
-// ----------------------------- form change password ------------------------------//
-Route::get('change/password', [App\Http\Controllers\UserManagementController::class, 'changePasswordView'])->middleware('auth')->name('change/password');
-Route::post('change/password/db', [App\Http\Controllers\UserManagementController::class, 'changePasswordDB'])->name('change/password/db');
 
 // ----------------------------- job ------------------------------//
 Route::get('form/job/list', [App\Http\Controllers\JobController::class, 'jobList'])->name('form/job/list');
