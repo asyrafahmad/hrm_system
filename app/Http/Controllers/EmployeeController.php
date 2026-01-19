@@ -39,14 +39,11 @@ class EmployeeController extends Controller
     // all employee list
     public function listAllEmployee()
     {
-        $users = DB::table('users')
-                    ->join('employees', 'users.employee_id', '=', 'employees.id')
-                    ->join('roles', 'users.role_id', '=', 'roles.id')
-                    ->select('users.*', 'employees.gender', 'employees.company', 'employees.department_id', 'employees.position_id', 'employees.phone_number', 'employees.join_date','roles.name as role_name')
-                    ->get();
+        $employees = Employee::with('department', 'position')->get();
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.employeelist',compact('users','userList','permission_lists'));
+
+        return view('form.employeelist',compact('employees','userList','permission_lists'));
     }
 
     // save data employee

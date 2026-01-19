@@ -69,30 +69,30 @@
                                     <th>Email</th>
                                     <th>Mobile</th>
                                     <th class="text-nowrap">Join Date</th>
-                                    <th>Role</th>
+                                    <th>Department</th>
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $items )
+                                @foreach ($employees as $employee )
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$items->employee_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
-                                            <a href="{{ url('employee/profile/'.$items->employee_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
+                                            <a href="{{ url('employee/profile/'.$employee->id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $employee->avatar) }}"></a>
+                                            <a href="{{ url('employee/profile/'.$employee->id) }}">{{ $employee->fullname }}<span>{{ optional($employee->position)->name }}</span></a>
                                         </h2>
                                     </td>
-                                    <td>{{ $items->employee_id }}</td>
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->phone_number }}</td>
-                                    <td>{{ $items->join_date }}</td>
-                                    <td>{{ $items->role_name }}</td>
+                                    <td>{{ $employee->employee_code }}</td>
+                                    <td>{{ $employee->email }}</td>
+                                    <td>{{ $employee->phone_number }}</td>
+                                    <td>{{ $employee->join_date }}</td>
+                                    <td>{{ optional($employee->department)->name }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$items->employee_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$items->employee_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$employee->employee_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$employee->employee_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -126,7 +126,7 @@
                                         <select class="select" id="name" name="name">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->employee_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
+                                                <option value="{{ $user->username }}" data-employee_id={{ $user->id }} data-email={{ $user->email }}>{{ $user->username }}</option>
                                             @endforeach
                                         </select>
                                     </div>
