@@ -19,6 +19,8 @@ class Employee extends Model
         'email',
         'birth_date',
         'gender',
+        'join_date',
+        'avatar',
         'employee_code',
         'company',
         'department_id',

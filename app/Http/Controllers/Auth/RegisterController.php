@@ -35,31 +35,37 @@ class RegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
 
-        $dt       = Carbon::now();
-        $todayDate = $dt->toDayDateTimeString();
-
         try {
             DB::transaction(function () use ($request, $employeeIdService) {
+
+                $dt       = Carbon::now();
+                $todayDate = $dt->format('Y-m-d');
 
                 // 1️⃣ Create user FIRST
                 $user = User::create([
                     'username'          => $request->username,
-                    'avatar'            => $request->image ?? null,
                     'email'             => $request->email,
                     'user_status_id'    => 1,
                     'password'          => Hash::make($request->password),
                 ]);
-
                 // 2️⃣ Assign role
                 $user->assignRole($request->role);
 
+                if($request->role === '1' || $request->role === '2'){ // Super Admin & Admin roles
+                    $default_avatar = 'Admin.jpg';
+                }else{// Employee role
+                    $default_avatar = 'photo_defaults.jpg';
+                }
+
                 // 3️⃣ Generate employee code
                 $employeeCode = $employeeIdService->generate();
+
 
                 // 4️⃣ Create employee
                 $employee = Employee::create([
                     'user_id'       => $user->id,
                     'employee_code' => $employeeCode,
+                    'avatar'        => $default_avatar,
                     'join_date'     => $todayDate,
                     'name'          => $request->name,
                     'email'         => $request->email,

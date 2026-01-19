@@ -57,7 +57,7 @@
                 <span class="user-img">
                     @auth
                         <img
-                            src="{{ asset('assets/images/' . auth()->user()->avatar) }}"
+                            src="{{ asset('assets/images/Admin.jpg') }}"
                             alt="{{ auth()->user()->name }}"
                         >
                         <span class="status online"></span>

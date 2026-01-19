@@ -132,7 +132,7 @@ class UserManagementController extends Controller
         $employee = DB::table('employees')->where('user_id', $user_id)->first();
         $employees = Employee::select('id', 'fullname', 'employee_code')->get();
         $information = DB::table('profile_information')->where('employee_id', $employee->id)->first();
-        $position = DB::table('position')->pluck('name','id');
+        $positions = DB::table('positions')->pluck('name','id');
         $departments = DB::table('departments')->pluck('name','id');
 
         $employee_id = $employee->id;
@@ -140,16 +140,16 @@ class UserManagementController extends Controller
         if(empty($employee))
         {
             $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
-            return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'position', 'departments'));
+            return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'positions', 'departments'));
 
         }else{
             if($employee_id == $profile)
             {
                 $information = DB::table('profile_information')->where('employee_id',$employee_id)->first();
-                return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'position', 'departments'));
+                return view('usermanagement.profile_user',compact('information', 'employee', 'employees','user', 'positions', 'departments'));
             }else{
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information', 'employee','employees','user', 'position', 'departments'));
+                return view('usermanagement.profile_user',compact('information', 'employee','employees','user', 'positions', 'departments'));
             }
         }
 
