@@ -28,7 +28,7 @@
 			<!-- /Page Header -->
 
             <!-- Search Filter -->
-            <form action="{{ route('all.employee.list.search') }}" method="POST">
+            {{-- <form action="{{ route('all.employee.list.search') }}" method="POST">
                 @csrf
                 <div class="row filter-row">
                     <div class="col-sm-6 col-md-3">
@@ -53,7 +53,7 @@
                         <button type="sumit" class="btn btn-success btn-block"> Search </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
             <!-- Search Filter -->
             {{-- message --}}
             {!! Toastr::message() !!}
@@ -78,8 +78,8 @@
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$employee->id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $employee->avatar) }}"></a>
-                                            <a href="{{ url('employee/profile/'.$employee->id) }}">{{ $employee->fullname }}<span>{{ optional($employee->position)->name }}</span></a>
+                                            <a href="{{ route('profile.employee', $employee->id) }}" class="avatar"><img alt="" src="{{ asset('assets/images/' . $employee->avatar) }}"></a>
+                                            <a href="{{ route('profile.employee', $employee->id) }}">{{ $employee->fullname }}<span>{{ optional($employee->position)->name }}</span></a>
                                         </h2>
                                     </td>
                                     <td>{{ $employee->employee_code }}</td>
@@ -91,8 +91,8 @@
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$employee->employee_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$employee->employee_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$employee->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$employee->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>

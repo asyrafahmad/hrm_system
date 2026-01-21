@@ -101,16 +101,21 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
+
     // view edit record
     public function viewRecord($employee_id)
     {
-        $permission = DB::table('employees')
-            ->join('module_permissions', 'employees.employee_id', '=', 'module_permissions.employee_id')
-            ->select('employees.*', 'module_permissions.*')
-            ->where('employees.employee_id','=',$employee_id)
-            ->get();
-        $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
-        return view('form.edit.editemployee',compact('employees','permission'));
+        // $permission = DB::table('employees')
+        //     ->join('module_permissions', 'employees.employee_id', '=', 'module_permissions.employee_id')
+        //     ->select('employees.*', 'module_permissions.*')
+        //     ->where('employees.employee_id','=',$employee_id)
+        //     ->get();
+        // $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
+        // return view('form.edit.editemployee',compact('employees','permission'));
+
+        $employee = Employee::where('id',$employee_id)->first();
+
+        return view('form.edit.editemployee',compact('employee'));
     }
     // update record employee
     public function updateRecord( Request $request)
@@ -358,13 +363,20 @@ class EmployeeController extends Controller
     // employee profile
     public function profileEmployee($employee_id)
     {
-        $users = DB::table('profile_information')
-                ->join('users', 'users.employee_id', '=', 'profile_information.employee_id')
-                ->select('profile_information.*', 'users.*')
-                ->where('profile_information.employee_id','=',$employee_id)
-                ->first();
+        // $users = DB::table('profile_information')
+        //         ->join('users', 'users.employee_id', '=', 'profile_information.employee_id')
+        //         ->select('profile_information.*', 'users.*')
+        //         ->where('profile_information.employee_id','=',$employee_id)
+        //         ->first();
 
-        $user = DB::table('users')->where('employee_id',$employee_id)->get();
-        return view('form.employeeprofile',compact('user','users'));
+        $employee = Employee::where('id',$employee_id)->first();
+        $employees = Employee::get();
+        // $user = DB::table('users')->where('employee_id',$employee_id)->first();
+
+        // $information = DB::table('profile_information')->where('employee_id', $employee->id)->first();
+        $positions = DB::table('positions')->pluck('name','id');
+        $departments = DB::table('departments')->pluck('name','id');
+
+        return view('form.employeeprofile', compact('employee','employees', 'departments','positions'));
     }
 }

@@ -26,18 +26,17 @@
                             <div class="profile-view">
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
-                                        <a href="#"><img alt="" src="{{ URL::to('/assets/images/'. $user[0]->avatar) }}" alt="{{ $user[0]->name }}"></a>
+                                        <a href="#"><img alt="" src="{{ asset('assets/images/' . $employee->avatar) }}" alt="{{ $employee->name }}"></a>
                                     </div>
                                 </div>
                                 <div class="profile-basic">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">{{ $user[0]->name }}</h3>
-                                                <h6 class="text-muted"> {{ $user[0]->department }}</h6>
-                                                <small class="text-muted">{{ $user[0]->position }}</small>
-                                                <div class="staff-id">Employee ID : {{ $user[0]->employee_id }}</div>
-                                                <div class="small doj text-muted">Date of Join : {{ $user[0]->join_date }}</div>
+                                                <h4 class="title">{{ $employee->fullname }} ({{ $employee->employee_code }})</h4>
+                                                <h6 class="text-muted">Position: {{ optional($employee->position)->name }}</h6>
+                                                <h6 class="text-muted">Department: {{ optional($employee->department)->name }}</h6>
+                                                <h6 class="text-muted">Date of Join : {{ $employee->join_date }}</h6>
                                                 <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
                                             </div>
                                         </div>
@@ -45,41 +44,84 @@
                                             <ul class="personal-info">
                                                 <li>
                                                     <div class="title">Phone:</div>
-                                                    <div class="text"><a href="">{{ Auth::user()->phone_number }}</a></div>
+                                                    <div class="text">
+                                                        @if(!empty($employee->phone_number))
+                                                        <a href="">{{ $employee->phone_number }}</a>
+                                                        @else
+                                                        N/A
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
+                                                    @if(!empty($employee->email))
                                                     <div class="title">Email:</div>
-                                                    <div class="text"><a href="">{{ Auth::user()->email }}</a></div>
+                                                    <div class="text"><a href="">{{ $employee->email }}</a></div>
+                                                    @else
+                                                    <div class="title">Email:</div>
+                                                    <div class="text">N/A</div>
+                                                    @endif
                                                 </li>
                                                 <li>
+                                                    @if(!empty($employee->profileInformation->birth_date))
                                                     <div class="title">Birthday:</div>
-                                                    @if(!empty($users))
-                                                    <div class="text">{{ $users->birth_date }}</div>
+                                                    <div class="text">{{date('d F, Y',strtotime($employee->profileInformation->birth_date)) }}</div>
+                                                    @else
+                                                    <div class="title">Birthday:</div>
+                                                    <div class="text">N/A</div>
                                                     @endif
                                                 </li>
                                                 <li>
+                                                    @if(!empty($employee->profileInformation->address ))
                                                     <div class="title">Address:</div>
-                                                    @if(!empty($users))
-                                                    <div class="text">{{ $users->address }}</div>
+                                                    <div class="text">
+                                                        @if($employee->profileInformation->address != null)
+                                                            {{ $employee->profileInformation->address }},
+                                                            {{ $employee->profileInformation->postcode }},
+                                                            {{ $employee->profileInformation->city }},
+                                                            {{ $employee->profileInformation->state }},
+                                                            {{ $employee->profileInformation->country }}
+                                                        @else
+                                                            <br>
+                                                        @endif
+                                                    </div>
+                                                    @else
+                                                    <div class="title">Address:</div>
+                                                    <div class="text">N/A</div>
                                                     @endif
                                                 </li>
                                                 <li>
+                                                    @if(!empty($employee->gender))
                                                     <div class="title">Gender:</div>
-                                                    @if(!empty($users))
-                                                    <div class="text">{{ $users->gender }}</div>
+                                                    <div class="text">{{ $employee->gender }}</div>
+                                                    @else
+                                                    <div class="title">Gender:</div>
+                                                    <div class="text">N/A</div>
                                                     @endif
                                                 </li>
                                                 <li>
                                                     <div class="title">Reports to:</div>
                                                     <div class="text">
-                                                        <div class="avatar-box">
-                                                            <div class="avatar avatar-xs">
-                                                                <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                                        @if(!empty($employee->profileInformation->reports_to))
+                                                            <div class="avatar-box">
+                                                                <div class="avatar avatar-xs">
+                                                                    @foreach ($employees as $each_employee)
+                                                                        @if($employee->profileInformation->reports_to === $each_employee->id)
+                                                                            <img src="{{ asset('assets/images/' . $each_employee->avatar) }}" alt="{{ $each_employee->avatar }}">
+
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <a href="profile.html">
-                                                            {{ Auth::user()->name }}
-                                                        </a>
+                                                            <a href="{{ route('profile.employee', ['employee_id' => $employee->profileInformation->reports_to]) }}">
+                                                                @foreach ($employees as $each_employee)
+                                                                    @if($employee->profileInformation->reports_to === $each_employee->id)
+                                                                        {{ $each_employee->fullname }}
+                                                                    @endif
+                                                                @endforeach
+                                                            </a>
+                                                        @else
+                                                            N/A
+                                                        @endif
                                                     </div>
                                                 </li>
                                             </ul>
@@ -116,35 +158,31 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Passport No.</div>
-                                            <div class="text">9876543210</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->passport_no)){{ $employee->profileInformation->passport_no }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Passport Exp Date.</div>
-                                            <div class="text">9876543210</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">Tel</div>
-                                            <div class="text"><a href="">9876543210</a></div>
+                                            <div class="text">@if(!empty($employee->profileInformation->passport_expired_date)){{ $employee->profileInformation->passport_expired_date }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Nationality</div>
-                                            <div class="text">Indian</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->nationality))<a href="">{{ $employee->profileInformation->nationality }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Religion</div>
-                                            <div class="text">Christian</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->religion))<a href="">{{ $employee->profileInformation->religion }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Marital status</div>
-                                            <div class="text">Married</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->marital_status))<a href="">{{ $employee->profileInformation->marital_status }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Employment of spouse</div>
-                                            <div class="text">No</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->employment_of_spouse))<a href="">{{ $employee->profileInformation->employment_of_spouse }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">No. of children</div>
-                                            <div class="text">2</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->no_of_children))<a href="">{{ $employee->profileInformation->no_of_children }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -154,35 +192,43 @@
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
                                     <h3 class="card-title">Emergency Contact <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
-                                    <h5 class="section-title">Primary</h5>
+                                    <h4 class="section-title">Primary</h4>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">John Doe</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_name_1)){{ $employee->profileInformation->emergency_contact_name_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Father</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_relationship_1)){{ $employee->profileInformation->emergency_contact_relationship_1 }}@else N\A @endif</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Mobile </div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_mobile_1)){{ $employee->profileInformation->emergency_contact_mobile_1 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_phone_1)){{ $employee->profileInformation->emergency_contact_phone_1 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                     <hr>
-                                    <h5 class="section-title">Secondary</h5>
+                                    <h4 class="section-title">Secondary</h4>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">Karen Wills</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_name_2)){{ $employee->profileInformation->emergency_contact_name_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Brother</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_relationship_2)){{ $employee->profileInformation->emergency_contact_relationship_2 }}@else N\A @endif</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Mobile </div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_mobile_2)){{ $employee->profileInformation->emergency_contact_mobile_2 }}@else N\A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->emergency_contact_phone_2)){{ $employee->profileInformation->emergency_contact_phone_2 }}@else N\A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -193,23 +239,15 @@
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
-                                    <h3 class="card-title">Bank information</h3>
+                                    <h3 class="card-title">Bank information <a href="#" class="edit-icon" data-toggle="modal" data-target="#bank_information_modal"><i class="fa fa-pencil"></i></a></h3>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Bank name</div>
-                                            <div class="text">ICICI Bank</div>
+                                            <div class="text">@if(!empty($employee->profileInformation->bank_name)){{ $employee->profileInformation->bank_name }}@else N/A @endif</div>
                                         </li>
                                         <li>
                                             <div class="title">Bank account No.</div>
-                                            <div class="text">159843014641</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">IFSC Code</div>
-                                            <div class="text">ICI24504</div>
-                                        </li>
-                                        <li>
-                                            <div class="title">PAN No</div>
-                                            <div class="text">TC000Y56</div>
+                                            <div class="number">@if(!empty($employee->profileInformation->bank_account_no)){{ $employee->profileInformation->bank_account_no }}@else N/A @endif</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -223,6 +261,7 @@
                                         <table class="table table-nowrap">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Name</th>
                                                     <th>Relationship</th>
                                                     <th>Date of Birth</th>
@@ -231,19 +270,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 <tr>
-                                                    <td>Leo</td>
-                                                    <td>Brother</td>
-                                                    <td>Feb 16th, 2019</td>
-                                                    <td>9876543210</td>
+                                                    <td>@if(!empty($employee->profileInformation->family_member_name_1))@else @endif</td>
+                                                    <td>@if(!empty($employee->profileInformation->family_member_name_1)){{ $employee->profileInformation->family_member_name_1 }}@else @endif</td>
+                                                    <td>@if(!empty($employee->profileInformation->family_member_relationship_1)){{ $employee->profileInformation->family_member_relationship_1 }}@else @endif</td>
+                                                    <td>@if(!empty($employee->profileInformation->family_member_DOB_1)){{ $employee->profileInformation->family_member_DOB_1 }}@else @endif</td>
+                                                    <td>@if(!empty($employee->profileInformation->family_member_phone_1)){{ $employee->profileInformation->family_member_phone_1 }}@else @endif</td>
                                                     <td class="text-right">
+                                                        @if(!empty($employee->profileInformation->family_member_name_1))
                                                         <div class="dropdown dropdown-action">
                                                             <a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                {{-- <a href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a> --}}
                                                                 <a href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
+                                                        @else @endif
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -266,9 +309,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">International College of Arts and Science (UG)</a>
-                                                        <div>Bsc Computer Science</div>
-                                                        <span class="time">2000 - 2003</span>
+                                                        <a href="#/" class="name">@if(!empty($employee->profileInformation->academic_institution_1)){{ $employee->profileInformation->academic_institution_1 }}@else Academic Institution 1 @endif</a>
+                                                        <div>@if(!empty($employee->profileInformation->academic_qualification_1)){{ $employee->profileInformation->academic_qualification_1 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty($employee->profileInformation->academic_starting_date_1)){{ $employee->profileInformation->academic_starting_date_1 }}@else N/A @endif - @if(!empty($employee->profileInformation->academic_complete_date_1)){{ $employee->profileInformation->academic_complete_date_1 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -278,9 +321,9 @@
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">International College of Arts and Science (PG)</a>
-                                                        <div>Msc Computer Science</div>
-                                                        <span class="time">2000 - 2003</span>
+                                                        <a href="#/" class="name">@if(!empty($employee->profileInformation->academic_institution_2)){{ $employee->profileInformation->academic_institution_2 }}@else Academic Institution 2 @endif</a>
+                                                        <div>@if(!empty($employee->profileInformation->academic_qualification_2)){{ $employee->profileInformation->academic_qualification_2 }}@else Academic Qualification 1 @endif</div>
+                                                        <span class="time">@if(!empty($employee->profileInformation->academic_starting_date_2)){{ $employee->profileInformation->academic_starting_date_2 }}@else N/A @endif - @if(!empty($employee->profileInformation->academic_complete_date_2)){{ $employee->profileInformation->academic_complete_date_2 }}@else N/A @endif</span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -295,39 +338,32 @@
                                     <h3 class="card-title">Experience <a href="#" class="edit-icon" data-toggle="modal" data-target="#experience_info"><i class="fa fa-pencil"></i></a></h3>
                                     <div class="experience-box">
                                         <ul class="experience-list">
+                                            @if(!empty($employee->profileInformation->exp_company_name_1))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Zen Corporation</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                                        <a href="#/" class="name">{{ $employee->profileInformation->exp_position_1 }} at {{ $employee->profileInformation->exp_company_name_1}}</a>
+                                                        <span class="time">{{ $employee->profileInformation->exp_period_from_1 }} - {{ $employee->profileInformation->exp_period_to_1 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
+                                            @endif
+                                            @if(!empty($employee->profileInformation->exp_company_name_2))
                                             <li>
                                                 <div class="experience-user">
                                                     <div class="before-circle"></div>
                                                 </div>
                                                 <div class="experience-content">
                                                     <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Ron-tech</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
+                                                        <a href="#/" class="name">{{ $employee->profileInformation->exp_position_2 }} at {{ $employee->profileInformation->exp_company_name_2 }}</a>
+                                                        <span class="time">{{ $employee->profileInformation->exp_period_from_2 }} - {{ $employee->profileInformation->exp_period_to_2 }}</span>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="experience-user">
-                                                    <div class="before-circle"></div>
-                                                </div>
-                                                <div class="experience-content">
-                                                    <div class="timeline-content">
-                                                        <a href="#/" class="name">Web Designer at Dalt Technology</a>
-                                                        <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -338,7 +374,7 @@
                 <!-- /Profile Info Tab -->
 
                 <!-- Projects Tab -->
-                <div class="tab-pane fade" id="emp_projects">
+                {{-- <div class="tab-pane fade" id="emp_projects">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
                             <div class="card">
@@ -592,7 +628,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /Projects Tab -->
 
                 <!-- Bank Statutory Tab -->
@@ -821,144 +857,165 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile/information/save') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('profile.information.save') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile-img-wrap edit-img">
-                                        @if(!empty($users))
-                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. $users->avatar) }}" alt="{{ $users->name }}">
-                                        @endif
+                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
                                         <div class="fileupload btn">
                                             <span class="btn-text">edit</span>
                                             <input class="upload" type="file" id="image" name="images">
-                                            @if(!empty($users))
-                                            <input type="hidden" name="hidden_image" id="e_image" value="{{ $users->avatar }}">
-                                            @endif
+                                            {{-- <input type="hidden" name="hidden_image" id="e_image" value="{{ Auth::user()->avatar }}"> --}}
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                @if(!empty($users))
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
-                                                <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $users->employee_id }}">
-                                                <input type="hidden" class="form-control" id="email" name="email" value="{{ $users->email }}">
-                                                @endif
+                                                <input type="text" class="form-control" id="fullname" name="fullname" value="{{ $employee->fullname }}">
+                                                <input type="hidden" id="employee_id" name="employee_id" value="{{ $employee->id }}">
+                                                <input type="hidden" id="email" name="email" value="{{ $employee->email }}">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Birth Date</label>
                                                 <div class="cal-icon">
-                                                    @if(!empty($users))
-                                                    <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" value="{{ $users->birth_date }}">
-                                                    @endif
+                                                    <input class="form-control datetimepicker" type="text" id="birth_date" name="birth_date" value="{{ !empty($information->birth_date) ? $information->birth_date : '' }}">
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Gender</label>
-                                                <select class="select form-control" id="gender" name="gender">
-                                                    @if(!empty($users))
-                                                    <option value="{{ $users->gender }}" {{ ( $users->gender == $users->gender) ? 'selected' : '' }}>{{ $users->gender }} </option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    @endif
+                                                <select class="form-control" id="gender" name="gender">
+                                                    <option value="" disabled {{ empty($employee->gender) ? 'selected' : '' }}>Select Gender</option>
+                                                    <option value="Male" {{ $employee->gender === 'Male' ? 'selected' : '' }}>Male</option>
+                                                    <option value="Female" {{ $employee->gender === 'Female' ? 'selected' : '' }}>Female</option>
                                                 </select>
                                             </div>
                                         </div>
+
+                                        @if(Auth::user()->hasRole(['Super Admin','Admin','HR']))
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Date of Joining</label>
+                                                    <div class="cal-icon">
+                                                        <input class="form-control datetimepicker" type="text" id="join_date" name="join_date" value="{{ !empty($employee->join_date) ? $employee->join_date : '' }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        @if(!empty($users))
-                                        <input type="text" class="form-control" id="address" name="address" value="{{ $users->address }}">
-                                        @endif
+                                        <input type="text" class="form-control" id="address" name="address" value="{{ !empty($employee->profileInformation->address) ? $employee->profileInformation->address : '' }}">
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" class="form-control" id="city" name="city" value="{{ !empty($employee->profileInformation->city) ? $employee->profileInformation->city : '' }}">
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>State</label>
-                                        @if(!empty($users))
-                                        <input type="text" class="form-control" id="state" name="state" value="{{ $users->state }}">
-                                        @endif
+                                        <input type="text" class="form-control" id="state" name="state" value="{{ !empty($employee->profileInformation->state) ? $employee->profileInformation->state : '' }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Country</label>
-                                        @if(!empty($users))
-                                        <input type="text" class="form-control" id="" name="country" value="{{ $users->country }}">
-                                        @endif
+                                        <label for="country">Country</label>
+
+                                        <select class="form-control" id="country" name="country">
+                                            <option value="">-- Select Country --</option>
+
+                                            @foreach (config('nationalities') as $country)
+                                                <option value="{{ $country }}"
+                                                    {{ (!empty($employee->profileInformation->country)
+                                                        && $employee->profileInformation->country === $country)
+                                                        ? 'selected' : '' }}>
+                                                    {{ $country }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Pin Code</label>
-                                        @if(!empty($users))
-                                        <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $users->postcode }}">
-                                        @endif
+                                        <label>Post Code</label>
+                                        <input type="number" class="form-control" id="postcode" name="postcode" value="{{ !empty($employee->profileInformation->postcode) ? $employee->profileInformation->postcode : '' }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        @if(!empty($users))
-                                        <input type="text" class="form-control" id="phoneNumber" name="phone_number" value="{{ $users->phone_number }}">
-                                        @endif
+                                        <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{ !empty($employee->phone_number) ? $employee->phone_number : '' }}">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Department <span class="text-danger">*</span></label>
-                                        <select class="select" id="department" name="department">
-                                            @if(!empty($users))
-                                            <option value="{{ $users->department }}" {{ ( $users->department == $users->department) ? 'selected' : '' }}>{{ $users->department }} </option>
-                                            <option value="Web Development">Web Development</option>
-                                            <option value="IT Management">IT Management</option>
-                                            <option value="Marketing">Marketing</option>
-                                            @endif
+                                        <select class="form-control" id="department" name="department">
+                                            <option value="" disabled {{ empty($employee->department_id) ? 'selected' : '' }}>Select Department</option>
+                                            @foreach ($departments as $id => $name)
+                                                <option value="{{ $id }}" {{ $employee->department_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Designation <span class="text-danger">*</span></label>
-                                        <select class="select" id="designation" name="designation">
-                                            @if(!empty($users))
-                                            <option value="{{ $users->designation }}" {{ ( $users->designation == $users->designation) ? 'selected' : '' }}>{{ $users->designation }} </option>
-                                            <option value="Web Designer">Web Designer</option>
-                                            <option value="Web Developer">Web Developer</option>
-                                            <option value="Android Developer">Android Developer</option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Reports To <span class="text-danger">*</span></label>
-                                        <select class="select" id="" name="reports_to">
-                                            @if(!empty($users))
-                                            <option value="{{ $users->reports_to }}" {{ ( $users->reports_to == $users->reports_to) ? 'selected' : '' }}>{{ $users->reports_to }} </option>
-                                            @foreach ($user as $users )
-                                            <option value="{{ $users->name }}">{{ $users->name }}</option>
+                                        <select class="form-control" name="position">
+                                            <option value="" disabled {{ empty($employee->position_id) ? 'selected' : '' }}>Select Designation</option>
+                                            @foreach ($positions as $id => $name)
+                                                <option value="{{ $id }}" {{ $employee->position_id == $id ? 'selected' : '' }}>{{ $name }}</option>
                                             @endforeach
-                                            @endif
                                         </select>
                                     </div>
                                 </div>
+
+                                @if(Auth::user()->hasRole(['Super Admin','Admin','HR']))
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Reports To <span class="text-danger">*</span></label>
+                                            <select class="form-control" id="reports_to" name="reports_to">
+                                                <option value="" disabled {{ empty($employee->profileInformation->reports_to) ? 'selected' : '' }}>Select Manager</option>
+                                                @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->id }}" {{ optional($employee->profileInformation)->reports_to == $employee->id ? 'selected' : '' }}>
+                                                        {{ $employee->fullname }}, ({{ $employee->employee_code }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
+
                             <div class="submit-section">
                                 <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -976,69 +1033,106 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile.personal_information.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="employee_id" value="{{ $employee->id }}">
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Passport No</label>
-                                        <input type="text" class="form-control">
+                                        <label for="passport_no">Passport No</label>
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no" value="{{ !empty($employee->profileInformation->passport_no) ? $employee->profileInformation->passport_no : '' }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Passport Expiry Date</label>
+                                        <label for="passport_expired_date">Passport Expiry Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text">
+                                            <input type="text" class="form-control datetimepicker" id="passport_expired_date" name="passport_expired_date" value="{{ !empty($information->passport_expired_date) ? $information->passport_expired_date : '' }}">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tel</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nationality <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Religion</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Marital status <span class="text-danger">*</span></label>
-                                        <select class="select form-control">
-                                            <option>-</option>
-                                            <option>Single</option>
-                                            <option>Married</option>
+                                        <label for="nationality">
+                                            Nationality <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control" id="nationality" name="nationality" required>
+                                            <option value="">-- Select Nationality --</option>
+
+                                            @foreach (config('nationalities') as $nationality)
+                                                <option value="{{ $nationality }}"
+                                                    {{ (!empty($employee->profileInformation->nationality) && $employee->profileInformation->nationality === $nationality) ? 'selected' : '' }}>
+                                                    {{ $nationality }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Employment of spouse</label>
-                                        <input class="form-control" type="text">
+                                        <label for="religion">Religion</label>
+
+                                        <select class="form-control" id="religion" name="religion">
+                                            <option value="">-- Select Religion --</option>
+
+                                            @foreach (config('religious') as $religion)
+                                                <option value="{{ $religion }}"
+                                                    {{ (!empty($employee->profileInformation->religion) && $employee->profileInformation->religion === $religion) ? 'selected' : '' }}>
+                                                    {{ $religion }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>No. of children </label>
-                                        <input class="form-control" type="text">
+                                        <label for="marital_status">
+                                            Marital Status <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control" id="marital_status" name="marital_status" required>
+                                            <option value="">-- Select Marital Status --</option>
+
+                                            @foreach (config('marital_status') as $status)
+                                                <option value="{{ $status }}"
+                                                    {{ (!empty($employee->profileInformation->marital_status) && $employee->profileInformation->marital_status === $status) ? 'selected' : '' }}>
+                                                    {{ $status }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="employment_of_spouse">Employment of Spouse</label>
+                                        <select class="form-control" id="employment_of_spouse" name="employment_of_spouse">
+                                            <option value="Yes" {{ !empty($employee->profileInformation->employment_of_spouse) && $employee->profileInformation->employment_of_spouse == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                            <option value="No" {{ !empty($employee->profileInformation->employment_of_spouse) && $employee->profileInformation->employment_of_spouse == 'No' ? 'selected' : '' }}>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="no_of_children">No. of Children</label>
+                                        <input type="number" min="0" class="form-control" id="no_of_children" name="no_of_children" value="{{ !empty($employee->profileInformation->no_of_children) ? $employee->profileInformation->no_of_children : '' }}">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -1056,69 +1150,55 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile.family_information.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Family Member <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Date of birth <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <h3 class="card-title">Family Member 1
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                            <a href="javascript:void(0);" class="delete-icon">
+                                                <i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i>
+                                            </a>
+                                        </h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Name <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" type="text" id="family_member_name_1" name="family_member_name_1" value="{{ !empty($employee->profileInformation->family_member_name_1) ? $employee->profileInformation->family_member_name_1 : '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Relationship <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <select class="form-control" id="family_member_relationship_1" name="family_member_relationship_1">
+                                                        <option value="" disabled selected>Select Relationship</option>
+                                                        @foreach(config('family_members') as $relationship)
+                                                            <option value="{{ $relationship }}" {{ $employee->profileInformation->family_member_relationship_1 == $relationship ? 'selected' : '' }}>{{ $relationship }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
+
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Date of birth <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <div class="cal-icon">
+                                                        <input class="form-control datetimepicker" type="text" id="family_member_DOB_1" name="family_member_DOB_1" value="{{ !empty($employee->profileInformation->family_member_DOB_1) ? $employee->profileInformation->family_member_DOB_1 : '' }}">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" type="number" id="family_member_phone_1" name="family_member_phone_1"  value="{{ !empty($employee->profileInformation->family_member_phone_1) ? $employee->profileInformation->family_member_phone_1 : '' }}">
                                                 </div>
                                             </div>
                                         </div>
+                                        ** TODO : ADD MORE FAMILY INFORMATION **
                                         <div class="add-more">
                                             <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
                                         </div>
@@ -1146,65 +1226,136 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                        <form action="{{ route('profile.emergency_contact.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->id }}">
+                            @if(!empty($employee->profileInformation))
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Primary Contact</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="emergency_contact_name_1" name="emergency_contact_name_1" value="{{ !empty($employee->profileInformation->emergency_contact_name_1) ? $employee->profileInformation->emergency_contact_name_1 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Relationship <span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="relationship" name="relationship">
+                                                        <option value="" disabled {{ empty(optional($employee->profileInformation)->emergency_contact_relationship_1) ? 'selected' : '' }}>
+                                                            Select Relationship
+                                                        </option>
+
+                                                        @foreach (config('family_members') as $relationship)
+                                                            <option value="{{ $relationship }}"
+                                                                {{ optional($employee->profileInformation)->emergency_contact_relationship_1 == $relationship ? 'selected' : '' }}>
+                                                                {{ $relationship }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Mobile <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="number" id="emergency_contact_mobile_1" name="emergency_contact_mobile_1" value="{{ !empty($employee->profileInformation->emergency_contact_mobile_1) ? $employee->profileInformation->emergency_contact_mobile_1 : '' }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" type="number" id="emergency_contact_phone_1" name="emergency_contact_phone_1" value="{{ !empty($employee->profileInformation->emergency_contact_phone_1) ? $employee->profileInformation->emergency_contact_phone_1 : '' }}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Secondary Contact</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="emergency_contact_name_2" name="emergency_contact_name_2" value="{{ !empty($employee->profileInformation->emergency_contact_name_2) ? $employee->profileInformation->emergency_contact_name_2 : '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Relationship <span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="emergency_contact_relationship_2" name="emergency_contact_relationship_2">
+                                                        <option value="" disabled {{ empty(optional($employee->profileInformation)->emergency_contact_relationship_2) ? 'selected' : '' }}>
+                                                            Select Relationship
+                                                        </option>
 
+                                                        @foreach (config('family_members') as $relationship)
+                                                            <option value="{{ $relationship }}"
+                                                                {{ optional($employee->profileInformation)->emergency_contact_relationship_2 == $relationship ? 'selected' : '' }}>
+                                                                {{ $relationship }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Mobile <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="number" id="emergency_contact_mobile_2" name="emergency_contact_mobile_2" value="{{ !empty($employee->profileInformation->emergency_contact_mobile_2) ? $employee->profileInformation->emergency_contact_mobile_2 : '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" type="number" id="emergency_contact_phone_2" name="emergency_contact_phone_2" value="{{ !empty($employee->profileInformation->emergency_contact_phone_2) ? $employee->profileInformation->emergency_contact_phone_2 : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Emergency Contact Modal -->
+
+        <!-- Bank Information Modal -->
+        <div id="bank_information_modal" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bank Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('profile.bank_information.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->id }}">
                             <div class="card">
                                 <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
+                                    <h3 class="card-title">Bank Details</h3>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                <label>Bank Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="bank_name" name="bank_name" value="@if(!empty($employee->profileInformation->bank_name)){{ $employee->profileInformation->bank_name }}@endif">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                <label>Bank Account No <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="bank_account_no" name="bank_account_no" value="@if(!empty($employee->profileInformation->bank_account_no)){{ $employee->profileInformation->bank_account_no }}@endif">
                                             </div>
                                         </div>
                                     </div>
@@ -1218,7 +1369,7 @@
                 </div>
             </div>
         </div>
-        <!-- /Emergency Contact Modal -->
+        <!-- Bank Information Modal -->
 
         <!-- Education Modal -->
         <div id="education_info" class="modal custom-modal fade" role="dialog">
@@ -1230,29 +1381,46 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="modal-header">
+                        <h5 class="title">(Highest to Lowest)</h5>
+                    </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile.education_information.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Oxford University" class="form-control floating">
+                                                    <input type="text" class="form-control floating" id="academic_institution_1" name="academic_institution_1" value="@if(!empty($employee->profileInformation->academic_institution_1)){{ $employee->profileInformation->academic_institution_1 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Subject</label>
+                                                    <input type="text" class="form-control floating" id="academic_qualification_1" name="academic_qualification_1" value="@if(!empty($employee->profileInformation->academic_qualification_1)){{ $employee->profileInformation->academic_qualification_1 }}@endif">
+                                                    <label class="focus-label">Academic Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_1" name="academic_type_qualification_1" value="@if(!empty($employee->profileInformation->academic_type_qualification_1)){{ $employee->profileInformation->academic_type_qualification_1 }}@endif">
+                                                    <label class="focus-label">Type of Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_grade_1" name="academic_grade_1" value="@if(!empty($employee->profileInformation->academic_grade_1)){{ $employee->profileInformation->academic_grade_1 }}@endif">
+                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_1" name="academic_starting_date_1" value="@if(!empty($employee->profileInformation->academic_starting_date_1)){{ $employee->profileInformation->academic_starting_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1260,21 +1428,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_1" name="academic_complete_date_1" value="@if(!empty($employee->profileInformation->academic_complete_date_1)){{ $employee->profileInformation->academic_complete_date_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="BE Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Degree</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="Grade A" class="form-control floating">
-                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1283,24 +1439,36 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"> ** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Oxford University" class="form-control floating">
+                                                    <input type="text" class="form-control floating" id="academic_institution_2" name="academic_institution_2" value="@if(!empty($employee->profileInformation->academic_institution_2)){{ $employee->profileInformation->academic_institution_2 }}@endif">
                                                     <label class="focus-label">Institution</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
-                                                    <input type="text" value="Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Subject</label>
+                                                    <input type="text" class="form-control floating" id="academic_qualification_2" name="academic_qualification_2" value="@if(!empty($employee->profileInformation->academic_qualification_2)){{ $employee->profileInformation->academic_qualification_2 }}@endif">
+                                                    <label class="focus-label">Academic Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_type_qualification_2" name="academic_type_qualification_2" value="@if(!empty($employee->profileInformation->academic_type_qualification_2)){{ $employee->profileInformation->academic_type_qualification_2 }}@endif">
+                                                    <label class="focus-label">Type of Qualification</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-focus focused">
+                                                    <input type="text" class="form-control floating" id="academic_grade_2" name="academic_grade_2" value="@if(!empty($employee->profileInformation->academic_grade_2)){{ $employee->profileInformation->academic_grade_2 }}@endif">
+                                                    <label class="focus-label">Grade</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="01/06/2002" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_starting_date_21" name="academic_starting_date_2" value="@if(!empty($employee->profileInformation->academic_starting_date_2)){{ $employee->profileInformation->academic_starting_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Starting Date</label>
                                                 </div>
@@ -1308,26 +1476,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus focused">
                                                     <div class="cal-icon">
-                                                        <input type="text" value="31/05/2006" class="form-control floating datetimepicker">
+                                                        <input type="text" class="form-control floating datetimepicker" id="academic_complete_date_2" name="academic_complete_date_2" value="@if(!empty($employee->profileInformation->academic_complete_date_2)){{ $employee->profileInformation->academic_complete_date_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Complete Date</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="BE Computer Science" class="form-control floating">
-                                                    <label class="focus-label">Degree</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-focus focused">
-                                                    <input type="text" value="Grade A" class="form-control floating">
-                                                    <label class="focus-label">Grade</label>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="add-more">
-                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
+                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More ** TODO : ADD MORE EDUCATION INFORMATION **</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1353,34 +1509,36 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('profile.experience_information.save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->id }}">
                             <div class="form-scroll">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 1<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Digital Devlopment Inc">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_1" name="exp_company_name_1" value="@if(!empty($employee->profileInformation->exp_company_name_1 )){{ $employee->profileInformation->exp_company_name_1 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="United States">
+                                                    <input type="text" class="form-control floating" id="exp_location_1" name="exp_location_1"  value="@if(!empty($employee->profileInformation->exp_location_1 )){{ $employee->profileInformation->exp_location_1 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Web Developer">
+                                                    <input type="text" class="form-control floating" id="exp_position_1" name="exp_position_1"  value="@if(!empty($employee->profileInformation->exp_position_1 )){{ $employee->profileInformation->exp_position_1 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_1" name="exp_period_from_1"  value="@if(!empty($employee->profileInformation->exp_period_from_1 )){{ $employee->profileInformation->exp_period_from_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1388,7 +1546,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_1" name="exp_period_to_1" value="@if(!empty($employee->profileInformation->exp_period_to_1 )){{ $employee->profileInformation->exp_period_to_1 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
@@ -1399,30 +1557,30 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
+                                        <h3 class="card-title">Experience Informations 2<a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o">** TODO: DELETE FUNCTION **</i></a></h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Digital Devlopment Inc">
+                                                    <input type="text" class="form-control floating" id="exp_company_name_2" name="exp_company_name_2" value="@if(!empty($employee->profileInformation->exp_company_name_2 )){{ $employee->profileInformation->exp_company_name_2 }}@endif">
                                                     <label class="focus-label">Company Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="United States">
+                                                    <input type="text" class="form-control floating" id="exp_location_2" name="exp_location_2"  value="@if(!empty($employee->profileInformation->exp_location_2 )){{ $employee->profileInformation->exp_location_2 }}@endif">
                                                     <label class="focus-label">Location</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
-                                                    <input type="text" class="form-control floating" value="Web Developer">
+                                                    <input type="text" class="form-control floating" id="exp_position_2" name="exp_position_2" value="@if(!empty($employee->profileInformation->exp_position_2 )){{ $employee->profileInformation->exp_position_2 }}@endif">
                                                     <label class="focus-label">Job Position</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="01/07/2007">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_from_2" name="exp_period_from_2" value="@if(!empty($employee->profileInformation->exp_period_from_2 )){{ $employee->profileInformation->exp_period_from_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period From</label>
                                                 </div>
@@ -1430,14 +1588,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus">
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control floating datetimepicker" value="08/06/2018">
+                                                        <input type="text" class="form-control floating datetimepicker" id="exp_period_to_2" name="exp_period_to_2" value="@if(!empty($employee->profileInformation->exp_period_to_2 )){{ $employee->profileInformation->exp_period_to_2 }}@endif">
                                                     </div>
                                                     <label class="focus-label">Period To</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="add-more">
-                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
+                                            <a href="javascript:void(0);"><i class="fa fa-plus-circle">** TODO: ADD MORE EXPERIENCE FUNCTION **</i> Add More</a>
                                         </div>
                                     </div>
                                 </div>

@@ -44,83 +44,83 @@
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
-                                                    <li>
-                                                        <div class="title">Phone:</div>
-                                                        <div class="text">
-                                                            @if(!empty(Auth::user()->employee->phone_number))
-                                                            <a href="">{{ Auth::user()->employee->phone_number }}</a>
-                                                            @else
-                                                            N/A
-                                                            @endif
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        @if(!empty(Auth::user()->employee->email))
-                                                        <div class="title">Email:</div>
-                                                        <div class="text"><a href="">{{ Auth::user()->employee->email }}</a></div>
+                                                <li>
+                                                    <div class="title">Phone:</div>
+                                                    <div class="text">
+                                                        @if(!empty(Auth::user()->employee->phone_number))
+                                                        <a href="">{{ Auth::user()->employee->phone_number }}</a>
                                                         @else
-                                                        <div class="title">Email:</div>
-                                                        <div class="text">N/A</div>
+                                                        N/A
                                                         @endif
-                                                    </li>
-                                                    <li>
-                                                        @if(!empty(Auth::user()->employee->profileInformation->birth_date))
-                                                        <div class="title">Birthday:</div>
-                                                        <div class="text">{{date('d F, Y',strtotime(Auth::user()->employee->profileInformation->birth_date)) }}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    @if(!empty(Auth::user()->employee->email))
+                                                    <div class="title">Email:</div>
+                                                    <div class="text"><a href="">{{ Auth::user()->employee->email }}</a></div>
+                                                    @else
+                                                    <div class="title">Email:</div>
+                                                    <div class="text">N/A</div>
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    @if(!empty(Auth::user()->employee->profileInformation->birth_date))
+                                                    <div class="title">Birthday:</div>
+                                                    <div class="text">{{date('d F, Y',strtotime(Auth::user()->employee->profileInformation->birth_date)) }}</div>
+                                                    @else
+                                                    <div class="title">Birthday:</div>
+                                                    <div class="text">N/A</div>
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    @if(!empty(Auth::user()->employee->profileInformation->address ))
+                                                    <div class="title">Address:</div>
+                                                    <div class="text">
+                                                        @if(Auth::user()->employee->profileInformation->address != null)
+                                                            {{ Auth::user()->employee->profileInformation->address }},
+                                                            {{ Auth::user()->employee->profileInformation->postcode }},
+                                                            {{ Auth::user()->employee->profileInformation->city }},
+                                                            {{ Auth::user()->employee->profileInformation->state }},
+                                                            {{ Auth::user()->employee->profileInformation->country }}
                                                         @else
-                                                        <div class="title">Birthday:</div>
-                                                        <div class="text">N/A</div>
+                                                            <br>
                                                         @endif
-                                                    </li>
-                                                    <li>
-                                                        @if(!empty(Auth::user()->employee->profileInformation->address ))
-                                                        <div class="title">Address:</div>
-                                                        <div class="text">
-                                                            @if(Auth::user()->employee->profileInformation->address != null)
-                                                                {{ Auth::user()->employee->profileInformation->address }},
-                                                                {{ Auth::user()->employee->profileInformation->postcode }},
-                                                                {{ Auth::user()->employee->profileInformation->city }},
-                                                                {{ Auth::user()->employee->profileInformation->state }},
-                                                                {{ Auth::user()->employee->profileInformation->country }}
-                                                            @else
-                                                                <br>
-                                                            @endif
-                                                        </div>
-                                                        @else
-                                                        <div class="title">Address:</div>
-                                                        <div class="text">N/A</div>
-                                                        @endif
-                                                    </li>
-                                                    <li>
-                                                        @if(!empty(Auth::user()->employee->gender))
-                                                        <div class="title">Gender:</div>
-                                                        <div class="text">{{ Auth::user()->employee->gender }}</div>
-                                                        @else
-                                                        <div class="title">Gender:</div>
-                                                        <div class="text">N/A</div>
-                                                        @endif
-                                                    </li>
-                                                    <li>
-                                                        <div class="title">Reports to:</div>
-                                                        <div class="text">
-                                                            @if(!empty(Auth::user()->employee->profileInformation->reports_to))
-                                                                <div class="avatar-box">
-                                                                    <div class="avatar avatar-xs">
-                                                                        <img src="{{ URL::to('/assets/images/'. Auth::user()->employee->avatar) }}" alt="{{ Auth::user()->employee->profileInformation->reports_to }}">
-                                                                    </div>
+                                                    </div>
+                                                    @else
+                                                    <div class="title">Address:</div>
+                                                    <div class="text">N/A</div>
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    @if(!empty(Auth::user()->employee->gender))
+                                                    <div class="title">Gender:</div>
+                                                    <div class="text">{{ Auth::user()->employee->gender }}</div>
+                                                    @else
+                                                    <div class="title">Gender:</div>
+                                                    <div class="text">N/A</div>
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    <div class="title">Reports to:</div>
+                                                    <div class="text">
+                                                        @if(!empty(Auth::user()->employee->profileInformation->reports_to))
+                                                            <div class="avatar-box">
+                                                                <div class="avatar avatar-xs">
+                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->employee->avatar) }}" alt="{{ Auth::user()->employee->profileInformation->reports_to }}">
                                                                 </div>
-                                                                <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
-                                                                    @foreach ($employees as $employee)
-                                                                        @if(Auth::user()->employee->profileInformation->reports_to === $employee->id)
-                                                                            {{ $employee->fullname }}
-                                                                        @endif
-                                                                    @endforeach
-                                                                </a>
-                                                            @else
-                                                                N/A
-                                                            @endif
-                                                        </div>
-                                                    </li>
+                                                            </div>
+                                                            <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
+                                                                @foreach ($employees as $employee)
+                                                                    @if(Auth::user()->employee->profileInformation->reports_to === $employee->id)
+                                                                        {{ $employee->fullname }}
+                                                                    @endif
+                                                                @endforeach
+                                                            </a>
+                                                        @else
+                                                            N/A
+                                                        @endif
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

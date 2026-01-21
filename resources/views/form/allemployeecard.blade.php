@@ -28,7 +28,7 @@
 			<!-- /Page Header -->
 
             <!-- Search Filter -->
-            <form action="{{ route('all.employee.search') }}" method="POST">
+            {{-- <form action="{{ route('all.employee.search') }}" method="POST">
                 @csrf
                 <div class="row filter-row">
                     <div class="col-sm-6 col-md-3">
@@ -53,7 +53,7 @@
                         <button type="submit" class="btn btn-success btn-block"> Search </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
             <!-- Search Filter -->
 
             <div class="row staff-grid-row">
@@ -61,7 +61,7 @@
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
-                            <a href="{{ route('profile_user', $employee->id) }}" class="avatar"><img src="{{ asset('assets/images/' . $employee->avatar) }}" alt="Profile Image"></a>
+                            <a href="{{ route('profile.employee', $employee->id) }}" class="avatar"><img src="{{ asset('assets/images/' . $employee->avatar) }}" alt="Profile Image"></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
