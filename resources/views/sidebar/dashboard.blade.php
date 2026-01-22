@@ -6,8 +6,8 @@
                     <li class="menu-title"> <span>Main</span> </li>
                     <li class="submenu"> <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a class="active" href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
-                            <li><a href="{{ route('dashboard.employee') }}">Employee Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.admin') }}" class="{{ Route::currentRouteNamed('dashboard.admin') ? 'active' : '' }}">Admin Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.employee') }}" class="{{ Route::currentRouteNamed('dashboard.employee') ? 'active' : '' }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
                     <li class="menu-title"> <span>Employees</span> </li>
@@ -124,6 +124,13 @@
                             <li><a href="client-profile.html"> Client Profile </a></li>
                         </ul>
                     </li> --}}
+                    <li class="menu-title"><span>System</span> </li>
+                    <li class="submenu"> <a href="#"><i class="la la-user"></i> <span>Settings</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{ route('company.settings.page') }}" class="{{ Route::currentRouteNamed('company.settings.page') ? 'active' : '' }}">Company Information</a></li>
+                            <li><a href="{{ route('roles.permissions.page') }}" class="{{ Route::currentRouteNamed('roles.permissions.page') ? 'active' : '' }}">Role Permission</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
