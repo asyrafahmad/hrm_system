@@ -71,14 +71,14 @@
                             </div>
                         </div>
                         <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('profile.employee', $employee->id) }}">{{ $employee->fullname }}</a></h4>
-                        <div class="small text-muted">{{ optional($employee->position)->name }}</div>
+                        <div class="small text-muted">{{ optional($employee->position)->name ?? 'N/A' }}</div>
                     </div>
                 </div>
                 @endforeach
             </div>
 
             <!-- List of Employee Table -->
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <table class="table table-striped custom-table mb-0">
@@ -103,7 +103,6 @@
                                     <td class="email">{{ $employee->email }}</td>
                                     <td class="phone_number">{{ $employee->phone_number }}</td>
                                     <td class="image" style="display:none;">{{ $employee->avatar }}</td>
-                                    {{-- <td class="role_name" style="display:none;">{{ $employee->role_name }}</td> --}}
                                     <td class="status" style="display:none;">{{ $employee->status }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
@@ -120,7 +119,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- List of Employee Table -->
         </div>
         <!-- /Page Content -->
