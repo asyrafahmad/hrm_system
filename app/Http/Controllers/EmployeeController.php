@@ -387,15 +387,7 @@ class EmployeeController extends Controller
     public function employeeEditPermission($employee_id)
     {
         $employee = Employee::with('user')->findOrFail($employee_id);
-
-     $user = User::find($employee->user_id);
-
-// dd([
-//     'user_guard' => User::getDefaultGuardName(),
-//     'roles_raw' => DB::table('model_has_roles')->where('model_id', $user->id)->get(),
-//     'roles_relation' => $user->roles,
-// ]);
-
+        $user = User::find($employee->user_id);
 
         // Role names
         $roleNames = $user->getRoleNames(); // collection
@@ -413,9 +405,7 @@ class EmployeeController extends Controller
             ->values();
 
         // All permissions (for checkbox list)
-        $allPermissions = Permission::orderBy('id')->get();
-
-        // dd($allPermissions);die();
+        // $allPermissions = Permission::orderBy('id')->get();
 
         return view(
             'form.edit.employeepermission',
@@ -425,8 +415,29 @@ class EmployeeController extends Controller
                 'roleNames',
                 'rolePermissions',
                 'directPermissions',
-                'allPermissions'
+                // 'allPermissions'
             )
         );
+    }
+
+    public function employeeUpdatePermission(Request $request)
+    {
+        $request->validate([
+            'employee_id' => 'required|integer|exists:employees,id',
+            'permissions' => 'array',
+            'permissions.*' => 'string|exists:permissions,name',
+        ]);
+
+        $employee = Employee::findOrFail($request->employee_id);
+        $user = User::findOrFail($employee->user_id);
+
+        // Sync permissions - only checked permissions will be passed
+        // Unchecked permissions will be automatically removed
+        $permissions = $request->permissions ?? [];
+        $user->syncPermissions($permissions);
+
+        Toastr::success('Employee permissions updated successfully :)', 'Success');
+
+        return redirect()->back();
     }
 }

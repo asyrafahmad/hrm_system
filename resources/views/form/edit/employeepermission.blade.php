@@ -13,7 +13,7 @@
                         <h3 class="page-title">Employee Permission</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Employee / Permission</li>
+                            <li class="breadcrumb-item active">Employee / Edit Permission</li>
                         </ul>
                     </div>
                 </div>
@@ -25,12 +25,12 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Edit Employee Permission</h4>
+                            <h4 class="card-title mb-0">Edit</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('all.employee.update') }}" method="POST">
+                            <form action="{{ route('employee.update.permission') }}" method="POST">
                                 @csrf
-                                <input type="hidden" class="form-control" id="id" name="id" value="{{ $employee->id }}">
+                                <input type="hidden" name="employee_id" value="{{ $employee->id }}">
                                 <div class="row">
                                     <label class="col-form-label col-md-2">Employee ID</label>
                                     <div class="col-md-10">
@@ -81,79 +81,19 @@
                                             <table class="table table-striped custom-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Module Permission</th>
-                                                        <th class="text-center">Read</th>
-                                                        <th class="text-center">Write</th>
-                                                        <th class="text-center">Create</th>
-                                                        <th class="text-center">Delete</th>
-                                                        <th class="text-center">Import</th>
-                                                        <th class="text-center">Export</th>
+                                                        <th>Module</th>
+                                                        <th class="text-center">Permission</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php
-                                                    $key = 0;
-                                                    $key1 = 0;
-                                                    ?>
-
-                                                    @foreach ($allPermissions as $items)
+                                                    @foreach ($rolePermissions as $items)
                                                         <tr>
-                                                            <td>{{ $items->name }}</td>
+                                                            <td>{{ $items }}</td>
                                                             <td class="text-center">
-                                                                <input type="checkbox" class="read{{ ++$key }}" id="read" name="read[]" value="Y" >
-                                                                <input type="checkbox" class="read{{ ++$key1 }}" id="read" name="read[]" value="N" >
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" class="write{{ ++$key }}" id="write" name="write[]" value="Y" >
-                                                                <input type="checkbox" class="write{{ ++$key1 }}" id="write" name="write[]" value="N" >
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" class="create{{ ++$key }}" id="create" name="create[]" value="Y" >
-                                                                <input type="checkbox" class="create{{ ++$key1 }}" id="create" name="create[]" value="N" >
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" class="delete{{ ++$key }}" id="delete" name="delete[]" value="Y" >
-                                                                <input type="checkbox" class="delete{{ ++$key1 }}" id="delete" name="delete[]" value="N" >
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" class="import{{ ++$key }}" id="import" name="import[]" value="Y" >
-                                                                <input type="checkbox" class="import{{ ++$key1 }}" id="import" name="import[]" value="N" >
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" class="export{{ ++$key }}" id="export" name="export[]" value="Y" >
-                                                                <input type="checkbox" class="export{{ ++$key1 }}" id="export" name="export[]" value="N" >
+                                                                <input type="checkbox" id="check_permission_{{ $items }}" name="permissions[]" value="{{ $items }}" {{ in_array($items, $directPermissions->toArray()) ? 'checked' : '' }}>
                                                             </td>
                                                         </tr>
                                                     @endforeach
-                                                    <tr>
-                                                        <td>{{ Auth::user()->name }}</td>
-                                                        {{-- <input type="hidden" name="permission[]" value="{{ $items->name }}">
-                                                        <input type="hidden" name="id_permission[]" value="{{ $items->id }}">
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="read{{ ++$key }}" id="read" name="read[]" value="Y"{{ $items->read =="Y" ? 'checked' : ''}} >
-                                                            <input type="checkbox" class="read{{ ++$key1 }}" id="read" name="read[]" value="N" {{ $items->read =="N" ? 'checked' : ''}}>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="write{{ ++$key }}" id="write" name="write[]" value="Y" {{ $items->write =="Y" ? 'checked' : ''}}>
-                                                            <input type="checkbox" class="write{{ ++$key1 }}" id="write" name="write[]" value="N" {{ $items->write =="N" ? 'checked' : ''}}>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="create{{ ++$key }}" id="create" name="create[]" value="Y" {{ $items->create =="Y" ? 'checked' : ''}}>
-                                                            <input type="checkbox" class="create{{ ++$key1 }}" id="create" name="create[]" value="N" {{ $items->create =="N" ? 'checked' : ''}}>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="delete{{ ++$key }}" id="delete" name="delete[]" value="Y" {{ $items->delete =="Y" ? 'checked' : ''}}>
-                                                            <input type="checkbox" class="delete{{ ++$key1 }}" id="delete" name="delete[]" value="N" {{ $items->delete =="N" ? 'checked' : ''}}>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="import{{ ++$key }}" id="import" name="import[]" value="Y" {{ $items->import =="Y" ? 'checked' : ''}}>
-                                                            <input type="checkbox" class="import{{ ++$key1 }}" id="import" name="import[]" value="N" {{ $items->import =="N" ? 'checked' : ''}}>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <input type="checkbox" class="export{{ ++$key }}" id="export" name="export[]" value="Y" {{ $items->export =="Y" ? 'checked' : ''}}>
-                                                            <input type="checkbox" class="export{{ ++$key1 }}" id="export" name="export[]" value="N" {{ $items->export =="N" ? 'checked' : ''}}>
-                                                        </td> --}}
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -176,22 +116,6 @@
     </div>
     <!-- /Page Wrapper -->
     @section('script')
-    <script>
-        $("input:checkbox").on('click', function()
-        {
-            var $box = $(this);
-            if ($box.is(":checked"))
-            {
-                var group = "input:checkbox[class='" + $box.attr("class") + "']";
-                $(group).prop("checked", false);
-                $box.prop("checked", true);
-            }
-            else
-            {
-                $box.prop("checked", false);
-            }
-        });
-    </script>
     @endsection
 
 @endsection
