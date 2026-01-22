@@ -13,6 +13,9 @@ use App\Models\module_permission;
 
 use App\Services\HR\EmployeeIdService;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class EmployeeController extends Controller
 {
     // all employee card view
@@ -378,5 +381,52 @@ class EmployeeController extends Controller
         $departments = DB::table('departments')->pluck('name','id');
 
         return view('form.employeeprofile', compact('employee','employees', 'departments','positions'));
+    }
+
+    // edit employee permission
+    public function employeeEditPermission($employee_id)
+    {
+        $employee = Employee::with('user')->findOrFail($employee_id);
+
+     $user = User::find($employee->user_id);
+
+// dd([
+//     'user_guard' => User::getDefaultGuardName(),
+//     'roles_raw' => DB::table('model_has_roles')->where('model_id', $user->id)->get(),
+//     'roles_relation' => $user->roles,
+// ]);
+
+
+        // Role names
+        $roleNames = $user->getRoleNames(); // collection
+
+        // Permissions from roles
+        $rolePermissions = $user->roles
+            ->flatMap->permissions
+            ->pluck('name')
+            ->unique()
+            ->values();
+
+        // Direct permissions only
+        $directPermissions = $user->permissions
+            ->pluck('name')
+            ->values();
+
+        // All permissions (for checkbox list)
+        $allPermissions = Permission::orderBy('id')->get();
+
+        // dd($allPermissions);die();
+
+        return view(
+            'form.edit.employeepermission',
+            compact(
+                'employee',
+                'user',
+                'roleNames',
+                'rolePermissions',
+                'directPermissions',
+                'allPermissions'
+            )
+        );
     }
 }

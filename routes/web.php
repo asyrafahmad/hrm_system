@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     // ----------------------------- profile employee ------------------------------//
     Route::get('employee/profile/{employee_id}', [EmployeeController::class, 'profileEmployee'])->name('profile.employee');
+    Route::get('employee/edit/permission/{employee_id}', [EmployeeController::class, 'employeeEditPermission'])->name('employee.edit.permission');
 
     // ----------------------------- form holiday ------------------------------//
     Route::get('form/holidays', [HolidayController::class, 'holiday'])->name('form.holidays');

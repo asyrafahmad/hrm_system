@@ -66,12 +66,12 @@
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                <a class="dropdown-item" href="{{ route('employee.edit.permission', $employee->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit Permission</a>
                                 <a class="dropdown-item" href="#" onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                             </div>
                         </div>
-                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"></a></h4>
-                        <div class="small text-muted"></div>
+                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('profile.employee', $employee->id) }}">{{ $employee->fullname }}</a></h4>
+                        <div class="small text-muted">{{ optional($employee->position)->name }}</div>
                     </div>
                 </div>
                 @endforeach

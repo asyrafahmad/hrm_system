@@ -91,8 +91,8 @@
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$employee->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$employee->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{ route('employee.edit.permission', $employee->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit Permission</a>
+                                                <a class="dropdown-item" href="{{ url('all/employee/delete/'.$employee->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
