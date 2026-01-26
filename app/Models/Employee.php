@@ -18,6 +18,7 @@ class Employee extends Model
         'user_id',
         'fullname',
         'email',
+        'ic_number',
         'birth_date',
         'gender',
         'join_date',

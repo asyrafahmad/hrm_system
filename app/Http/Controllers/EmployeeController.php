@@ -13,6 +13,7 @@ use App\Models\PermissionList;
 use App\Models\module_permission;
 
 use App\Services\HR\EmployeeIdService;
+use App\Services\HR\SequenceEmployeeCodeService;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -20,7 +21,7 @@ use Spatie\Permission\Models\Permission;
 class EmployeeController extends Controller
 {
     // all employee card view
-    public function cardAllEmployee(Request $request)
+    public function cardAllEmployee(SequenceEmployeeCodeService $sequenceEmployeeCodeService, Request $request)
     {
         // $users = DB::table('users')
         //             ->join('employees', 'users.id', '=', 'employees.user_id')
@@ -37,19 +38,22 @@ class EmployeeController extends Controller
         $all_department = Department::get();
         $all_position = Position::get();
         $permission_lists = PermissionList::get();
+        $employee_code = $sequenceEmployeeCodeService->nextEmployeeCode();
 
-        return view('form.allemployeecard', compact('employees', 'all_department', 'all_position', 'permission_lists'));
+        return view('form.allemployeecard', compact('employees', 'all_department', 'all_position', 'permission_lists', 'employee_code'));
     }
 
     // all employee list
-    public function listAllEmployee()
+    public function listAllEmployee(SequenceEmployeeCodeService $sequenceEmployeeCodeService)
     {
         $employees = Employee::with('department', 'position')->get();
         $userList = DB::table('users')->get();
         $all_department = Department::get();
+        $all_position = Position::get();
         $permission_lists = PermissionList::get();
+        $employee_code = $sequenceEmployeeCodeService->nextEmployeeCode();
 
-        return view('form.employeelist',compact('employees','all_department','userList','permission_lists'));
+        return view('form.employeelist',compact('employees','all_department', 'all_position', 'userList','permission_lists', 'employee_code'));
     }
 
     // save data employee

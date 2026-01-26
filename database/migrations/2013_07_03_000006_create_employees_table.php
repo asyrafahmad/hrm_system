@@ -22,6 +22,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_code', 50)->unique();
             $table->string('fullname', 255);
             $table->string('email', 255)->unique();
+            $table->string('ic_number', 255);
             $table->string('join_date',100)->nullable()->default('1970-01-01');
             $table->string('avatar')->nullable();
 

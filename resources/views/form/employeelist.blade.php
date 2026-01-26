@@ -7,25 +7,8 @@
         <!-- Page Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class="page-header">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="page-title">Employee</h3>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item {{ request()->routeIs('all.employee.card') ? 'active' : '' }}">Employee</li>
-                        </ul>
-                    </div>
-                    <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
-                        <div class="view-icons">
-                            <a href="{{ route('all.employee.card') }}" class="grid-view btn btn-link {{ request()->routeIs('all.employee.card') ? 'active' : '' }}" ><i class="fa fa-th"></i></a>
-                            <a href="{{ route('all.employee.list') }}" class="list-view btn btn-link {{ request()->routeIs('all.employee.list') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<!-- /Page Header -->
+            @include('form.add.addemployee', ['title' => 'Employee', 'breadcrumbLabel' => 'Employee'])
+            <!-- /Page Header -->
 
             <!-- Search Filter -->
             {{-- <form action="{{ route('all.employee.list.search') }}" method="POST">
@@ -78,7 +61,9 @@
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ route('profile.employee', $employee->id) }}" class="avatar"><img alt="" src="{{ asset('assets/images/' . $employee->avatar) }}"></a>
+                                            <a href="{{ route('profile.employee', $employee->id) }}" class="avatar">
+                                                <img alt="" src="{{ asset('assets/images/' . $employee->avatar) }}">
+                                            </a>
                                             <a href="{{ route('profile.employee', $employee->id) }}">{{ $employee->fullname }}<span>{{ optional($employee->position)->name }}</span></a>
                                         </h2>
                                     </td>
@@ -106,133 +91,7 @@
         </div>
         <!-- /Page Content -->
 
-        <!-- Add Employee Modal -->
-        <div id="add_employee" class="modal custom-modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Employee</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('all.employee.save') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Full Name</label>
-                                        <select class="select" id="name" name="name">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->username }}" data-employee_id={{ $user->id }} data-email={{ $user->email }}>{{ $user->username }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Auto email" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Birth Date</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <select class="select form-control" id="gender" name="gender">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="Auto id employee" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Company</label>
-                                        <select class="select" id="company" name="company">
-                                            <option value="">-- Select --</option>
-                                            <option value="Signature">Signature</option>
-                                            <option value="StarGame Kh">StarGame Kh</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive m-t-15">
-                                <table class="table table-striped custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Module Permission</th>
-                                            <th class="text-center">Read</th>
-                                            <th class="text-center">Write</th>
-                                            <th class="text-center">Create</th>
-                                            <th class="text-center">Delete</th>
-                                            <th class="text-center">Import</th>
-                                            <th class="text-center">Export</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            $key = 0;
-                                            $key1 = 0;
-                                        ?>
-                                        @foreach ($permission_lists as $lists )
-                                        <tr>
-                                            <td>{{ $lists->permission_name }}</td>
-                                            <input type="hidden" name="permission[]" value="{{ $lists->permission_name }}">
-                                            <input type="hidden" name="id_count[]" value="{{ $lists->id }}">
-                                            <td class="text-center">
-                                                <input type="checkbox" class="read{{ ++$key }}" id="read" name="read[]" value="Y"{{ $lists->read =="Y" ? 'checked' : ''}} >
-                                                <input type="checkbox" class="read{{ ++$key1 }}" id="read" name="read[]" value="N" {{ $lists->read =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="write{{ ++$key }}" id="write" name="write[]" value="Y" {{ $lists->write =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="write{{ ++$key1 }}" id="write" name="write[]" value="N" {{ $lists->write =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="create{{ ++$key }}" id="create" name="create[]" value="Y" {{ $lists->create =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="create{{ ++$key1 }}" id="create" name="create[]" value="N" {{ $lists->create =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="delete{{ ++$key }}" id="delete" name="delete[]" value="Y" {{ $lists->delete =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="delete{{ ++$key1 }}" id="delete" name="delete[]" value="N" {{ $lists->delete =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="import{{ ++$key }}" id="import" name="import[]" value="Y" {{ $lists->import =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="import{{ ++$key1 }}" id="import" name="import[]" value="N" {{ $lists->import =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="export{{ ++$key }}" id="export" name="export[]" value="Y" {{ $lists->export =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="export{{ ++$key1 }}" id="export" name="export[]" value="N" {{ $lists->export =="N" ? 'checked' : ''}}>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Add Employee Modal -->
     </div>
     <!-- /Page Wrapper -->
     @section('script')
