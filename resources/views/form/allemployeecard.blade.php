@@ -13,14 +13,14 @@
                         <h3 class="page-title">Employee</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Employee</li>
+                            <li class="breadcrumb-item {{ request()->routeIs('all.employee.card') ? 'active' : '' }}">Employee</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
                         <div class="view-icons">
-                            <a href="{{ route('all.employee.card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-                            <a href="{{ route('all.employee.list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                            <a href="{{ route('all.employee.card') }}" class="grid-view btn btn-link {{ request()->routeIs('all.employee.card') ? 'active' : '' }}" ><i class="fa fa-th"></i></a>
+                            <a href="{{ route('all.employee.list') }}" class="list-view btn btn-link {{ request()->routeIs('all.employee.list') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
                         </div>
                     </div>
                 </div>
@@ -162,20 +162,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Gender <span class="text-danger">*</span></label>
-                                        <select class="select form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="gender" name="gender">
+                                        <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="gender" name="gender">
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Department <span class="text-danger">*</span></label>
-                                        <select class="select select2s-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="department" name="department">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($all_department as $key => $dept )
-                                                <option value="{{ $dept->name }}">{{ $dept->name }}</option>
-                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -186,17 +175,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Position <span class="text-danger">*</span></label>
+                                        <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="position" name="position">
+                                            <option value="">-- Select --</option>
+                                            @foreach ($all_position as $key => $pos )
+                                                <option value="{{ $pos->name }}">{{ $pos->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Department <span class="text-danger">*</span></label>
+                                        <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="department" name="department">
+                                            <option value="">-- Select --</option>
+                                            @foreach ($all_department as $key => $dept )
+                                                <option value="{{ $dept->name }}">{{ $dept->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive m-t-15">
                                 <table class="table table-striped custom-table">
                                     <thead>
                                         <tr>
-                                            <th>Module Permission</th>
-                                            <th class="text-center">Read</th>
-                                            <th class="text-center">Write</th>
-                                            <th class="text-center">Create</th>
-                                            <th class="text-center">Delete</th>
-                                            <th class="text-center">Import</th>
-                                            <th class="text-center">Export</th>
+                                            <th>Module</th>
+                                            <th class="text-center">Permission</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -4,22 +4,29 @@
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
                     <li class="menu-title"> <span>Main</span> </li>
-                    <li class="submenu"> <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                    <li class="submenu">
+                        <a href="#"><i class="la la-dashboard"></i>
+                            <span> Dashboard</span>
+                            <span class="menu-arrow"></span>
+                        </a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('dashboard.admin') }}" class="{{ Route::currentRouteNamed('dashboard.admin') ? 'active' : '' }}">Admin Dashboard</a></li>
-                            <li><a href="{{ route('dashboard.employee') }}" class="{{ Route::currentRouteNamed('dashboard.employee') ? 'active' : '' }}">Employee Dashboard</a></li>
+                            <li class="{{ request()->routeIs('dashboard.admin') ? 'active' : '' }}"><a href="{{ route('dashboard.admin') }}" class="{{ Route::currentRouteNamed('dashboard.admin') ? 'active' : '' }}">Admin Dashboard</a></li>
+                            <li class="{{ request()->routeIs('dashboard.employee') ? 'active' : '' }}"><a href="{{ route('dashboard.employee') }}" class="{{ Route::currentRouteNamed('dashboard.employee') ? 'active' : '' }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
                     <li class="menu-title"> <span>Employees</span> </li>
-                    <li class="submenu"> <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+                    <li class="submenu">
+                        {{-- <a href="#" class="noti-dot"> --}}
+                        <a href="#" class="la la-dashboard">
+                        <i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a href="{{ route('all.employee.card') }}">All Employees</a></li>
-                            <li><a href="{{ route('form.holidays') }}">Holidays</a></li>
-                            <li><a href="{{ route('form.leaves.new') }}">Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span></a></li>
-                            <li><a href="{{ route('form.leaves.employee.new') }}">Leaves (Employee)</a></li>
-                            <li><a href="{{ route('form.leavesettings.page') }}">Leave Settings</a></li>
-                            <li><a href="{{ route('attendance.page') }}">Attendance (Admin)</a></li>
-                            <li><a href="{{ route('attendance.employee.page') }}">Attendance (Employee)</a></li>
+                            <li class="{{ request()->routeIs('all.employee.card') ? 'active' : '' }}"><a href="{{ route('all.employee.card') }}">All Employees</a></li>
+                            <li class="{{ request()->routeIs('form.holidays') ? 'active' : '' }}"><a href="{{ route('form.holidays') }}">Holidays</a></li>
+                            <li class="{{ request()->routeIs('form.leaves.new') ? 'active' : '' }}"><a href="{{ route('form.leaves.new') }}">Leaves (Admin) <!-- <span class="badge badge-pill bg-primary float-right">1</span> --></a></li>
+                            <li class="{{ request()->routeIs('form.leaves.employee.new') ? 'active' : '' }}"><a href="{{ route('form.leaves.employee.new') }}">Leaves (Employee)</a></li>
+                            <li class="{{ request()->routeIs('form.leavesettings.page') ? 'active' : '' }}"><a href="{{ route('form.leavesettings.page') }}">Leave Settings</a></li>
+                            <li class="{{ request()->routeIs('attendance.page') ? 'active' : '' }}"><a href="{{ route('attendance.page') }}">Attendance (Admin)</a></li>
+                            <li class="{{ request()->routeIs('attendance.employee.page') ? 'active' : '' }}"><a href="{{ route('attendance.employee.page') }}">Attendance (Employee)</a></li>
                             {{-- <li><a href="{{ route('departments') }}">Departments</a></li> --}}
                             {{-- <li><a href="{{ route('designations.page') }}">Designations</a></li> --}}
                             {{-- <li><a href="{{ route('timesheet.page') }}">Timesheet</a></li> --}}

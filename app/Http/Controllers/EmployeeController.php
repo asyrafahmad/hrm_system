@@ -8,6 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Employee;
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Position;
 use App\Models\PermissionList;
 use App\Models\module_permission;
 
@@ -34,9 +35,10 @@ class EmployeeController extends Controller
 
         $employees = Employee::with('department', 'position')->get();
         $all_department = Department::get();
+        $all_position = Position::get();
         $permission_lists = PermissionList::get();
 
-        return view('form.allemployeecard', compact('employees', 'all_department', 'permission_lists'));
+        return view('form.allemployeecard', compact('employees', 'all_department', 'all_position', 'permission_lists'));
     }
 
     // all employee list
@@ -44,9 +46,10 @@ class EmployeeController extends Controller
     {
         $employees = Employee::with('department', 'position')->get();
         $userList = DB::table('users')->get();
-        $permission_lists = DB::table('permission_lists')->get();
+        $all_department = Department::get();
+        $permission_lists = PermissionList::get();
 
-        return view('form.employeelist',compact('employees','userList','permission_lists'));
+        return view('form.employeelist',compact('employees','all_department','userList','permission_lists'));
     }
 
     // save data employee

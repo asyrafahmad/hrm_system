@@ -13,14 +13,14 @@
                         <h3 class="page-title">Employee</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Employee</li>
+                            <li class="breadcrumb-item {{ request()->routeIs('all.employee.card') ? 'active' : '' }}">Employee</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
                         <div class="view-icons">
-                            <a href="{{ route('all.employee.card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-                            <a href="{{ route('all.employee.list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+                            <a href="{{ route('all.employee.card') }}" class="grid-view btn btn-link {{ request()->routeIs('all.employee.card') ? 'active' : '' }}" ><i class="fa fa-th"></i></a>
+                            <a href="{{ route('all.employee.list') }}" class="list-view btn btn-link {{ request()->routeIs('all.employee.list') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
                         </div>
                     </div>
                 </div>
