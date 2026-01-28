@@ -11,15 +11,15 @@
         <span class="bar-icon"><span></span><span></span><span></span></span>
     </a>
     <!-- Header Title -->
-    <div class="page-title-box">
+    {{-- <div class="page-title-box">
         @auth
-            <h3>{{ auth()->user()->name }}</h3>
+            <h3>{{ optional(auth()->user())->employee->fullname  }}</h3>
         @endauth
 
         @guest
             <h3>Guest</h3>
         @endguest
-    </div>
+    </div> --}}
     <!-- /Header Title -->
     <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
     <!-- Header Menu -->
@@ -57,7 +57,7 @@
                 <span class="user-img">
                     @auth
                         <img
-                            src="{{ asset('assets/images/Admin.jpg') }}"
+                            src="{{ asset('assets/images/' . optional(auth()->user())->employee->avatar ) }}"
                             alt="{{ auth()->user()->name }}"
                         >
                         <span class="status online"></span>

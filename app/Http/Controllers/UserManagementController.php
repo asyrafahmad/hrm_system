@@ -130,7 +130,7 @@ class UserManagementController extends Controller
 
         $user = DB::table('users')->get();
         $employee = DB::table('employees')->where('user_id', $user_id)->first();
-        $employees = Employee::select('id', 'fullname', 'employee_code')->get();
+        $employees = Employee::select('id', 'fullname', 'employee_code','avatar')->get();
         $information = DB::table('profile_information')->where('employee_id', $employee->id)->first();
         $positions = DB::table('positions')->pluck('name','id');
         $departments = DB::table('departments')->pluck('name','id');

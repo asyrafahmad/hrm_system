@@ -27,7 +27,7 @@
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
                                         <a href="#">
-                                            <img alt="" src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
+                                            <img alt="" src="{{ URL::to('/assets/images/'. Auth::user()->employee->avatar) }}" alt="{{ Auth::user()->username }}">
                                         </a>
                                     </div>
                                 </div>
@@ -104,18 +104,19 @@
                                                     <div class="title">Reports to:</div>
                                                     <div class="text">
                                                         @if(!empty(Auth::user()->employee->profileInformation->reports_to))
-                                                            <div class="avatar-box">
-                                                                <div class="avatar avatar-xs">
-                                                                    <img src="{{ URL::to('/assets/images/'. Auth::user()->employee->avatar) }}" alt="{{ Auth::user()->employee->profileInformation->reports_to }}">
-                                                                </div>
-                                                            </div>
-                                                            <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
-                                                                @foreach ($employees as $employee)
-                                                                    @if(Auth::user()->employee->profileInformation->reports_to === $employee->id)
-                                                                        {{ $employee->fullname }}
-                                                                    @endif
-                                                                @endforeach
-                                                            </a>
+                                                            @foreach ($employees as $employee)
+                                                                @if(Auth::user()->employee->profileInformation->reports_to === $employee->id)
+                                                                    <div class="avatar-box">
+                                                                        <div class="avatar avatar-xs">
+                                                                            <img src="{{ URL::to('/assets/images/'. $employee->avatar) }}" alt="{{ Auth::user()->employee->profileInformation->reports_to }}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="{{ route('profile_user.report_to', ['employee_id' => Auth::user()->employee->profileInformation->reports_to]) }}">
+
+                                                                                {{ $employee->fullname }}
+                                                                    </a>
+                                                                @endif
+                                                            @endforeach
                                                         @else
                                                             N/A
                                                         @endif
