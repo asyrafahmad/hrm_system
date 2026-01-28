@@ -61,7 +61,6 @@ Route::middleware('auth')->group(function () {
 
     // ----------------------------- profile employee ------------------------------//
     Route::get('employee/profile/{employee_id}', [EmployeeController::class, 'profileEmployee'])->name('profile.employee');
-    Route::get('employee/edit/permission/{employee_id}', [EmployeeController::class, 'employeeEditPermission'])->name('employee.edit.permission');
     Route::post('employee/update/permission', [EmployeeController::class, 'employeeUpdatePermission'])->name('employee.update.permission');
 
     // ----------------------------- form holiday ------------------------------//
@@ -107,6 +106,10 @@ Route::middleware('auth')->group(function () {
     Route::get('form/salary/view/{employee_id}', [PayrollController::class, 'salaryView'])->name('form.salary.view');
     Route::get('form/payroll/items', [PayrollController::class, 'payrollItems'])->middleware('auth')->name('form.payroll.items');
 
+});
+
+Route::middleware(['auth', 'permission:employee.update'])->group(function () {
+    Route::get('employee/edit/permission/{employee_id}', [EmployeeController::class, 'employeeEditPermission'])->name('employee.edit.permission');
 });
 
 // -----------------------------login----------------------------------------//

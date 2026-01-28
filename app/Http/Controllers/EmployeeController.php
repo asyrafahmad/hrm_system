@@ -412,7 +412,9 @@ class EmployeeController extends Controller
             ->values();
 
         // All permissions (for checkbox list)
-        // $allPermissions = Permission::orderBy('id')->get();
+        $allPermissions = Permission::orderBy('id')->get();
+
+        // dd($directPermissions);die();
 
         return view(
             'form.edit.employeepermission',

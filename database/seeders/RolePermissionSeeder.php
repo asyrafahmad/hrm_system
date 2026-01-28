@@ -10,9 +10,58 @@ use Illuminate\Support\Facades\DB;
 
 class RolePermissionSeeder extends Seeder
 {
+    // public function run()
+    // {
+    //     // Permissions
+    //     $permissions = [
+    //         'employee.view',
+    //         'employee.create',
+    //         'employee.update',
+    //         'employee.delete',
+    //         'attendance.manage',
+    //         'leave.approve',
+    //         'payroll.manage',
+    //     ];
+
+    //     foreach ($permissions as $permission) {
+    //         Permission::firstOrCreate(['name' => $permission]);
+    //     }
+
+    //     // Roles
+    //     $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
+    //     $admin = Role::firstOrCreate(['name' => 'Admin']);
+    //     $hr = Role::firstOrCreate(['name' => 'HR']);
+    //     $employee = Role::firstOrCreate(['name' => 'Employee']);
+
+    //     // Assign permissions
+    //     $superAdmin->givePermissionTo(Permission::all());
+
+    //     $admin->givePermissionTo([
+    //         'employee.view',
+    //         'employee.create',
+    //         'employee.update',
+    //         'attendance.manage',
+    //         'leave.approve',
+    //         'payroll.manage',
+    //     ]);
+
+    //     $hr->givePermissionTo([
+    //         'employee.view',
+    //         'employee.create',
+    //         'employee.update',
+    //         'attendance.manage',
+    //         'leave.approve',
+    //         'payroll.manage',
+    //     ]);
+
+    //     $employee->givePermissionTo([
+    //         'employee.view',
+    //     ]);
+    // }
+
     public function run()
     {
-        // Permissions
+        // 1️⃣ Define permissions
         $permissions = [
             'employee.view',
             'employee.create',
@@ -27,35 +76,34 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // Roles
-        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
-        $admin = Role::firstOrCreate(['name' => 'Admin']);
-        $hr = Role::firstOrCreate(['name' => 'HR']);
-        $employee = Role::firstOrCreate(['name' => 'Employee']);
+        // 2️⃣ Define roles
+        $roles = [
+            'Super Admin' => Permission::all(),
+            'Admin' => [
+                'employee.view',
+                'employee.create',
+                'employee.update',
+                'attendance.manage',
+                'leave.approve',
+                'payroll.manage',
+            ],
+            'HR' => [
+                'employee.view',
+                'employee.create',
+                'employee.update',
+                'attendance.manage',
+                'leave.approve',
+                'payroll.manage',
+            ],
+            'Employee' => ['employee.view'],
+        ];
 
-        // Assign permissions
-        $superAdmin->givePermissionTo(Permission::all());
+        // 3️⃣ Create roles and assign permissions
+        foreach ($roles as $roleName => $rolePermissions) {
+            $role = Role::firstOrCreate(['name' => $roleName]);
 
-        $admin->givePermissionTo([
-            'employee.view',
-            'employee.create',
-            'employee.update',
-            'attendance.manage',
-            'leave.approve',
-            'payroll.manage',
-        ]);
-
-        $hr->givePermissionTo([
-            'employee.view',
-            'employee.create',
-            'employee.update',
-            'attendance.manage',
-            'leave.approve',
-            'payroll.manage',
-        ]);
-
-        $employee->givePermissionTo([
-            'employee.view',
-        ]);
+            // Assign permissions to role
+            $role->syncPermissions($rolePermissions);
+        }
     }
 }
